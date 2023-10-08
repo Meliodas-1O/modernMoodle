@@ -1,13 +1,12 @@
-import express, {Express, Request, Response} from 'express'
+import express, { Express, Request, Response } from 'express'
 
 const app: Express = express()
+const port: number = 4500
 
-const port: number= 4500;
-
-app.get('/', (req: Request, res: Response) => {
-    res.send("Okay lezgo !")
+app.get('/', (_req: Request, res: Response) => {
+    res.send("Hello, world")
 })
 
 app.listen(port, () => {
-    console.log('Listenning on port ', port)
+    console.log(`Server listening on port ${port}`)
 })
