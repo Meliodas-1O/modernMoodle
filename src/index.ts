@@ -25,6 +25,7 @@ setup_db()
 export const app: Express = express()
 const port: number = config.EXPRESS_CONFIG.port
 
+// Middleware(s)
 // Parse requests of Content-Type: application/json
 app.use(express.json())
 
