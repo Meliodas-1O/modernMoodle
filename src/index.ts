@@ -1,14 +1,11 @@
-import dotenv from 'dotenv'
 import express, { Express } from 'express'
 import { addRoutes as addTopicsRoutes } from './routes/topics';
 import { addRoutes as addChaptersRoutes } from './routes/chapters';
-
-// Read .env file
-dotenv.config()
+import { EXPRESS_PORT } from './config/config';
 
 // Configure express app
 export const app: Express = express()
-const port: number = parseInt(process.env.EXPRESS_APP_PORT || '4500')
+const port: number = EXPRESS_PORT
 
 // Add routes
 addTopicsRoutes()
