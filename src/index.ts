@@ -1,11 +1,11 @@
-import express, { Express } from 'express'
+import express, { Express } from 'express';
 import { addRoutes as addTopicsRoutes } from './routes/topics';
 import { addRoutes as addChaptersRoutes } from './routes/chapters';
-import { EXPRESS_PORT } from './config/config';
+import config from './config/config';
 
 // Configure express app
 export const app: Express = express()
-const port: number = EXPRESS_PORT
+const port: number = config.EXPRESS_CONFIG.port
 
 // Add routes
 addTopicsRoutes()
