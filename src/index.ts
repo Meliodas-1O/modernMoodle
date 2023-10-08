@@ -22,10 +22,12 @@ setup_db()
     })
     .catch(error => { console.error(`"Oops, something went wrong: ${error}`) })
 
-// Configure express app
+// Basic configuration of express app
 export const app: Express = express()
-app.use(express.json())
 const port: number = config.EXPRESS_CONFIG.port
+
+// Parse requests of Content-Type: application/json
+app.use(express.json())
 
 // Add routes
 addTopicsRoutes()
