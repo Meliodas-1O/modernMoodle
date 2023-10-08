@@ -24,6 +24,7 @@ setup_db()
 
 // Configure express app
 export const app: Express = express()
+app.use(express.json())
 const port: number = config.EXPRESS_CONFIG.port
 
 // Add routes
