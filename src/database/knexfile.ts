@@ -1,7 +1,7 @@
 import {config as app_config} from "../config/config";
 
 // Update with your config settings.
-export const config = {
+const config = {
   development: {
     client: "postgresql",
     connection: {
@@ -22,4 +22,4 @@ export const config = {
 
 };
 
-module.exports = config;
+export default config;
