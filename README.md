@@ -9,6 +9,16 @@ Start a Postgres database locally using Docker:
 docker run -p 5432:5432 --name some-postgres -e POSTGRES_PASSWORD=password -e POSTGRES_USER=root -ePOSTGRES_DB=modernmoodledb -d postgres
 ```
   
+Install  all packages:
+```shell
+npm i
+```
+  
+Build the project:
+```shell
+npm run build
+```
+  
 Run the nodeJS server in dev mode:
 ```shell
 npm run dev
