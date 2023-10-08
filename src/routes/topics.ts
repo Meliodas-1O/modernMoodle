@@ -24,4 +24,12 @@ export function addRoutes() {
         await controller.createTopic(req, res);
     })
 
+    app.delete("/topics/:id", async (req: Request, res: Response) => {
+        await controller.deleteTopic(req, res);
+    })
+
+    app.patch("/topics/:id", async (req: Request, res: Response) => {
+        await controller.updateTopic(req, res);
+    })
+
 }

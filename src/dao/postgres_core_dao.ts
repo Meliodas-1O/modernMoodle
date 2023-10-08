@@ -20,7 +20,7 @@ export class PostgresCoreDAO implements TopicsDAO {
     }
 
     async delete(id: number): Promise<void> {
-        throw new Error("Method not implemented.");
+        await this.db("topics").delete().where("topic_id", id);
     }
 
     async create(topic: ITopic): Promise<number> {
@@ -28,6 +28,14 @@ export class PostgresCoreDAO implements TopicsDAO {
             .insert(topic)
             .returning("topic_id");
         return topic_id[0];
+    }
+
+    async update(id: number, newTopic: ITopic): Promise<ITopic | undefined> {
+        const topic = await this.db("topics")
+            .update(newTopic)
+            .where("topic_id", id)
+            .returning("*");
+        return topic[0];
     }
 
 }

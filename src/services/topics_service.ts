@@ -20,4 +20,13 @@ export class TopicService {
     async createTopic(topic: ITopic) : Promise<number> {
         return await this.dao.create(topic);
     }
+
+    async deleteTopic(id: number) {
+        await this.dao.delete(id);
+    }
+
+    async updateTopic(id: number, newTopic: ITopic): Promise<ITopic | undefined> {
+        const topic = await this.dao.update(id, newTopic);
+        return topic;
+    }
 }
