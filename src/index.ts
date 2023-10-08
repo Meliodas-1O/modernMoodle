@@ -1,6 +1,5 @@
 import express, { Express } from 'express';
 import { addRoutes as addTopicsRoutes } from './routes/topics';
-import { addRoutes as addChaptersRoutes } from './routes/chapters';
 import config from './config/config';
 import { down, up } from './database/migrations/20231008130412_init';
 import db from './database/database';
@@ -31,7 +30,6 @@ app.use(express.json())
 
 // Add routes
 addTopicsRoutes()
-addChaptersRoutes()
 
 // Run the server
 app.listen(port, () => {
