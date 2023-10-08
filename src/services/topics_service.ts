@@ -1,20 +1,23 @@
-import topics_dao from "../database/topics_dao";
+import { TopicsDAO } from "../dao/core_dao";
 import { ITopic } from "../models/topic";
 
-async function getAllTopics() : Promise<ITopic[]> {
-    return await topics_dao.getAllTopics();
-}
+export class TopicService {
+    dao: TopicsDAO;
 
-async function getTopicById(id: number) : Promise<ITopic> {
-    return await topics_dao.getTopicById(id);
-}
+    constructor(dao: TopicsDAO) {
+        this.dao = dao;
+    }
 
-async function createTopic(topic: ITopic) : Promise<number> {
-    return await topics_dao.createTopic(topic);
-}
+    async getAll(): Promise<ITopic[]> {
+        return await this.dao.getAll();
+    }
 
-export default {
-    getAllTopics,
-    getTopicById,
-    createTopic,
+    async getById(id: number): Promise<ITopic | undefined> {
+        const topic = await this.dao.getById(id);
+        return topic;
+    }
+
+    async createTopic(topic: ITopic) : Promise<number> {
+        return await this.dao.create(topic);
+    }
 }
