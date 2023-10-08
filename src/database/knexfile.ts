@@ -1,10 +1,6 @@
-// Update with your config settings.
-const PG_HOST = process.env.PG_HOST || "localhost"
-const PG_PORT = parseInt(process.env.PG_PORT || "5432")
-const PG_USER = process.env.PG_USER || "root"
-const PG_PASSWORD = process.env.PG_PASSWORD || "password"
-const PG_DB = process.env.PG_DB || "modernmoodledb"
+import { PG_DB, PG_USER, PG_PASSWORD } from "../config/config";
 
+// Update with your config settings.
 const config = {
   development: {
     client: "postgresql",
