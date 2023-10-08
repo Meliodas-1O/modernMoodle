@@ -10,9 +10,8 @@ import { seed } from './database/seed/seed';
 // DEV ONLY, recreate database
 // TODO: handle db migrations better
 async function setup_db() {
-    console.log("before down");
-    console.log("after down");
-    console.log("after up");
+    await down(db);
+    await up(db);
 }
 
 setup_db()
