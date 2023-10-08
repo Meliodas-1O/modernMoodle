@@ -8,7 +8,7 @@ const EXPRESS_PORT: number = parseInt(process.env.EXPRESS_APP_PORT || '4500')
 
 // Postgres configuration
 const PG_HOST: string = process.env.PG_HOST || "localhost"
-const PG_PORT: number = parseInt(process.env.PG_PORT || "3306")
+const PG_PORT: number = parseInt(process.env.PG_PORT || "5432")
 const PG_USER: string = process.env.PG_USER || "root"
 const PG_PASSWORD: string = process.env.PG_PASSWORD || "password"
 const PG_DB: string = process.env.PG_DB || "modernmoodledb"
