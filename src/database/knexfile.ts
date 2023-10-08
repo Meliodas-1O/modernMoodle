@@ -1,13 +1,15 @@
-import { PG_DB, PG_USER, PG_PASSWORD } from "../config/config";
+import {config as app_config} from "../config/config";
 
 // Update with your config settings.
-const config = {
+export const config = {
   development: {
     client: "postgresql",
     connection: {
-      database: PG_DB,
-      user: PG_USER,
-      password: PG_PASSWORD
+      database: app_config.PG_CONFIG.database,
+      user: app_config.PG_CONFIG.user,
+      password: app_config.PG_CONFIG.password,
+      port: app_config.PG_CONFIG.port,
+      host: app_config.PG_CONFIG.host,
     },
     pool: {
       min: 2,
@@ -19,5 +21,3 @@ const config = {
   },
 
 };
-
-module.exports = config;
