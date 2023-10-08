@@ -2,7 +2,7 @@
 
 modernMoodle
 
-# Dev
+## Quick start
 
 Start a Postgres database locally using Docker:
 ```shell
@@ -13,3 +13,17 @@ Run the nodeJS server in dev mode:
 ```shell
 npm run dev
 ```
+
+## Check the database
+
+To see what's in the database, first connect to the Docker container:
+```shell
+docker exec -ti some-postgres /bin/bash
+```
+  
+Then, execute the psql command to go inside the database:
+```shell
+psql -d modernmoodledb
+```
+  
+You can then query any table you want !
