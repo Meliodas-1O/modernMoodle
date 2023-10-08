@@ -1,6 +1,6 @@
 import {config as app_config} from "../config/config";
 
-// Update with your config settings.
+// Create knex config
 const config = {
   development: {
     client: "postgresql",
