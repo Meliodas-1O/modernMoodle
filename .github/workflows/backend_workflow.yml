@@ -1,7 +1,5 @@
 name: NodeJS backend workflow
 
-# TODO: use artifacts so we build only once
-
 on:
   push:
     branches: [ "*" ]
