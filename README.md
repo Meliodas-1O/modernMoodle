@@ -1,5 +1,17 @@
 # modernMoodle
 
+## Table of contents
+- [modernMoodle](#modernmoodle)
+  - [Table of contents](#table-of-contents)
+  - [Dev - quick start](#dev---quick-start)
+    - [Postgres database](#postgres-database)
+    - [Install dependencies and build project](#install-dependencies-and-build-project)
+    - [Run the project with hot-reload](#run-the-project-with-hot-reload)
+    - [Shut down everything](#shut-down-everything)
+  - [Contributing](#contributing)
+
+
+
 ## Dev - quick start
 ### Postgres database
 modernMoodle currently needs an up and running Postgres database.  
