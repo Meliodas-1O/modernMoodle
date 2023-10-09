@@ -1,9 +1,9 @@
 import { Knex } from "knex";
-import db from "../database/database";
-import { ITopic } from "../models/topic";
-import { TopicsDAO } from "./core_dao";
+import db from "../../database/database";
+import { ITopic } from "../../models/topic";
+import {ITopicDAO } from "../topic_dao";
 
-export class PostgresCoreDAO implements TopicsDAO {
+export class PostgresTopicsDAO implements ITopicDAO {
     db: Knex;
 
     constructor() {

@@ -1,6 +1,6 @@
 import { ITopic } from "../models/topic";
 
-export interface TopicsDAO {
+export interface ITopicDAO {
     getAll(): Promise<ITopic[]>;
     getById(id: number): Promise<ITopic | undefined>;
     delete(id: number): Promise<void>;
