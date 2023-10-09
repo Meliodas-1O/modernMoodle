@@ -4,10 +4,9 @@ name: NodeJS backend workflow
 
 on:
   push:
-    # TODO: change this back to main
-    branches: [ "setup-ci" ]
+    branches: [ "*" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "*" ]
 
 jobs:
   build:
