@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checking out repository
     - uses: actions/checkout@v3
 
     - name: Use Node.js 18.x
