@@ -4,12 +4,13 @@
   "description": "modernMoodle",
   "main": "./src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
     "start": "nodemon dist/index.js",
     "dev": "concurrently \"npx tsc -w\" \"nodemon dist/index.js\"",
     "migrate": "npx knex migrate:latest --knexfile src/database/knexfile.ts",
-    "migrate-macos": "cp .env ./src/database/ && npx knex migrate:latest --knexfile src/database/knexfile.ts; rm ./src/database/.env"
+    "migrate-macos": "cp .env ./src/database/ && npx knex migrate:latest --knexfile src/database/knexfile.ts; rm ./src/database/.env",
+    "unit-tests": "jest unit",
+    "integration-tests": "jest integration"
   },
   "keywords": [],
   "author": "",
