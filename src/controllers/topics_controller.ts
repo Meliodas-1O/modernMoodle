@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { TopicService } from "../services/topics_service";
-import { PostgresCoreDAO } from "../dao/postgres_topics_dao";
+import { PostgresCoreDAO } from "../dao/postgres_impl/postgres_topics_dao";
 
 export class TopicsController {
     service: TopicService;
