@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
-    "start": "nodemon dist/index.js",
-    "dev": "concurrently \"npx tsc -w\" \"nodemon dist/index.js\"",
+    "start": "nodemon dist/src/index.js",
+    "dev": "concurrently \"npx tsc -w\" \"nodemon dist/src/index.js\"",
     "migrate": "npx knex migrate:latest --knexfile src/database/knexfile.ts",
     "migrate-macos": "cp .env ./src/database/ && npx knex migrate:latest --knexfile src/database/knexfile.ts; rm ./src/database/.env"
   },
