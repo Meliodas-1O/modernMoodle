@@ -1,5 +1,7 @@
 name: NodeJS backend workflow
 
+# TODO: use artifacts so we build only once
+
 on:
   push:
     # TODO: change this back to main
@@ -30,5 +32,19 @@ jobs:
     needs: build
 
     steps:
-    - name: Test
-      run: echo "Hello, world"
+    - name: Checking out repository
+      uses: actions/checkout@v3
+
+    - name: Setup nodeJS
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.18.0
+
+    - name: Build
+      run: |
+        npm i
+        npm run build
+    
+    - name: Run tests
+      run: |
+        echo "We have no tests yet !"
