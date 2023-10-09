@@ -14,7 +14,8 @@
 3. Write some code and some [tests](#writing-tests), see [here](#commit-messages-guidelines) for more information about commit messages format.
 4. Run tests locally.
 5. Run tests on the CI pipeline.
-6. If everything is good, create a merge request and wait for approval.
+6. If everything is good, merge origin/main into your branch and fix any conflitcs
+7. Create a merge request and wait for approval
   
 Thank you !
 
