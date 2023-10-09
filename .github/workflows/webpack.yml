@@ -1,4 +1,4 @@
-name: NodeJS with Webpack
+name: NodeJS backend workflow
 
 on:
   push:
@@ -24,3 +24,11 @@ jobs:
       run: |
         npm i
         npm run build
+  
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Test
+      run: echo "Hello, world"
