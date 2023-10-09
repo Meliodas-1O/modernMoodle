@@ -1,9 +1,9 @@
-import { IChapter } from "../models/chapter";
+import { ITopic } from "../models/topic";
 
 export interface ITopicDAO {
-    getAll(): Promise<IChapter[]>;
-    getById(id: number): Promise<IChapter | undefined>;
+    getAll(): Promise<ITopic[]>;
+    getById(id: number): Promise<ITopic | undefined>;
     delete(id: number): Promise<void>;
-    create(topic: IChapter): Promise<number>;
-    update(id: number, newTopic: IChapter): Promise<IChapter | undefined>;
+    create(topic: ITopic): Promise<number>;
+    update(id: number, newTopic: ITopic): Promise<ITopic | undefined>;
 }

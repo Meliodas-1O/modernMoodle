@@ -1,4 +1,4 @@
-import { ITopicDAO } from "../dao/topics_dao";
+import { ITopicDAO } from "../dao/chapter_dao";
 import { ITopic } from "../models/topic";
 
 export class TopicService {
