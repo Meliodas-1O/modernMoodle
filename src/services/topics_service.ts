@@ -1,10 +1,10 @@
-import { TopicsDAO } from "../dao/core_dao";
+import { ITopicDAO } from "../dao/topics_dao";
 import { ITopic } from "../models/topic";
 
 export class TopicService {
-    dao: TopicsDAO;
+    dao: ITopicDAO;
 
-    constructor(dao: TopicsDAO) {
+    constructor(dao: ITopicDAO) {
         this.dao = dao;
     }
 
