@@ -52,7 +52,7 @@ To stop the server, just press `Ctrl+C`.
   
 To stop and delete the database (running as a docker container):
 ```shell
-docker stop modernmoodle-db-pg && docker modernmoodle-db-pg
+docker stop modernmoodle-db-pg && docker rm modernmoodle-db-pg
 ```
 
 ### Available scripts
