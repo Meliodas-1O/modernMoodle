@@ -8,8 +8,9 @@
     - [Install dependencies and build project](#install-dependencies-and-build-project)
     - [Run the project with hot-reload](#run-the-project-with-hot-reload)
     - [Shut down everything](#shut-down-everything)
-  - [Contributing](#contributing)
-
+    - [Available scripts](#available-scripts)
+    - [How to write tests](#how-to-write-tests)
+  - [Contributing & guidelines](#contributing-&-guidelines)
 
 
 ## Dev - quick start
@@ -54,5 +55,19 @@ To stop and delete the database (running as a docker container):
 docker stop modernmoodle-db-pg && docker modernmoodle-db-pg
 ```
 
+### Available scripts
+```shell
+npm run build # build the project
+npm run start # start the server (no hot-reload)
+npm run dev # start the server (with hot-reload)
+npm run migrate # apply migrations to the database
+npm run unit-tests # run all unit tests
+npm run integration-tests # run all integrations tests
+```
 
-## Contributing
+### How to write tests
+Please check [here](./documentation/contributing.md).
+
+## Contributing & guidelines
+
+If you want to contribute to the project, please see our [contributing guide](./documentation/contributing.md).
