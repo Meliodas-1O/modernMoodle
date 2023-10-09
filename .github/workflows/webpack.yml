@@ -15,10 +15,10 @@ jobs:
     - name: Checking out repository
       uses: actions/checkout@v3
 
-    - name: Use Node.js 18.x
+    - name: Use Node.js 18.18.0
       uses: actions/setup-node@v3
       with:
-        node-version: 18.x
+        node-version: 18.18.0
 
     - name: Build
       run: |
