@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { PostgresExerciseDAO } from "../dao/postgres_impl/postgres_exercises_dao";
+import { PostgresExerciseDAO } from "../dao/impl/postgres/postgres_exercises_dao";
 import { ExerciseService } from "../services/exercise_servce";
 
 export class ExercisesController {

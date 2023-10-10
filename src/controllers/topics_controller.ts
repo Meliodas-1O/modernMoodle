@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { TopicService } from "../services/topics_service";
-import { PostgresTopicsDAO } from "../dao/postgres_impl/postgres_topics_dao";
+import { TopicsService } from "../services/topics_service";
+import { PostgresTopicsDAO } from "../dao/impl/postgres/postgres_topics_dao";
 
 export class TopicsController {
-    service: TopicService;
+    service: TopicsService;
 
     constructor() {
-        this.service = new TopicService(new PostgresTopicsDAO());
+        this.service = new TopicsService(new PostgresTopicsDAO());
     }
 
     // GET /topics

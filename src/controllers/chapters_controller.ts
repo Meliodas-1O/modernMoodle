@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ChapterService } from "../services/chapters_service";
-import { PostgresChapterDAO } from "../dao/postgres_impl/postgres_chapters_dao";
+import { PostgresChapterDAO } from "../dao/impl/postgres/postgres_chapters_dao";
 
 export class ChaptersController {
     service: ChapterService;
