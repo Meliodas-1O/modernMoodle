@@ -1,7 +1,7 @@
 import { ITopicDAO } from "../dao/topic_dao";
 import { ITopic } from "../models/topic";
 
-export class TopicService {
+export class TopicsService {
     dao: ITopicDAO;
 
     constructor(dao: ITopicDAO) {
