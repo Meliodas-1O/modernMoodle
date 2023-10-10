@@ -36,4 +36,17 @@ describe("Topics service", () => {
         // Then
         expect(actualTopicId).toBe(topicId);
     })
+
+    test("Delete topic", async () => {
+        // Given
+        const topicId = 7;
+        
+        // When
+        await sut.deleteTopic(topicId);
+
+        // Then
+        expect(dao.delete).toBeCalledTimes(1);
+        expect(dao.delete).toHaveBeenCalledWith(topicId);
+        
+    })
 })
