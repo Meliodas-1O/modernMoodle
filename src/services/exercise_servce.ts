@@ -13,12 +13,12 @@ export class ExerciseService {
     }
 
     async getById(id: number): Promise<IExercise | undefined> {
-        const chapter = await this.dao.getById(id);
-        return chapter;
+        const exercise = await this.dao.getById(id);
+        return exercise;
     }
 
-    async createExercise(chapter: IExercise) : Promise<number> {
-        return await this.dao.create(chapter);
+    async createExercise(exercise: IExercise) : Promise<number> {
+        return await this.dao.create(exercise);
     }
 
     async deleteExercise(id: number) {
@@ -26,7 +26,7 @@ export class ExerciseService {
     }
 
     async updateExercise(id: number, newExercise: IExercise): Promise<IExercise | undefined> {
-        const chapter = await this.dao.update(id, newExercise);
-        return chapter;
+        const exercise = await this.dao.update(id, newExercise);
+        return exercise;
     }
 }
