@@ -11,30 +11,30 @@ export class PostgresChapterDAO implements IChapterDAO {
     }
 
     async getAll(): Promise<IChapter[]> {
-        return await this.db("chapters").select("*");
+        return await this.db ("chapters").select ("*");
     }
 
     async getById(id: number): Promise<IChapter | undefined> {
-        const topic = await this.db("chapters").select("*").where("chapter_id", id).first();
+        const topic = await this.db ("chapters").select ("*").where ("chapter_id", id).first ();
         return topic;
     }
 
     async delete(id: number): Promise<void> {
-        await this.db("chapters").delete().where("chapter_id", id);
+        await this.db ("chapters").delete ().where ("chapter_id", id);
     }
 
     async create(topic: IChapter): Promise<number> {
-        const topic_id = await this.db("chapters")
-            .insert(topic)
-            .returning("chapter_id");
+        const topic_id = await this.db ("chapters")
+            .insert (topic)
+            .returning ("chapter_id");
         return topic_id[0];
     }
 
     async update(id: number, newTopic: IChapter): Promise<IChapter | undefined> {
-        const topic = await this.db("chapters")
-            .update(newTopic)
-            .where("chapter_id", id)
-            .returning("*");
+        const topic = await this.db ("chapters")
+            .update (newTopic)
+            .where ("chapter_id", id)
+            .returning ("*");
         return topic[0];
     }
 
