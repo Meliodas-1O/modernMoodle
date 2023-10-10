@@ -1,7 +1,7 @@
 import { Knex } from "knex";
-import db from "../../database/database";
-import { IChapterDAO } from "../chapter_dao";
-import { IChapter } from "../../models/chapter";
+import db from "../../../database/database";
+import { IChapterDAO } from "../../chapter_dao";
+import { IChapter } from "../../../models/chapter";
 
 export class PostgresChapterDAO implements IChapterDAO {
     db: Knex;

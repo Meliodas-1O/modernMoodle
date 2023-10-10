@@ -1,7 +1,7 @@
 import { Knex } from "knex";
-import db from "../../database/database";
-import { IExercise } from "../../models/exercise";
-import { IExerciseDAO } from "../exercise_dao";
+import db from "../../../database/database";
+import { IExercise } from "../../../models/exercise";
+import { IExerciseDAO } from "../../exercise_dao";
 
 export class PostgresExerciseDAO implements IExerciseDAO {
     db: Knex;
