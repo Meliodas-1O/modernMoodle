@@ -12,15 +12,15 @@ const controller = new ExercisesController();
 
 export function addRoutes() {
      app.get("/exercises", async (req: Request, res: Response) => {
-          await controller.getAllExercises(req, res);
+          return await controller.getAllExercises(req, res);
      });
 
      app.get("/exercises/:id", async (req: Request, res: Response) => {
-          await controller.getExerciseById(req, res);
+          return await controller.getExerciseById(req, res);
      });
 
      app.post("/exercises", async (req: Request, res: Response) => {
-          await controller.createExercise(req, res);
+          return await controller.createExercise(req, res);
      });
 
      app.delete("/exercises/:id", async (req: Request, res: Response) => {
@@ -28,6 +28,6 @@ export function addRoutes() {
      });
 
      app.patch("/exercises/:id", async (req: Request, res: Response) => {
-          await controller.updateExercise(req, res);
+          return await controller.updateExercise(req, res);
      });
 }
