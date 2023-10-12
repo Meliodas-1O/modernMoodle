@@ -25,7 +25,7 @@ jobs:
     - name: Remove **test.ts exclusion
       run: |
         sed '/\*\*\.test\.ts/d' .eslintignore > .eslintignoretmp && mv .eslintignoretmp .eslintignore
-        cat .eslintignore
+        sed '/test\/\*\*\/\*\.ts/d' tsconfig.json > tsconfig.tmp.json && mv tsconfig.tmp.json tsconfig.json
 
     - name: Verify eslint rules
       run: npx eslint . --max-warnings 1
