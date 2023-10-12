@@ -1,6 +1,6 @@
-describe('API Endpoints', () => {
-  test('GET /topics', async () => {
+describe ('API Endpoints', () => {
+  test ('GET /topics', async () => {
     // TODO(test): real test
-    expect(true).toBe(true);
+    expect (true).toBe (true);
   });
 });
