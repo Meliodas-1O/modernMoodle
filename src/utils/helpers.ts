@@ -37,4 +37,14 @@ export enum ExerciseErrorMessages {
      NO_EXERCISE_BY_ID = "There is no exercise with the given id. Please check your input values or try again later.",
      UPDATE_ERROR = "Error while updating the exercise. Please check your input values or try again later.",
      NO_EXERCICES = "There is no exercice yet !"
-   }
+}
+
+export enum TopicErrorMessages {
+     EMPTY_REQUEST_BODY = "The request body is empty. Please put input values.",
+     CREATE_ERROR = "Error while creating the topic. Please check your input values or try again later.",
+     INVALID_FIELD = `One of the field is not appropriate. The valid keys are: `,
+     RETRIEVAL_ERROR = "Error while retrieving topics. Please try again.",
+     NO_TOPIC_BY_ID = "There is no topic with the given id. Please check your input values or try again later.",
+     UPDATE_ERROR = "Error while updating the topic. Please check your input values or try again later.",
+     NO_TOPICS = "There is no topic yet !"
+}
