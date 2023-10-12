@@ -86,4 +86,19 @@ describe("Topics service", () => {
         // Then
         expect(actual.length).toBe(3);
     })
+
+    test("Get by id", async () => {
+        // Given
+        const id = 17;
+        dao.getById = jest.fn().mockResolvedValue({ id: id, title: "article", description: "" });
+
+        // When
+        const topic = await sut.getById(id);
+
+        // Then
+        expect(topic?.id).not.toBeUndefined();
+        expect(topic?.id).toBe(id);
+        expect(dao.getById).toBeCalledTimes(1);
+        expect(dao.getById).toBeCalledWith(id);
+    })
 })
