@@ -1,10 +1,14 @@
 /* eslint-env node */
 module.exports = {
-    extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+    extends: [
+      'eslint:recommended', 
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-type-checked',
+  ],
     parser: '@typescript-eslint/parser',
     parserOptions: { // add this object
       tsconfigRootDir: __dirname,
-      project: ['./tsconfig.json'],
+      project: ['./tsconfig.eslint.json'],
     },
     plugins: ['@typescript-eslint'],
     root: true,
