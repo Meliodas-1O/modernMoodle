@@ -9,24 +9,24 @@ export class ExerciseService {
     }
 
     async getAll(): Promise<IExercise[]> {
-        return await this.dao.getAll();
+        return await this.dao.getAll ();
     }
 
     async getById(id: number): Promise<IExercise | undefined> {
-        const exercise = await this.dao.getById(id);
+        const exercise = await this.dao.getById (id);
         return exercise;
     }
 
     async createExercise(exercise: IExercise) : Promise<number> {
-        return await this.dao.create(exercise);
+        return await this.dao.create (exercise);
     }
 
     async deleteExercise(id: number) {
-        await this.dao.delete(id);
+        await this.dao.delete (id);
     }
 
     async updateExercise(id: number, newExercise: IExercise): Promise<IExercise | undefined> {
-        const exercise = await this.dao.update(id, newExercise);
+        const exercise = await this.dao.update (id, newExercise);
         return exercise;
     }
 }

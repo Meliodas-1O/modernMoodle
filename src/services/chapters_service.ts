@@ -9,24 +9,24 @@ export class ChapterService {
     }
 
     async getAll(): Promise<IChapter[]> {
-        return await this.dao.getAll();
+        return await this.dao.getAll ();
     }
 
     async getById(id: number): Promise<IChapter | undefined> {
-        const chapter = await this.dao.getById(id);
+        const chapter = await this.dao.getById (id);
         return chapter;
     }
 
     async createChapter(chapter: IChapter) : Promise<number> {
-        return await this.dao.create(chapter);
+        return await this.dao.create (chapter);
     }
 
     async deleteChapter(id: number) {
-        await this.dao.delete(id);
+        await this.dao.delete (id);
     }
 
     async updateChapter(id: number, newChapter: IChapter): Promise<IChapter | undefined> {
-        const chapter = await this.dao.update(id, newChapter);
+        const chapter = await this.dao.update (id, newChapter);
         return chapter;
     }
 }
