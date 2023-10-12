@@ -5,46 +5,46 @@ import db_config from "../../../src/database/knexfile";
 import knex from 'knex';
 
 
-const db = knex(db_config.development);
+const db = knex (db_config.development);
 let pg: StartedTestContainer | null = null;
 
 async function startPostgresContainer() {
-    const container = new GenericContainer("postgres:16")
-        .withEnvironment({
+    const container = new GenericContainer ("postgres:16")
+        .withEnvironment ({
             "POSTGRES_PASSWORD": config.PG_CONFIG.password,
             "POSTGRES_USER": config.PG_CONFIG.user,
             "POSTGRES_DB": config.PG_CONFIG.database,
         })
-        .withExposedPorts({ container: config.PG_CONFIG.port, host: config.PG_CONFIG.port });
-    pg = await container.start();
+        .withExposedPorts ({ container: config.PG_CONFIG.port, host: config.PG_CONFIG.port });
+    pg = await container.start ();
 }
 
 async function stopPostgresContainer() {
     if (pg !== null) {
-        await pg.stop();
+        await pg.stop ();
     }
 }
 
 async function sleep(ms: number): Promise<void> {
-    return new Promise((resolve) => {
-        setTimeout(resolve, ms);
+    return new Promise ((resolve) => {
+        setTimeout (resolve, ms);
     });
 }
 
 async function createDatabaseSchema() {
-    await up(db);
+    await up (db);
 }
 
 export async function setup() {
-    await startPostgresContainer();
+    await startPostgresContainer ();
 
     // Wait to be sure that Postgres is ready
-    await sleep(5 * 1000);
+    await sleep (5 * 1000);
 
     // Create the schema
-    await createDatabaseSchema();
+    await createDatabaseSchema ();
 }
 
 export async function teardown() {
-    await stopPostgresContainer();
+    await stopPostgresContainer ();
 }
