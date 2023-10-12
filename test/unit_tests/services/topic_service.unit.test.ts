@@ -1,6 +1,6 @@
-describe("Topics service", () => {
-    test("Dummy", async () => {
+describe ("Topics service", () => {
+    test ("Dummy", () => {
         // TODO(test): real test
-        expect(true).toBe(true);
+        expect (true).toBe (true);
     })
 })
