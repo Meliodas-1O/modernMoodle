@@ -11,12 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Che
-
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
     - name: Checking out repository
       uses: actions/checkout@v3
 
@@ -24,9 +18,12 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18.18.0
-    
+        
     - name: Verify eslint rules
       run: npx eslint . --max-warnings 1
+
+  build:
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checking out repository
