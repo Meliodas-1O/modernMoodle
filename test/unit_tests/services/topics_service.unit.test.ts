@@ -21,6 +21,15 @@ describe("Topics service", () => {
         sut = new TopicsService(dao);
     })
 
+    test("Constructor", () => {
+        // Given
+        // When
+        sut = new TopicsService(dao);
+
+        // Then
+        expect(sut.dao).toBe(dao);
+    })
+
     test("Create topic", async () => {
         // Given
         const topicId = 12;
