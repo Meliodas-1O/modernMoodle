@@ -63,6 +63,8 @@ npm run dev # start the server (with hot-reload)
 npm run migrate # apply migrations to the database
 npm run unit-tests # run all unit tests
 npm run integration-tests # run all integrations tests
+npm run lint # try to fix small coding rules using eslint
+npm run lint-for-tests # same as previous but for test/ directory
 ```
 
 ### How to write tests
