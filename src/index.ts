@@ -1,6 +1,7 @@
 import express, { Express } from 'express';
 import { addRoutes as addTopicsRoutes } from './routes/topics';
 import { addRoutes as addChaptersRoutes } from './routes/chapter';
+import { addRoutes as addExercisesRoutes } from './routes/exercise';
 import { config } from './config/config';
 
 // Basic express app configuration
@@ -11,8 +12,9 @@ const port: number = config.EXPRESS_CONFIG.port;
 app.use (express.json ())
 
 // Add all routes
-addTopicsRoutes ()
-addChaptersRoutes ()
+addTopicsRoutes()
+addChaptersRoutes()
+addExercisesRoutes()
 
 // Run the server
 app.listen (port, () => {

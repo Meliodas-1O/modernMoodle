@@ -15,7 +15,7 @@ export class PostgresChapterDAO implements IChapterDAO {
     }
 
     async getById(id: number): Promise<IChapter | undefined> {
-        const chapter = await this.db ("chapters").select ("*").where ("chapter_id", id).first () as IChapter;
+        const chapter : IChapter = await this.db ("chapters").select ("*").where ("chapter_id", id).first ();
         return chapter;
     }
 
