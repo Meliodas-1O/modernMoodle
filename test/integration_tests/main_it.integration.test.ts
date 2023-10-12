@@ -3,68 +3,63 @@ import request from "supertest";
 import { app } from "../../src/index";
 import { ITopic } from "../../src/models/topic";
 
-describe ("Main integration tests suite", () => {
+describe("Main integration tests suite", () => {
+     jest.setTimeout(60 * 1000);
 
-    jest.setTimeout (60 * 1000);
+     beforeAll(async () => {
+          await setup();
+     });
 
-    beforeAll (async () => {
-        await setup ();
-    })
+     afterAll(async () => {
+          await teardown();
+     });
 
-    afterAll (async () => {
-        await teardown ();
-    })
+     describe("Topics routes", () => {
+          it("1 - Get all topics", async () => {
+               // Given
+               // When
+               const response = await request(app).get("/topics");
 
-    describe ("Topics routes", () => {
+               // Then
+               expect(response.statusCode).toBe(404);
+          });
 
-        it ("1 - Get all topics", async () => {
-            // Given
-            // When
-            const response = await request (app).get ("/topics");
+          it("2 - Create a new topic", async () => {
+               // Given
+               const newTopic = {
+                    title: "topic",
+                    description: "description",
+               };
 
-            // Then
-            expect (response.statusCode).toBe (404);
-        })
+               // When
+               const response = await request(app)
+                    .post("/topics")
+                    .send(newTopic)
+                    .set("Content-Type", "application/json");
 
-        it ("2 - Create a new topic", async () => {
-            // Given
-            const newTopic = {
-                title: "topic",
-                description: "description",
-            };
+               // Then
+               expect(response.statusCode).toBe(200);
+          });
 
-            // When
-            const response = await request (app)
-                .post ("/topics")
-                .send (newTopic)
-                .set ("Content-Type", "application/json");
+          it("3- Get all topics again", async () => {
+               // Given
+               // When
+               const response = await request(app).get("/topics");
 
-            // Then
-            expect (response.statusCode).toBe (200);
-        })
+               // Then
+               expect(response.statusCode).toBe(200);
 
-        it ("3- Get all topics again", async () => {
-            // Given
-            // When
-            const response = await request (app).get ("/topics");
+               const topics: ITopic[] = response.body;
+               console.log(topics);
+               expect(topics.length).toBe(1);
 
-            // Then
-            expect (response.statusCode).toBe (200);
+               const topic = topics[0];
+               expect(topic.title).toBe("topic");
+               expect(topic.description).toBe("description");
 
-            const topics: ITopic[] = response.body;
-            console.log (topics);
-            expect (topics.length).toBe (1);
-
-            const topic = topics[0];
-            expect (topic.title).toBe ("topic");
-            expect (topic.description).toBe ("description");
-
-            // TODO(test, fix): the field is called 'topic_id' in the db
-            // expect(topic.id).not.toBeUndefined();
-            // expect(topic.id).toBe(1);
-        })
-
-        
-    })
-
-})
+               // TODO(test, fix): the field is called 'topic_id' in the db
+               expect(topic.id).not.toBeUndefined();
+               expect(topic.id).toBe(1);
+          });
+     });
+});
