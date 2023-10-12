@@ -1,6 +1,6 @@
-import { setup, teardown } from "./setup"
 import request from "supertest";
 import { Application } from "express";
+import { setup, teardown } from "./utils/setup";
 
 describe ("Main integration tests suite", () => {
 

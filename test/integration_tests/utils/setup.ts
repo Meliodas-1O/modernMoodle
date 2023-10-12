@@ -1,6 +1,7 @@
 import { GenericContainer, StartedTestContainer } from 'testcontainers';
-import { config } from '../../src/config/config';
-import db_config from "../../src/database/knexfile";
+import { config } from '../../../src/config/config';
+import { up } from "../../../src/database/migrations/20231008185239_init";
+import db_config from "../../../src/database/knexfile";
 import knex from 'knex';
 
 
@@ -30,18 +31,18 @@ async function sleep(ms: number): Promise<void> {
     });
 }
 
-async function runDatabaseMigraton() {
-    console.log(db.migrate);
+async function createDatabaseSchema() {
+    await up(db);
 }
 
 export async function setup() {
     await startPostgresContainer();
 
     // Wait to be sure that Postgres is ready
-    await sleep(10 * 1000);
+    await sleep(5 * 1000);
 
-    // Run the migration
-    runDatabaseMigraton();
+    // Create the schema
+    await createDatabaseSchema();
 }
 
 export async function teardown() {
