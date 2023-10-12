@@ -1,5 +1,5 @@
 describe ("Topics service", () => {
-    test ("Dummy", async () => {
+    test ("Dummy", () => {
         // TODO(test): real test
         expect (true).toBe (true);
     })
