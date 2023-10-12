@@ -4,11 +4,11 @@ import { TopicsService } from "../services/topics_service";
 import { ITopic } from "../models/topic";
 
 export class TopicsController {
-    service: TopicsService;
+     service: TopicsService;
 
-    constructor() {
-        this.service = new TopicsService (new PostgresTopicsDAO ());
-    }
+     constructor() {
+          this.service = new TopicsService(new PostgresTopicsDAO());
+     }
 
      // GET /topics
      async getAllTopics(_req: Request, res: Response) {
