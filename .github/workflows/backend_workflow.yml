@@ -23,7 +23,7 @@ jobs:
       run: npm ci
     
     - name: Verify eslint rules
-      run: npx eslint . --max-warnings 1
+      run: npx eslint ./src/ --max-warnings 1
     
   verify-lint-for-tests:
     runs-on: ubuntu-latest
@@ -39,14 +39,9 @@ jobs:
 
     - name: Install dependencies
       run: npm ci
-    
-    - name: Remove **test.ts exclusion
-      run: |
-        sed '/\*\*\.test\.ts/d' .eslintignore > .eslintignoretmp && mv .eslintignoretmp .eslintignore
-        sed '/test\/\*\*\/\*\.ts/d' tsconfig.json > tsconfig.tmp.json && mv tsconfig.tmp.json tsconfig.json
 
     - name: Verify eslint rules
-      run: npx eslint . --max-warnings 1
+      run: npx eslint ./test/ --max-warnings 1
 
   build:
     runs-on: ubuntu-latest

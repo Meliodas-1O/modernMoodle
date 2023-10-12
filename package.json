@@ -11,8 +11,8 @@
     "migrate": "cp .env ./src/database/ && npx knex migrate:latest --knexfile src/database/knexfile.ts; rm ./src/database/.env",
     "unit-tests": "jest unit",
     "integration-tests": "jest integration",
-    "lint": "npx eslint . --fix",
-    "lint-for-tests": "bash ./fix-eslint-for-tests.sh"
+    "lint": "npx eslint . --max-warnings 1",
+    "lint-fix": "npx eslint . --fix"
   },
   "keywords": [],
   "author": "",
