@@ -2,64 +2,64 @@ import { ITopicDAO } from "../../../src/dao/topic_dao";
 import { ITopic } from "../../../src/models/topic";
 import { TopicsService } from "../../../src/services/topics_service";
 
-describe("Topics service", () => {
+describe ("Topics service", () => {
     // System Under Test
     let sut: TopicsService;
     let dao: ITopicDAO;
 
-    beforeEach(() => {
+    beforeEach (() => {
         // Create a mock for the DAO
         dao = {
-            getAll: jest.fn(),
-            getById: jest.fn(),
-            create: jest.fn(),
-            delete: jest.fn(),
-            update: jest.fn(),
+            getAll: jest.fn (),
+            getById: jest.fn (),
+            create: jest.fn (),
+            delete: jest.fn (),
+            update: jest.fn (),
         }
 
         // Create a new SUT
-        sut = new TopicsService(dao);
+        sut = new TopicsService (dao);
     })
 
-    test("Constructor", () => {
+    test ("Constructor", () => {
         // Given
         // When
-        sut = new TopicsService(dao);
+        sut = new TopicsService (dao);
 
         // Then
-        expect(sut.dao).toBe(dao);
+        expect (sut.dao).toBe (dao);
     })
 
-    test("Create topic", async () => {
+    test ("Create topic", async () => {
         // Given
         const topicId = 12;
         const newTopic: ITopic = {
             title: "sample topic",
             description: "it is what it is"
         };
-        dao.create = jest.fn().mockResolvedValue(topicId);
+        dao.create = jest.fn ().mockResolvedValue (topicId);
 
         // When
-        const actualTopicId = await sut.createTopic(newTopic);
+        const actualTopicId = await sut.createTopic (newTopic);
 
         // Then
-        expect(actualTopicId).toBe(topicId);
+        expect (actualTopicId).toBe (topicId);
     })
 
-    test("Delete topic", async () => {
+    test ("Delete topic", async () => {
         // Given
         const topicId = 7;
 
         // When
-        await sut.deleteTopic(topicId);
+        await sut.deleteTopic (topicId);
 
         // Then
-        expect(dao.delete).toBeCalledTimes(1);
-        expect(dao.delete).toHaveBeenCalledWith(topicId);
+        expect (dao.delete).toBeCalledTimes (1);
+        expect (dao.delete).toHaveBeenCalledWith (topicId);
 
     })
 
-    test("Get all topics", async () => {
+    test ("Get all topics", async () => {
         // Given
         const topics: ITopic[] = [
             {
@@ -78,43 +78,43 @@ describe("Topics service", () => {
                 description: "description 3",
             }
         ]
-        dao.getAll = jest.fn().mockResolvedValue(topics);
+        dao.getAll = jest.fn ().mockResolvedValue (topics);
 
         // When
-        const actual = await sut.getAll();
+        const actual = await sut.getAll ();
 
         // Then
-        expect(actual.length).toBe(3);
+        expect (actual.length).toBe (3);
     })
 
-    test("Get by id", async () => {
+    test ("Get by id", async () => {
         // Given
         const id = 17;
-        dao.getById = jest.fn().mockResolvedValue({ id: id, title: "article", description: "" });
+        dao.getById = jest.fn ().mockResolvedValue ({ id: id, title: "article", description: "" });
 
         // When
-        const topic = await sut.getById(id);
+        const topic = await sut.getById (id);
 
         // Then
-        expect(topic?.id).not.toBeUndefined();
-        expect(topic?.id).toBe(id);
-        expect(dao.getById).toBeCalledTimes(1);
-        expect(dao.getById).toBeCalledWith(id);
+        expect (topic?.id).not.toBeUndefined ();
+        expect (topic?.id).toBe (id);
+        expect (dao.getById).toBeCalledTimes (1);
+        expect (dao.getById).toBeCalledWith (id);
     })
 
-    test("Delete topic", async () => {
+    test ("Delete topic", async () => {
         // Given
         const id = 24;
 
         // When
-        await sut.deleteTopic(id);
+        await sut.deleteTopic (id);
 
         // Then
-        expect(dao.delete).toBeCalledTimes(1);
-        expect(dao.delete).toBeCalledWith(id);
+        expect (dao.delete).toBeCalledTimes (1);
+        expect (dao.delete).toBeCalledWith (id);
     })
 
-    test(("Update topic"), async () => {
+    test (("Update topic"), async () => {
         // Given
         const id = 1;
         const newTopic = {
@@ -123,10 +123,10 @@ describe("Topics service", () => {
         };
 
         // When
-        await sut.updateTopic(id, newTopic);
+        await sut.updateTopic (id, newTopic);
 
         // Then
-        expect(dao.update).toBeCalledTimes(1);
-        expect(dao.update).toBeCalledWith(id, newTopic);
+        expect (dao.update).toBeCalledTimes (1);
+        expect (dao.update).toBeCalledWith (id, newTopic);
     })
 })
