@@ -12,7 +12,8 @@
     "unit-tests": "jest unit",
     "integration-tests": "jest integration --forceExit --runInBand",
     "lint": "npx eslint . --max-warnings 1",
-    "lint-fix": "npx eslint . --fix"
+    "lint-fix": "npx eslint . --fix",
+    "prettier": "npx prettier --write src/**"
   },
   "keywords": [],
   "author": "",
@@ -39,6 +40,7 @@
     "eslint-plugin-typescript": "^0.14.0",
     "nodemon": "^3.0.1",
     "testcontainers": "^10.2.1",
+    "prettier": "^3.0.3",
     "ts-jest": "^29.1.1",
     "typescript": "^5.2.2"
   }
