@@ -1,6 +1,6 @@
-import { TopicsController } from '../controllers/topics_controller';
-import { app } from '../index';
-import { Request, Response } from 'express';
+import { TopicsController } from "../controllers/topics_controller";
+import { app } from "../index";
+import { Request, Response } from "express";
 
 // GET      /topics -> all topics
 // GET      /topics/:id -> topic with id
@@ -8,28 +8,26 @@ import { Request, Response } from 'express';
 // PATCH    /topics/:id -> update topic with id
 // DELETE   /topics/:id -> delete topic with id
 
-const controller = new TopicsController ();
+const controller = new TopicsController();
 
 export function addRoutes() {
+     app.get("/topics", async (req: Request, res: Response) => {
+          await controller.getAllTopics(req, res);
+     });
 
-    app.get ("/topics", async (req: Request, res: Response) => {
-        await controller.getAllTopics (req, res);
-    })
+     app.get("/topics/:id", async (req: Request, res: Response) => {
+          await controller.getTopicById(req, res);
+     });
 
-    app.get ("/topics/:id", async (req: Request, res: Response) => {
-        await controller.getTopicById (req, res);
-    })
+     app.post("/topics", async (req: Request, res: Response) => {
+          await controller.createTopic(req, res);
+     });
 
-    app.post ("/topics", async (req: Request, res: Response) => {
-        await controller.createTopic (req, res);
-    })
+     app.delete("/topics/:id", async (req: Request, res: Response) => {
+          await controller.deleteTopic(req, res);
+     });
 
-    app.delete ("/topics/:id", async (req: Request, res: Response) => {
-        await controller.deleteTopic (req, res);
-    })
-
-    app.patch ("/topics/:id", async (req: Request, res: Response) => {
-        await controller.updateTopic (req, res);
-    })
-
+     app.patch("/topics/:id", async (req: Request, res: Response) => {
+          await controller.updateTopic(req, res);
+     });
 }

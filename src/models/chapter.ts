@@ -1,6 +1,6 @@
 export interface IChapter {
-    chapter_id?: number;
-    topic_id: number;
-    title: string;
-    description: string;
+     chapter_id?: number;
+     topic_id: number;
+     title: string;
+     description: string;
 }
