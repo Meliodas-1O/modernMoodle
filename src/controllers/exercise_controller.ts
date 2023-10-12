@@ -53,7 +53,7 @@ export class ExercisesController {
                return res.status(400).send(errorMessage(400, ExerciseErrorMessages.EMPTY_REQUEST_BODY));
           }
           if (areKeysNotValid(req.body, this.validKeys)) {
-               return res.status(403).send(errorMessage(403, ExerciseErrorMessages.INVALID_FIELD));
+               return res.status(403).send(errorMessage(403, ExerciseErrorMessages.INVALID_FIELD + `${this.validKeys}`));
           }
           const exercise_id = await this.service.createExercise(exercise);
           if (!exercise_id) {
@@ -84,7 +84,7 @@ export class ExercisesController {
           }
 
           if (areKeysNotValid(newExercise, this.validKeys)) {
-               return res.status(403).send(errorMessage(403, ExerciseErrorMessages.INVALID_FIELD));
+               return res.status(403).send(errorMessage(403, ExerciseErrorMessages.INVALID_FIELD + `${this.validKeys}`));
           }
           const returnedExercise = await this.service.updateExercise(
                id,
