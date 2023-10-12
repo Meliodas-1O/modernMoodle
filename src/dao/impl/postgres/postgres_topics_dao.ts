@@ -1,13 +1,7 @@
 import { Knex } from "knex";
-<<<<<<< HEAD:src/dao/impl/postgres/postgres_topics_dao.ts
 import db from "../../../database/database";
 import { ITopic } from "../../../models/topic";
-import {ITopicDAO } from "../../topic_dao";
-=======
-import db from "../../database/database";
-import { ITopic } from "../../models/topic";
-import { ITopicDAO } from "../topic_dao";
->>>>>>> origin/main:src/dao/postgres_impl/postgres_topics_dao.ts
+import { ITopicDAO } from "../../topic_dao";
 
 export class PostgresTopicsDAO implements ITopicDAO {
      db: Knex;

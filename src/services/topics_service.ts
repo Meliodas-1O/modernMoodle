@@ -1,13 +1,8 @@
 import { ITopicDAO } from "../dao/topic_dao";
 import { ITopic } from "../models/topic";
 
-<<<<<<< HEAD
 export class TopicsService {
-    dao: ITopicDAO;
-=======
-export class TopicService {
      dao: ITopicDAO;
->>>>>>> origin/main
 
      constructor(dao: ITopicDAO) {
           this.dao = dao;
