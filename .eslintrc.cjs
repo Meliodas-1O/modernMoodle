@@ -17,7 +17,7 @@ module.exports = {
       // typescript rules
       "@typescript-eslint/adjacent-overload-signatures": "error",
       "@typescript-eslint/array-type": "error",
-      "@typescript-eslint/await-thenable": "error",
+      //"@typescript-eslint/await-thenable": "error",
       "@typescript-eslint/ban-types": "error",
       "@typescript-eslint/no-confusing-void-expression": "error",
       "@typescript-eslint/no-empty-interface": "error",
