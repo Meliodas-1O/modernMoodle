@@ -25,7 +25,7 @@ jobs:
     - name: Verify eslint rules
       run: npx eslint . --max-warnings 1
     
-    verify-lint-for-tests:
+  verify-lint-for-tests:
     runs-on: ubuntu-latest
     
     steps:
