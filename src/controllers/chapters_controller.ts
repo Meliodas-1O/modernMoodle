@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { ChapterService } from "../services/chapters_service";
 import { PostgresChapterDAO } from "../dao/postgres_impl/postgres_chapters_dao";
+import { IChapter } from "../models/chapter";
 
 export class ChaptersController {
     service: ChapterService;
@@ -34,7 +35,7 @@ export class ChaptersController {
     // POST /chapters, chapter to create is in the body
     async createChapter(req: Request, res: Response) {
         // TODO: check if chapter is not undefined | null
-        const chapter = req.body;
+        const chapter : IChapter = req.body;
         const chapter_id = await this.service.createChapter (chapter);
         res.status (200).send (chapter_id);
     }
@@ -51,7 +52,7 @@ export class ChaptersController {
     async updateChapter(req: Request, res: Response) {
         // TODO: check if id is not undefined | null
         const id = parseInt (req.params.id);
-        const newChapter = req.body;
+        const newChapter: IChapter = req.body;
         const returnedChapter = await this.service.updateChapter (id, newChapter);
         if (returnedChapter === undefined) {
             res.status (404).send ();

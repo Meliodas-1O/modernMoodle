@@ -3,12 +3,12 @@ import { Knex } from "knex";
 
 export async function up(knex: Knex): Promise<void> {
     return knex.schema
-        .createTable ("topics", function (table) {
+        .createTable ("topics",  (table) => {
             table.bigIncrements ("topic_id").primary;
             table.string ("title", 255);
             table.string ("description", 255);
         })
-        .createTable ("chapters", function (table) {
+        .createTable ("chapters", (table) => {
             table.bigIncrements ("chapter_id").primary;
             table
                 .bigInteger ("topic_id")
@@ -19,7 +19,7 @@ export async function up(knex: Knex): Promise<void> {
             table.string ("title", 255);
             table.string ("description", 255);
         })
-        .createTable ("exercises", function (table) {
+        .createTable ("exercises", (table) => {
             table.bigIncrements ("exercise_id").primary;
             table
                 .bigInteger ("chapter_id")

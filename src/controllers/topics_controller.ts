@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { TopicService } from "../services/topics_service";
 import { PostgresTopicsDAO } from "../dao/postgres_impl/postgres_topics_dao";
+import { ITopic } from "../models/topic";
 
 export class TopicsController {
     service: TopicService;
@@ -34,7 +35,7 @@ export class TopicsController {
     // POST /topics, topic to create is in the body
     async createTopic(req: Request, res: Response) {
         // TODO: check if topic is not undefined | null
-        const topic = req.body;
+        const topic : ITopic = req.body;
         const topic_id = await this.service.createTopic (topic);
         res.status (200).send (topic_id);
     }
@@ -51,7 +52,7 @@ export class TopicsController {
     async updateTopic(req: Request, res: Response) {
         // TODO: check if id is not undefined | null
         const id = parseInt (req.params.id);
-        const newTopic = req.body;
+        const newTopic : ITopic = req.body;
         const returnedTopic = await this.service.updateTopic (id, newTopic);
         if (returnedTopic === undefined) {
             res.status (404).send ();
