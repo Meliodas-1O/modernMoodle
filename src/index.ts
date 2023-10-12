@@ -12,9 +12,9 @@ const port: number = config.EXPRESS_CONFIG.port;
 app.use (express.json ())
 
 // Add all routes
-addTopicsRoutes()
-addChaptersRoutes()
-addExercisesRoutes()
+addTopicsRoutes ()
+addChaptersRoutes ()
+addExercisesRoutes ()
 
 // Run the server
 app.listen (port, () => {
