@@ -35,7 +35,7 @@ export class ChaptersController {
     // POST /chapters, chapter to create is in the body
     async createChapter(req: Request, res: Response) {
         // TODO: check if chapter is not undefined | null
-        const chapter : IChapter = req.body;
+        const chapter : IChapter = req.body as IChapter;
         const chapter_id = await this.service.createChapter (chapter);
         res.status (200).send (chapter_id);
     }
