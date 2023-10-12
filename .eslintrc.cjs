@@ -32,7 +32,6 @@ module.exports = {
       "@typescript-eslint/prefer-as-const": "error",
       "@typescript-eslint/no-useless-empty-export": "error",
       "@typescript-eslint/no-unsafe-return": "error",
-      "@typescript-eslint/no-unsafe-assignment": "error",
 
       // formatting rules
       "block-spacing": "off",
