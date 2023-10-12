@@ -7,16 +7,6 @@ import { ChapterErrorMessages, areKeysNotValid, errorMessage } from "../utils/he
 export class ChaptersController {
      service: ChapterService;
      validKeys: string[] = ["topic_id", "title", "description"];
-     erMsg: string[] = [
-          "The request body is empty. Please put input values.",
-          "Error while updating the chapter. Please check your input values or try again later.",
-          "One of the field is not appropriate. The valid keys are : [topic_id, title, description].",
-          "Error while creating the chapter. Please check your input values or try agin later",
-          "There is no chapter with the given id. Please check your input values or try again later.",
-          "There is no chapter yet !",
-          "Error while retrieving chapters. Please try again",
-     ];
-
         
      constructor() {
           this.service = new ChapterService(new PostgresChapterDAO());
