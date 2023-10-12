@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { PostgresExerciseDAO } from "../dao/postgres_impl/postgres_exercises_dao";
 import { ExerciseService } from "../services/exercise_servce";
-import { areKeysNotValid, errorMessage } from "../utils/helpers";
+import { ExerciseErrorMessages, areKeysNotValid, errorMessage } from "../utils/helpers";
 
 export class ExercisesController {
      service: ExerciseService;
@@ -10,15 +10,6 @@ export class ExercisesController {
           "statement",
           "solution",
           "difficulty_level",
-     ];
-     erMsg: string[] = [
-          "The request body is empty. Please put input values.",
-          "Error while creating the exercise. Please check your input values or try agin later",
-          "One of the field is not appropriate. The valid keys are :" +
-               `${this.validKeys} .`,
-          "Error while retrieving exercices. Please try again",
-          "There is no exercise with the given id. Please check your input values or try again later.",
-          "Error while updating the exercise.  Please check your input values or try again later.",
      ];
 
      constructor() {
@@ -29,12 +20,12 @@ export class ExercisesController {
      async getAllExercises(_req: Request, res: Response) {
           const exercises = await this.service.getAll();
           if (!exercises) {
-               return res.status(404).send(errorMessage(404, this.erMsg[3]));
+               return res.status(404).send(errorMessage(404, ExerciseErrorMessages.RETRIEVAL_ERROR));
           }
           if (!exercises.length) {
                return res
                     .status(200)
-                    .send(errorMessage(200, "There is no exercice yet !"));
+                    .send(errorMessage(200, ExerciseErrorMessages.NO_EXERCICES));
           }
           return res.status(200).send(exercises);
      }
@@ -45,7 +36,7 @@ export class ExercisesController {
           const id = parseInt(req.params.id);
           const exercise = await this.service.getById(id);
           if (!exercise) {
-               return res.status(404).send(errorMessage(404, this.erMsg[4]));
+               return res.status(404).send(errorMessage(404, ExerciseErrorMessages.NO_EXERCISE_BY_ID));
           }
           return res.status(200).send(exercise);
      }
@@ -59,14 +50,14 @@ export class ExercisesController {
                req.body.constructor === Object &&
                Object.keys(req.body).length === 0
           ) {
-               return res.status(400).send(errorMessage(400, this.erMsg[0]));
+               return res.status(400).send(errorMessage(400, ExerciseErrorMessages.EMPTY_REQUEST_BODY));
           }
           if (areKeysNotValid(req.body, this.validKeys)) {
-               return res.status(403).send(errorMessage(403, this.erMsg[2]));
+               return res.status(403).send(errorMessage(403, ExerciseErrorMessages.INVALID_FIELD));
           }
           const exercise_id = await this.service.createExercise(exercise);
           if (!exercise_id) {
-               return res.send(400).send(errorMessage(400, this.erMsg[1]));
+               return res.send(400).send(errorMessage(400, ExerciseErrorMessages.CREATE_ERROR));
           }
           res.status(200).send(exercise_id);
      }
@@ -89,18 +80,18 @@ export class ExercisesController {
                req.body.constructor === Object &&
                Object.keys(req.body).length === 0
           ) {
-               return res.status(400).send(errorMessage(400, this.erMsg[0]));
+               return res.status(400).send(errorMessage(400, ExerciseErrorMessages.EMPTY_REQUEST_BODY));
           }
 
           if (areKeysNotValid(newExercise, this.validKeys)) {
-               return res.status(403).send(errorMessage(403, this.erMsg[2]));
+               return res.status(403).send(errorMessage(403, ExerciseErrorMessages.INVALID_FIELD));
           }
           const returnedExercise = await this.service.updateExercise(
                id,
                newExercise
           );
           if (!returnedExercise) {
-               return res.status(404).send(errorMessage(404, this.erMsg[5]));
+               return res.status(404).send(errorMessage(404, ExerciseErrorMessages.UPDATE_ERROR));
           }
           return res.status(200).send(returnedExercise);
      }
