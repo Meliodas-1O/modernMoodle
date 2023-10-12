@@ -10,7 +10,7 @@
     "dev": "concurrently \"npx tsc -w\" \"nodemon ./src/index.ts\"",
     "migrate": "cp .env ./src/database/ && npx knex migrate:latest --knexfile src/database/knexfile.ts; rm ./src/database/.env",
     "unit-tests": "jest unit",
-    "integration-tests": "jest integration --forceExit",
+    "integration-tests": "jest integration --forceExit --runInBand",
     "lint": "npx eslint . --max-warnings 1",
     "lint-fix": "npx eslint . --fix"
   },
