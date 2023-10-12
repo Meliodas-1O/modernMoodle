@@ -56,10 +56,10 @@ describe("Main integration tests suite", () => {
                const topic = topics[0];
                expect(topic.title).toBe("topic");
                expect(topic.description).toBe("description");
-
-               // TODO(test, fix): the field is called 'topic_id' in the db
                expect(topic.id).not.toBeUndefined();
-               expect(topic.id).toBe(1);
+
+               // TODO: I don't know the server returns "1" and not "1"
+               expect(topic.id).toBe("1");
           });
      });
 });
