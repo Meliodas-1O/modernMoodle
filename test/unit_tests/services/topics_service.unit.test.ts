@@ -113,4 +113,20 @@ describe("Topics service", () => {
         expect(dao.delete).toBeCalledTimes(1);
         expect(dao.delete).toBeCalledWith(id);
     })
+
+    test(("Update topic"), async () => {
+        // Given
+        const id = 1;
+        const newTopic = {
+            title: "new topic title",
+            description: "new topic description"
+        };
+
+        // When
+        await sut.updateTopic(id, newTopic);
+
+        // Then
+        expect(dao.update).toBeCalledTimes(1);
+        expect(dao.update).toBeCalledWith(id, newTopic);
+    })
 })
