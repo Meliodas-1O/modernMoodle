@@ -5,19 +5,19 @@ import { addRoutes as addExercisesRoutes } from './routes/exercise';
 import { config } from './config/config';
 
 // Basic express app configuration
-export const app: Express = express()
+export const app: Express = express ()
 const port: number = config.EXPRESS_CONFIG.port;
 
 // Add middleware(s)
-app.use(express.json())
+app.use (express.json ())
 
 // Add all routes
-addTopicsRoutes()
-addChaptersRoutes()
-addExercisesRoutes()
+addTopicsRoutes ()
+addChaptersRoutes ()
+addExercisesRoutes ()
 
 // Run the server
-app.listen(port, () => {
-    console.log(`Server listening on port ${port}`)
+app.listen (port, () => {
+    console.log (`Server listening on port ${port}`)
 })
 

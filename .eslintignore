@@ -1,0 +1,4 @@
+*.js
+*.config.ts
+**.test.ts
+**/src/database/migrations/**.ts
