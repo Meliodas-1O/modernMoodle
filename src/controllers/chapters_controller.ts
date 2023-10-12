@@ -80,7 +80,7 @@ export class ChaptersController {
           const erMsg: string[] = [
                "The request body is empty. Please put input values.",
                "Error while updating the chapter. Please check your input values or try again later.",
-               "One of the field is not apporpriate. The valid keys are : [topic_id, title, description].",
+               "One of the field is not appropriate. The valid keys are : [topic_id, title, description].",
           ];
           const id = parseInt(req.params.id);
           const newChapter = req.body;
