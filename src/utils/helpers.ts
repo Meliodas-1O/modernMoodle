@@ -45,6 +45,5 @@ export enum TopicErrorMessages {
      INVALID_FIELD = `One of the field is not appropriate. The valid keys are: `,
      RETRIEVAL_ERROR = "Error while retrieving topics. Please try again.",
      NO_TOPIC_BY_ID = "There is no topic with the given id. Please check your input values or try again later.",
-     UPDATE_ERROR = "Error while updating the topic. Please check your input values or try again later.",
-     NO_TOPICS = "There is no topic yet !"
+     UPDATE_ERROR = "Error while updating the topic. Please check your input values or try again later."
 }
