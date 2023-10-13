@@ -15,7 +15,7 @@ describe("Main integration tests suite", () => {
      });
 
      describe("Topics routes", () => {
-          it("1 - Get all topics", async () => {
+          test("1 - Get all topics", async () => {
                // Given
                // When
                const response = await request(app).get("/topics");
@@ -24,7 +24,7 @@ describe("Main integration tests suite", () => {
                expect(response.statusCode).toBe(200);
           });
 
-          it("2 - Create a new topic", async () => {
+          test("2 - Create a new topic", async () => {
                // Given
                const newTopic = {
                     title: "topic",
@@ -41,7 +41,7 @@ describe("Main integration tests suite", () => {
                expect(response.statusCode).toBe(200);
           });
 
-          it("3- Get all topics again", async () => {
+          test("3- Get all topics again", async () => {
                // Given
                // When
                const response = await request(app).get("/topics");
