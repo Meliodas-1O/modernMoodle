@@ -3,6 +3,7 @@ import { config } from '../../../src/config/config';
 import { up } from "../../../src/database/migrations/20231008185239_init";
 import db_config from "../../../src/database/knexfile";
 import knex from 'knex';
+import {closeServer } from '../../../src';
 
 
 const db = knex (db_config.development);
@@ -46,5 +47,6 @@ export async function setup() {
 }
 
 export async function teardown() {
+    closeServer();
     await stopPostgresContainer ();
 }
