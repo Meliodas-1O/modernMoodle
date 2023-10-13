@@ -1,5 +1,5 @@
 export interface IExercise {
-     exercise_id?: number;
+     id?: number;
      chapter_id: number;
      statement: string;
      solution: string;
