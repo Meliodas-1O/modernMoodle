@@ -1,8 +1,8 @@
 import request from "supertest";
 import { app } from "../../../src";
-import { ITopic } from "../../../src/models/topic";
 import { setup, teardown } from "../utils/setup";
 import { ChapterErrorMessages } from "../../../src/utils/helpers";
+import { IChapter } from "../../../src/models/chapter";
 
 describe("Chapter integration tests suite", () => {
      jest.setTimeout(60 * 1000);
@@ -56,7 +56,7 @@ describe("Chapter integration tests suite", () => {
                // Then
                expect(response.statusCode).toBe(200);
 
-               const chapter: ITopic = response.body;
+               const chapter: IChapter = response.body;
                expect(chapter.title).toBe("chapterTitle");
                expect(chapter.description).toBe("chapterDescription");
                expect(chapter.id).toBeDefined();
@@ -79,7 +79,7 @@ describe("Chapter integration tests suite", () => {
                // Then
                expect(response.statusCode).toBe(200);
                expect(response.body).toBeDefined();
-               const chapter = response.body;
+               const chapter: IChapter = response.body;
                expect(chapter.title).toBe(updateDescription.title);
                expect(chapter.description).toBe(updateDescription.description);
                expect(chapter.id).toBeDefined();
