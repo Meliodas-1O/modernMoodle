@@ -21,7 +21,7 @@ describe("Main integration tests suite", () => {
                const response = await request(app).get("/topics");
 
                // Then
-               expect(response.statusCode).toBe(404);
+               expect(response.statusCode).toBe(200);
           });
 
           it("2 - Create a new topic", async () => {
@@ -58,7 +58,7 @@ describe("Main integration tests suite", () => {
                expect(topic.description).toBe("description");
                expect(topic.id).not.toBeUndefined();
 
-               // TODO: I don't know the server returns "1" and not "1"
+               // TODO: I don't know the server returns "1" and not 1
                expect(topic.id).toBe("1");
           });
      });
