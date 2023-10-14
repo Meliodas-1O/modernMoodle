@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { TopicService } from "../services/topics_service";
-import { PostgresTopicsDAO } from "../dao/postgres_impl/postgres_topics_dao";
+import { ITopicsService } from "../services/topics_service";
 import { ITopic } from "../models/topic";
 import {
      TopicErrorMessages,
@@ -9,11 +8,11 @@ import {
 } from "../utils/helpers";
 
 export class TopicsController {
-     service: TopicService;
+     service: ITopicsService;
      validKeys: string[] = ["title", "description"];
 
-     constructor() {
-          this.service = new TopicService(new PostgresTopicsDAO());
+     constructor(service: ITopicsService) {
+          this.service = service;
      }
 
      // GET /topics
@@ -22,15 +21,10 @@ export class TopicsController {
           const topics = await this.service.getAll();
           if (!topics) {
                return res
-                    .status(404)
+                    .status(500)
                     .send(
-                         errorMessage(404, TopicErrorMessages.RETRIEVAL_ERROR)
+                         errorMessage(500, TopicErrorMessages.RETRIEVAL_ERROR)
                     );
-          }
-          if (!topics.length) {
-               return res
-                    .status(200)
-                    .send(errorMessage(200, TopicErrorMessages.NO_TOPICS));
           }
           return res.status(200).send(topics);
      }
@@ -68,7 +62,6 @@ export class TopicsController {
                     );
           }
           if (areKeysNotValid(req.body, this.validKeys)) {
-               console.log("aaabaaaaaaaaaaaaaaaa");
                return res
                     .status(403)
                     .send(
@@ -121,7 +114,7 @@ export class TopicsController {
                     .send(
                          errorMessage(
                               403,
-                              TopicErrorMessages.EMPTY_REQUEST_BODY +
+                              TopicErrorMessages.INVALID_FIELD +
                                    `${this.validKeys}`
                          )
                     );

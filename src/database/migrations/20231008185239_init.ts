@@ -3,14 +3,14 @@ import { Knex } from "knex";
 export async function up(knex: Knex): Promise<void> {
      return knex.schema
           .createTable("topics", (table) => {
-               table.bigIncrements("topic_id").primary;
+               table.bigIncrements("id").primary;
                table.string("title", 255);
                table.string("description", 255);
           })
           .createTable("chapters", (table) => {
-               table.bigIncrements("chapter_id").primary;
+               table.bigIncrements("id").primary;
                table.bigInteger("topic_id")
-                    .references("topic_id")
+                    .references("id")
                     .inTable("topics")
                     .onDelete("CASCADE") // delete chapter if topic is deleted
                     .onUpdate("CASCADE"); // update chapter if topic is updated
@@ -18,9 +18,9 @@ export async function up(knex: Knex): Promise<void> {
                table.string("description", 255);
           })
           .createTable("exercises", (table) => {
-               table.bigIncrements("exercise_id").primary;
+               table.bigIncrements("id").primary;
                table.bigInteger("chapter_id")
-                    .references("chapter_id")
+                    .references("id")
                     .inTable("chapters")
                     .onDelete("CASCADE")
                     .onUpdate("CASCADE");
