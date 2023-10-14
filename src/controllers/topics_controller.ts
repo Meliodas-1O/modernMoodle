@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { PostgresTopicsDAO } from "../dao/impl/postgres/postgres_topics_dao";
 import { ITopicsService } from "../services/topics_service";
 import { ITopic } from "../models/topic";
 import {
@@ -7,14 +6,13 @@ import {
      areKeysNotValid,
      errorMessage,
 } from "../utils/helpers";
-import { TopicsService } from "../services/impl/topics_service.impl";
 
 export class TopicsController {
      service: ITopicsService;
      validKeys: string[] = ["title", "description"];
 
-     constructor() {
-          this.service = new TopicsService(new PostgresTopicsDAO());
+     constructor(service: ITopicsService) {
+          this.service = service;
      }
 
      // GET /topics
