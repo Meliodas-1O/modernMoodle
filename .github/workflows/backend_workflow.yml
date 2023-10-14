@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "*" ]
 
+defaults:
+  run:
+    working-directory: ./backend/
+
 jobs:
   verify-lint:
     runs-on: ubuntu-latest
@@ -21,12 +25,10 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd backend/
         npm ci
     
     - name: Verify eslint rules
       run: |
-        cd backend/
         npx eslint ./src/ --max-warnings 1
     
   verify-lint-for-tests:
@@ -43,12 +45,10 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd backend/
         npm ci
 
     - name: Verify eslint rules
       run: |
-        cd backend/
         npx eslint ./test/ --max-warnings 1
 
   build:
@@ -66,12 +66,10 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd backend/
         npm ci
 
     - name: Build project
       run: |
-        cd backend/
         npm run build
   
   unit-tests:
@@ -89,12 +87,10 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd backend/
         npm ci
     
     - name: Run unit tests
       run: |
-        cd backend/
         npm run unit-tests
   
   integration-tests:
@@ -112,10 +108,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd backend/
         npm ci
 
     - name: Run integration tests
       run: |
-        cd backend/
         npm run integration-tests
