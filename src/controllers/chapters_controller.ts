@@ -121,7 +121,11 @@ export class ChaptersController {
                return res
                     .status(403)
                     .send(
-                         errorMessage(403, ChapterErrorMessages.INVALID_FIELD)
+                         errorMessage(
+                              403,
+                              ChapterErrorMessages.INVALID_FIELD +
+                                   `${this.validKeys}`
+                         )
                     );
           }
           const returnedChapter = await this.service.updateChapter(
