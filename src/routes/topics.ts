@@ -13,7 +13,7 @@ const router = express.Router();
 router.get("/", controller.getAllTopics);
 router.get("/:id", controller.getTopicById);
 router.post("/", controller.createTopic);
-router.put("/:id", controller.updateTopic);
+router.patch("/:id", controller.updateTopic);
 router.delete("/:id", controller.deleteTopic);
 
 export default router;
