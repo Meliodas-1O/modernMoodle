@@ -73,6 +73,7 @@ describe("Chapter integration tests suite", () => {
 
           test("5- Update chapter", async () => {
                // Given
+
                const updateDescription = {
                     title: "updatedChapterTitle",
                     description: "updatedChapterDescription",

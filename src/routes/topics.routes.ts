@@ -1,5 +1,4 @@
-import { app } from "../index";
-import { Request, Response } from "express";
+import express from "express";
 import { createTopicsController } from "../di/dependency_injection";
 
 // GET      /topics -> all topics
@@ -9,25 +8,12 @@ import { createTopicsController } from "../di/dependency_injection";
 // DELETE   /topics/:id -> delete topic with id
 
 const controller = createTopicsController();
+const router = express.Router();
 
-export function addRoutes() {
-     app.get("/topics", async (req: Request, res: Response) => {
-          await controller.getAllTopics(req, res);
-     });
+router.get("/", controller.getAllTopics);
+router.get("/:id", controller.getTopicById);
+router.post("/", controller.createTopic);
+router.patch("/:id", controller.updateTopic);
+router.delete("/:id", controller.deleteTopic);
 
-     app.get("/topics/:id", async (req: Request, res: Response) => {
-          await controller.getTopicById(req, res);
-     });
-
-     app.post("/topics", async (req: Request, res: Response) => {
-          await controller.createTopic(req, res);
-     });
-
-     app.delete("/topics/:id", async (req: Request, res: Response) => {
-          await controller.deleteTopic(req, res);
-     });
-
-     app.patch("/topics/:id", async (req: Request, res: Response) => {
-          await controller.updateTopic(req, res);
-     });
-}
+export default router;
