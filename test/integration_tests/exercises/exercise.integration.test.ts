@@ -87,7 +87,6 @@ describe("Exercice integration tests suite", () => {
                     .set("Content-Type", "application/json");
 
                // Then
-               console.log(response.body);
                expect(response.statusCode).toBe(200);
 
                const exercice: IExercise = response.body;
