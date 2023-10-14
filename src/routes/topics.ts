@@ -3,6 +3,7 @@ import { app } from "../index";
 import { Request, Response } from "express";
 import { TopicsService } from "../services/impl/topics_service.impl";
 import { PostgresTopicsDAO } from "../dao/impl/postgres/postgres_topics_dao";
+import { createTopicsController } from "../di/dependency_injection";
 
 // GET      /topics -> all topics
 // GET      /topics/:id -> topic with id
@@ -10,9 +11,7 @@ import { PostgresTopicsDAO } from "../dao/impl/postgres/postgres_topics_dao";
 // PATCH    /topics/:id -> update topic with id
 // DELETE   /topics/:id -> delete topic with id
 
-const controller = new TopicsController(
-     new TopicsService(new PostgresTopicsDAO())
-);
+const controller = createTopicsController();
 
 export function addRoutes() {
      app.get("/topics", async (req: Request, res: Response) => {
