@@ -1,7 +1,7 @@
 import { Knex } from "knex";
 import db from "../../../database/database";
 import { ITopic } from "../../../models/topic";
-import { ITopicDAO } from "../../topic_dao";
+import { ITopicDAO } from "../../topic.dao.interface";
 
 export class PostgresTopicsDAO implements ITopicDAO {
      db: Knex;

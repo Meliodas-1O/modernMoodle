@@ -1,9 +1,9 @@
-import { ChaptersController } from "../controllers/chapters_controller";
-import { ExercisesController } from "../controllers/exercises_controller";
-import { TopicsController } from "../controllers/topics_controller";
-import { PostgresChapterDAO } from "../dao/impl/postgres/postgres_chapters_dao";
-import { PostgresExerciseDAO } from "../dao/impl/postgres/postgres_exercises_dao";
-import { PostgresTopicsDAO } from "../dao/impl/postgres/postgres_topics_dao";
+import { ChaptersController } from "../controllers/chapters.controller";
+import { ExercisesController } from "../controllers/exercises.controller";
+import { TopicsController } from "../controllers/topics.controller";
+import { PostgresChapterDAO } from "../dao/impl/postgres/postgres_chapters.dao.impl";
+import { PostgresExerciseDAO } from "../dao/impl/postgres/postgres_exercises.dao.impl";
+import { PostgresTopicsDAO } from "../dao/impl/postgres/postgres_topics.dao.impl";
 import { ChaptersService } from "../services/impl/chapters_service.impl";
 import { ExercisesService } from "../services/impl/exercises_service.impl";
 import { TopicsService } from "../services/impl/topics_service.impl";

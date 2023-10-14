@@ -1,6 +1,6 @@
-import { IChapterDAO } from "../../dao/chapter_dao";
+import { IChapterDAO } from "../../dao/chapter.dao.interface";
 import { IChapter } from "../../models/chapter";
-import { IChaptersService } from "../chapters_service";
+import { IChaptersService } from "../chapters.service";
 
 export class ChaptersService implements IChaptersService {
      dao: IChapterDAO;

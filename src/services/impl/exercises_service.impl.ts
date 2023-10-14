@@ -1,6 +1,6 @@
-import { IExerciseDAO } from "../../dao/exercise_dao";
+import { IExerciseDAO } from "../../dao/exercise.dao.interface";
 import { IExercise } from "../../models/exercise";
-import { IExercisesService } from "../exercises_service";
+import { IExercisesService } from "../exercises.service";
 
 export class ExercisesService implements IExercisesService {
      dao: IExerciseDAO;
