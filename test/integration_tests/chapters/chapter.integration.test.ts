@@ -73,6 +73,8 @@ describe("Chapter integration tests suite", () => {
 
           test("5- Update chapter", async () => {
                // Given
+               console.log(id);
+
                const updateDescription = {
                     title: "updatedChapterTitle",
                     description: "updatedChapterDescription",
@@ -85,6 +87,8 @@ describe("Chapter integration tests suite", () => {
                     .set("Content-Type", "application/json");
 
                // Then
+               console.log(response.body);
+
                expect(response.statusCode).toBe(200);
                expect(response.body).toBeDefined();
                const chapter: IChapter = response.body;
