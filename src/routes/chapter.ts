@@ -1,6 +1,5 @@
 import { createChaptersController } from "../di/dependency_injection";
-import { app } from "../index";
-import { Request, Response } from "express";
+import express from "express";
 
 // GET      /chapters -> all chapters
 // GET      /chapters/:id -> chapter with id
@@ -10,24 +9,12 @@ import { Request, Response } from "express";
 
 const controller = createChaptersController();
 
-export function addRoutes() {
-     app.get("/chapters", async (req: Request, res: Response) => {
-          return await controller.getAllChapters(req, res);
-     });
+const router = express.Router();
 
-     app.get("/chapters/:id", async (req: Request, res: Response) => {
-          return await controller.getChapterById(req, res);
-     });
+router.get("/", controller.getAllChapters);
+router.get("/:id", controller.getChapterById);
+router.post("/", controller.createChapter);
+router.patch("/:id", controller.updateChapter);
+router.delete("/:id", controller.deleteChapter);
 
-     app.post("/chapters", async (req: Request, res: Response) => {
-          return await controller.createChapter(req, res);
-     });
-
-     app.delete("/chapters/:id", async (req: Request, res: Response) => {
-          await controller.deleteChapter(req, res);
-     });
-
-     app.patch("/chapters/:id", async (req: Request, res: Response) => {
-          return await controller.updateChapter(req, res);
-     });
-}
+export default router;

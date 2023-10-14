@@ -1,7 +1,7 @@
 import express, { Express } from "express";
-import { addRoutes as addChaptersRoutes } from "./routes/chapter";
 import topicRoutes from "./routes/topics";
-import { addRoutes as addExercisesRoutes } from "./routes/exercise";
+import chapterRoutes from "./routes/chapter";
+import exercisesRoutes from "./routes/exercise";
 import { config } from "./config/config";
 import { Server } from "http";
 
@@ -12,10 +12,10 @@ const port: number = config.EXPRESS_CONFIG.port;
 // Add middleware(s)
 app.use(express.json());
 
-app.use("/topics", topicRoutes);
 // Add all routes
-addChaptersRoutes();
-addExercisesRoutes();
+app.use("/topics", topicRoutes);
+app.use("/chapters", chapterRoutes);
+app.use("/exercises", exercisesRoutes);
 
 // Run the server
 const server: Server = app.listen(port, () => {

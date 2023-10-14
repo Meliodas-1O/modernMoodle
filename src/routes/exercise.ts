@@ -1,6 +1,5 @@
-import { Request, Response } from "express";
+import express from "express";
 import { createExercisesController } from "../di/dependency_injection";
-import { app } from "../index";
 
 // GET      /exercises -> all exercises
 // GET      /exercises/:id -> exercise with id
@@ -9,25 +8,12 @@ import { app } from "../index";
 // DELETE   /exercises/:id -> delete exercise with id
 
 const controller = createExercisesController();
+const router = express.Router();
 
-export function addRoutes() {
-     app.get("/exercises", async (req: Request, res: Response) => {
-          return await controller.getAllExercises(req, res);
-     });
+router.get("/", controller.getAllExercises);
+router.get("/:id", controller.getExerciseById);
+router.post("/", controller.createExercise);
+router.patch("/:id", controller.updateExercise);
+router.delete("/:id", controller.deleteExercise);
 
-     app.get("/exercises/:id", async (req: Request, res: Response) => {
-          return await controller.getExerciseById(req, res);
-     });
-
-     app.post("/exercises", async (req: Request, res: Response) => {
-          return await controller.createExercise(req, res);
-     });
-
-     app.delete("/exercises/:id", async (req: Request, res: Response) => {
-          await controller.deleteExercise(req, res);
-     });
-
-     app.patch("/exercises/:id", async (req: Request, res: Response) => {
-          return await controller.updateExercise(req, res);
-     });
-}
+export default router;
