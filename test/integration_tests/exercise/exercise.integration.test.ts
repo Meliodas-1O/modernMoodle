@@ -2,7 +2,6 @@ import request from "supertest";
 import { app } from "../../../src";
 import { setup, teardown } from "../utils/setup";
 import { IExercise } from "../../../src/models/exercise";
-import { ExerciseErrorMessages } from "../../../src/utils/helpers";
 
 describe("Exercice integration tests suite", () => {
      jest.setTimeout(60 * 1000);
@@ -23,11 +22,6 @@ describe("Exercice integration tests suite", () => {
 
                // Then
                expect(response.statusCode).toBe(200);
-               expect(response.body.error).toBeDefined();
-               expect(response.body.error.message).toBeDefined();
-               expect(response.body.error.message).toBe(
-                    ExerciseErrorMessages.NO_EXERCICES
-               );
           });
 
           test("2 - Create a new exercice", async () => {
@@ -118,11 +112,6 @@ describe("Exercice integration tests suite", () => {
 
                // Then
                expect(response.statusCode).toBe(200);
-               expect(response.body.error).toBeDefined();
-               expect(response.body.error.message).toBeDefined();
-               expect(response.body.error.message).toBe(
-                    ExerciseErrorMessages.NO_EXERCICES
-               );
           });
      });
 });

@@ -26,11 +26,6 @@ export class ChaptersController {
                          errorMessage(404, ChapterErrorMessages.RETRIEVAL_ERROR)
                     );
           }
-          if (!chapters.length) {
-               return res
-                    .status(200)
-                    .send(errorMessage(200, ChapterErrorMessages.NO_CHAPTERS));
-          }
           return res.status(200).send(chapters);
      }
 

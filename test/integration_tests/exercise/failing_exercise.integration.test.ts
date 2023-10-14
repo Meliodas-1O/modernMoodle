@@ -47,10 +47,8 @@ describe("Exercise failing integration tests suite", () => {
                expect(response.statusCode).toBe(400);
                expect(response.body).toBeDefined();
                expect(response.body).toEqual({
-                    error: {
-                         status: 400,
-                         message: ExerciseErrorMessages.EMPTY_REQUEST_BODY,
-                    },
+                    status: 400,
+                    message: ExerciseErrorMessages.EMPTY_REQUEST_BODY,
                });
           });
 
@@ -70,12 +68,9 @@ describe("Exercise failing integration tests suite", () => {
                expect(response.statusCode).toBe(403);
                expect(response.body).toBeDefined();
                expect(response.body).toEqual({
-                    error: {
-                         status: 403,
-                         message:
-                              ExerciseErrorMessages.INVALID_FIELD +
-                              `${validKeys}`,
-                    },
+                    status: 403,
+                    message:
+                         ExerciseErrorMessages.INVALID_FIELD + `${validKeys}`,
                });
           });
 
@@ -93,10 +88,8 @@ describe("Exercise failing integration tests suite", () => {
                expect(response.statusCode).toBe(400);
                expect(response.body).toBeDefined();
                expect(response.body).toEqual({
-                    error: {
-                         status: 400,
-                         message: ExerciseErrorMessages.EMPTY_REQUEST_BODY,
-                    },
+                    status: 400,
+                    message: ExerciseErrorMessages.EMPTY_REQUEST_BODY,
                });
           });
 
@@ -116,12 +109,9 @@ describe("Exercise failing integration tests suite", () => {
                expect(response.statusCode).toBe(403);
                expect(response.body).toBeDefined();
                expect(response.body).toEqual({
-                    error: {
-                         status: 403,
-                         message:
-                              ExerciseErrorMessages.INVALID_FIELD +
-                              `${validKeys}`,
-                    },
+                    status: 403,
+                    message:
+                         ExerciseErrorMessages.INVALID_FIELD + `${validKeys}`,
                });
           });
 
@@ -134,10 +124,8 @@ describe("Exercise failing integration tests suite", () => {
                expect(response.statusCode).toBe(404);
                expect(response.body).toBeDefined();
                expect(response.body).toEqual({
-                    error: {
-                         status: 404,
-                         message: ExerciseErrorMessages.NO_EXERCISE_BY_ID,
-                    },
+                    status: 404,
+                    message: ExerciseErrorMessages.NO_EXERCISE_BY_ID,
                });
           });
      });

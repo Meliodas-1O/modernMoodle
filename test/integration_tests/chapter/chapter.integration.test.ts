@@ -1,7 +1,6 @@
 import request from "supertest";
 import { app } from "../../../src";
 import { setup, teardown } from "../utils/setup";
-import { ChapterErrorMessages } from "../../../src/utils/helpers";
 import { IChapter } from "../../../src/models/chapter";
 
 describe("Chapter integration tests suite", () => {
@@ -23,11 +22,6 @@ describe("Chapter integration tests suite", () => {
 
                // Then
                expect(response.statusCode).toBe(200);
-               expect(response.body.error).toBeDefined();
-               expect(response.body.error.message).toBeDefined();
-               expect(response.body.error.message).toBe(
-                    ChapterErrorMessages.NO_CHAPTERS
-               );
           });
 
           test("2 - Create a new chapter", async () => {
@@ -115,11 +109,6 @@ describe("Chapter integration tests suite", () => {
 
                // Then
                expect(response.statusCode).toBe(200);
-               expect(response.body.error).toBeDefined();
-               expect(response.body.error.message).toBeDefined();
-               expect(response.body.error.message).toBe(
-                    ChapterErrorMessages.NO_CHAPTERS
-               );
           });
      });
 });

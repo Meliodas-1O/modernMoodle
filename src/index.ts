@@ -24,4 +24,4 @@ const server: Server = app.listen(port, () => {
 
 export const closeServer = () => {
      server.close();
- };
+};
