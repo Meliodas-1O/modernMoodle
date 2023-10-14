@@ -1,6 +1,6 @@
 import { GenericContainer, StartedTestContainer } from "testcontainers";
 import { config } from "../../../src/config/config";
-import { up } from "../../../src/database/migrations/20231008185239_init";
+import { down, up } from "../../../src/database/migrations/20231008185239_init";
 import db_config from "../../../src/database/knexfile";
 import knex from "knex";
 import { closeServer } from "../../../src";
@@ -38,6 +38,10 @@ async function createDatabaseSchema() {
      await up(db);
 }
 
+async function destroyDatabaseSchema() {
+     await down(db);
+}
+
 export async function setup() {
      await startPostgresContainer();
 
@@ -49,6 +53,7 @@ export async function setup() {
 }
 
 export async function teardown() {
+     await destroyDatabaseSchema();
      closeServer();
      await stopPostgresContainer();
 }
