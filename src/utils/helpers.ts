@@ -22,7 +22,7 @@ export function areKeysNotValid(
 export enum ChapterErrorMessages {
      EMPTY_REQUEST_BODY = "The request body is empty. Please put input values.",
      UPDATE_ERROR = "Error while updating the chapter. Please check your input values or try again later.",
-     INVALID_FIELD = "One of the field is not appropriate. The valid keys are : [topic_id, title, description].",
+     INVALID_FIELD = "One of the field is not appropriate. The valid keys are : ",
      CREATE_ERROR = "Error while creating the chapter. Please check your input values or try again later.",
      NO_CHAPTER_BY_ID = "There is no chapter with the given id. Please check your input values or try again later.",
      NO_CHAPTERS = "There is no chapter yet !",
@@ -36,7 +36,7 @@ export enum ExerciseErrorMessages {
      RETRIEVAL_ERROR = "Error while retrieving exercises. Please try again.",
      NO_EXERCISE_BY_ID = "There is no exercise with the given id. Please check your input values or try again later.",
      UPDATE_ERROR = "Error while updating the exercise. Please check your input values or try again later.",
-     NO_EXERCICES = "There is no exercice yet !"
+     NO_EXERCICES = "There is no exercice yet !",
 }
 
 export enum TopicErrorMessages {
@@ -46,5 +46,5 @@ export enum TopicErrorMessages {
      RETRIEVAL_ERROR = "Error while retrieving topics. Please try again.",
      NO_TOPIC_BY_ID = "There is no topic with the given id. Please check your input values or try again later.",
      UPDATE_ERROR = "Error while updating the topic. Please check your input values or try again later.",
-     NO_TOPICS = "There is no topic yet !"
+     NO_TOPICS = "There is no topic yet !",
 }
