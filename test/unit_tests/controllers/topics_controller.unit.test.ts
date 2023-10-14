@@ -1,15 +1,18 @@
-import { Request, Response } from "express";
 import { TopicsController } from "../../../src/controllers/topics_controller";
 import { ITopicsService } from "../../../src/services/topics_service";
 import httpMocks from "node-mocks-http";
 import { ITopic } from "../../../src/models/topic";
-import { TopicErrorMessages, errorMessage } from "../../../src/utils/helpers";
+import { TopicErrorMessages } from "../../../src/utils/helpers";
 
 describe("Topics controller", () => {
      // System Under Test
      let sut: TopicsController;
      let service: ITopicsService;
+
+     /* eslint-disable  @typescript-eslint/no-explicit-any */
      let request: httpMocks.MockRequest<any>;
+
+     /* eslint-disable  @typescript-eslint/no-explicit-any */
      let response: httpMocks.MockResponse<any>;
 
      beforeEach(() => {
@@ -69,16 +72,18 @@ describe("Topics controller", () => {
      });
 
      test("Get all topics (Internal error)", async () => {
-        // Given
-        service.getAll = jest.fn().mockResolvedValue(null);
+          // Given
+          service.getAll = jest.fn().mockResolvedValue(null);
 
-        // When
-        await sut.getAllTopics(request, response);
+          // When
+          await sut.getAllTopics(request, response);
 
-        // Then
-        expect(response.statusCode).toBe(500);
-        expect(response._getData()).toBeDefined();
-        expect(response._getData().message).toBe(TopicErrorMessages.RETRIEVAL_ERROR);
-        expect(response._getData().status).toBe(500);
-     })
+          // Then
+          expect(response.statusCode).toBe(500);
+          expect(response._getData()).toBeDefined();
+          expect(response._getData().message).toBe(
+               TopicErrorMessages.RETRIEVAL_ERROR
+          );
+          expect(response._getData().status).toBe(500);
+     });
 });
