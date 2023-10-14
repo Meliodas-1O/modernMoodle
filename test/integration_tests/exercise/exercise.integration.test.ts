@@ -53,7 +53,7 @@ describe("Exercice integration tests suite", () => {
           test("3- Get all exercices again", async () => {
                // Given
                // When
-               const response = await request(app).get("/exercices");
+               const response = await request(app).get("/exercises");
 
                // Then
                expect(response.statusCode).toBe(200);
@@ -93,7 +93,6 @@ describe("Exercice integration tests suite", () => {
                expect(response.statusCode).toBe(200);
 
                const exercice: IExercise = response.body;
-               console.log(exercice);
                expect(exercice.statement).toBe(updatedExercise.statement);
                expect(exercice.solution).toBe(updatedExercise.solution);
                expect(exercice.difficulty_level).toBe(

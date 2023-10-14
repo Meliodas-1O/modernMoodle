@@ -44,7 +44,6 @@ describe("Exercise failing integration tests suite", () => {
                     .set("Content-Type", "application/json");
 
                // Then
-               console.log(response.body);
                expect(response.statusCode).toBe(400);
                expect(response.body).toBeDefined();
                expect(response.body).toEqual({
@@ -68,8 +67,6 @@ describe("Exercise failing integration tests suite", () => {
                     .set("Content-Type", "application/json");
 
                // Then
-               console.log(response.body);
-
                expect(response.statusCode).toBe(403);
                expect(response.body).toBeDefined();
                expect(response.body).toEqual({
@@ -93,8 +90,6 @@ describe("Exercise failing integration tests suite", () => {
                     .set("Content-Type", "application/json");
 
                // Then
-               console.log(response.body);
-
                expect(response.statusCode).toBe(400);
                expect(response.body).toBeDefined();
                expect(response.body).toEqual({
@@ -118,8 +113,6 @@ describe("Exercise failing integration tests suite", () => {
                     .set("Content-Type", "application/json");
 
                // Then
-               console.log(response.body);
-
                expect(response.statusCode).toBe(403);
                expect(response.body).toBeDefined();
                expect(response.body).toEqual({
@@ -138,8 +131,6 @@ describe("Exercise failing integration tests suite", () => {
                // When
                const response = await request(app).get("/exercises/" + fake_id);
                // Then
-               console.log(response.body);
-
                expect(response.statusCode).toBe(404);
                expect(response.body).toBeDefined();
                expect(response.body).toEqual({

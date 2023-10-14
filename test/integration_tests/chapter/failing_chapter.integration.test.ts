@@ -113,7 +113,9 @@ describe("Chapter failing integration tests suite", () => {
                expect(response.body).toEqual({
                     error: {
                          status: 403,
-                         message: ChapterErrorMessages.INVALID_FIELD,
+                         message:
+                              ChapterErrorMessages.INVALID_FIELD +
+                              `${validKeys}`,
                     },
                });
           });
