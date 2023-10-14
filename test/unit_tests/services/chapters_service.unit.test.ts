@@ -30,7 +30,7 @@ describe("Chapters service", () => {
           expect(sut.dao).toBe(dao);
      });
 
-     test("Create topic", async () => {
+     test("Create chapter", async () => {
           // Given
           const chapterId = 12;
           const newChapter: IChapter = {
