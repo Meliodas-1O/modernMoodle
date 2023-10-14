@@ -21,6 +21,9 @@ describe("Topics integration tests suite", () => {
 
           // Then
           expect(response.statusCode).toBe(200);
+
+          const topics: ITopic[] = response.body;
+          expect(topics.length).toBe(0);
      });
 
      test("2 - Create a new topic", async () => {

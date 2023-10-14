@@ -115,6 +115,9 @@ describe("Exercice integration tests suite", () => {
 
                // Then
                expect(response.statusCode).toBe(200);
+
+               const exercises: IExercise[] = response.body;
+               expect(exercises.length).toBe(0);
           });
      });
 });

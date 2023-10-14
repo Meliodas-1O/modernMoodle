@@ -22,6 +22,9 @@ describe("Chapter integration tests suite", () => {
 
                // Then
                expect(response.statusCode).toBe(200);
+
+               const chapters: IChapter[] = response.body;
+               expect(chapters.length).toBe(0);
           });
 
           test("2 - Create a new chapter", async () => {
@@ -109,6 +112,9 @@ describe("Chapter integration tests suite", () => {
 
                // Then
                expect(response.statusCode).toBe(200);
+
+               const chapters: IChapter[] = response.body;
+               expect(chapters.length).toBe(0);
           });
      });
 });
