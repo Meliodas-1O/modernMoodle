@@ -1,6 +1,6 @@
 import express, { Express } from "express";
-import { addRoutes as addTopicsRoutes } from "./routes/topics";
 import { addRoutes as addChaptersRoutes } from "./routes/chapter";
+import topicRoutes from "./routes/topics";
 import { addRoutes as addExercisesRoutes } from "./routes/exercise";
 import { config } from "./config/config";
 
@@ -11,8 +11,8 @@ const port: number = config.EXPRESS_CONFIG.port;
 // Add middleware(s)
 app.use(express.json());
 
+app.use("/topics", topicRoutes);
 // Add all routes
-addTopicsRoutes();
 addChaptersRoutes();
 addExercisesRoutes();
 
