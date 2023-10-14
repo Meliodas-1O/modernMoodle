@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IExercisesService } from "../services/exercises_service";
+import { IExercisesService } from "../services/exercises.service";
 import {
      ExerciseErrorMessages,
      areKeysNotValid,

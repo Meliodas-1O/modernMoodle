@@ -1,7 +1,7 @@
 import express, { Express } from "express";
-import { addRoutes as addTopicsRoutes } from "./routes/topics";
-import { addRoutes as addChaptersRoutes } from "./routes/chapter";
-import { addRoutes as addExercisesRoutes } from "./routes/exercise";
+import { addRoutes as addTopicsRoutes } from "./routes/topics.routes";
+import { addRoutes as addChaptersRoutes } from "./routes/chapter.routes";
+import { addRoutes as addExercisesRoutes } from "./routes/exercise.routes";
 import { config } from "./config/config";
 import { Server } from "http";
 
