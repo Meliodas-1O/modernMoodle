@@ -16,7 +16,7 @@ export class ChaptersController {
      }
 
      // GET /chapters
-     async getAllChapters(_req: Request, res: Response) {
+     getAllChapters = async (_req: Request, res: Response) => {
           const chapters = await this.service.getAll();
           if (!chapters) {
                return res
@@ -26,10 +26,10 @@ export class ChaptersController {
                     );
           }
           return res.status(200).send(chapters);
-     }
+     };
 
      // GET /chapters/:id
-     async getChapterById(req: Request, res: Response) {
+     getChapterById = async (req: Request, res: Response) => {
           // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
           const chapter = await this.service.getById(id);
@@ -44,10 +44,10 @@ export class ChaptersController {
                     );
           }
           return res.status(200).send(chapter);
-     }
+     };
 
      // POST /chapters, chapter to create is in the body
-     async createChapter(req: Request, res: Response) {
+     createChapter = async (req: Request, res: Response) => {
           // TODO: check if chapter is not undefined | null
           if (
                req.body.constructor === Object &&
@@ -81,18 +81,18 @@ export class ChaptersController {
                     .send(errorMessage(400, ChapterErrorMessages.CREATE_ERROR));
           }
           return res.status(200).send(chapter_id);
-     }
+     };
 
      // DELETE /chapters/:id
-     async deleteChapter(req: Request, res: Response) {
+     deleteChapter = async (req: Request, res: Response) => {
           // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
           await this.service.deleteChapter(id);
           res.status(200).send();
-     }
+     };
 
      // PATH /chapters/:id, new chapter is in the body
-     async updateChapter(req: Request, res: Response) {
+     updateChapter = async (req: Request, res: Response) => {
           // TODO: check if id is not undefined | null
 
           const id = parseInt(req.params.id);
@@ -132,5 +132,5 @@ export class ChaptersController {
                     .send(errorMessage(404, ChapterErrorMessages.UPDATE_ERROR));
           }
           return res.status(200).send(returnedChapter);
-     }
+     };
 }
