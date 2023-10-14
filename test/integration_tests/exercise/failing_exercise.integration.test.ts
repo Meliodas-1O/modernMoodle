@@ -20,8 +20,8 @@ describe("Exercise failing integration tests suite", () => {
                await request(app)
                     .post("/exercises")
                     .send({
-                         statement: "exerciceStatement",
-                         solution: "exerciceSolution",
+                         statement: "exerciseStatement",
+                         solution: "exerciseSolution",
                     })
                     .set("Content-Type", "application/json")
           ).body;
@@ -33,7 +33,7 @@ describe("Exercise failing integration tests suite", () => {
      });
 
      describe("Exercise routes", () => {
-          test("1 - Create a new exercice with empty request body", async () => {
+          test("1 - Create a new exercise with empty request body", async () => {
                // Given
                const newExercise = {};
 
@@ -55,10 +55,10 @@ describe("Exercise failing integration tests suite", () => {
                });
           });
 
-          test("2 - Create a new exercice with unvalid field", async () => {
+          test("2 - Create a new exercise with unvalid field", async () => {
                // Given
                const newExercise = {
-                    titre: "exerciceTitre",
+                    titre: "exerciseTitre",
                };
 
                // When
@@ -82,7 +82,7 @@ describe("Exercise failing integration tests suite", () => {
                });
           });
 
-          test("3- update exercice with empty request body ", async () => {
+          test("3- update exercise with empty request body ", async () => {
                // Given
                const updatedExercise = {};
 
@@ -105,7 +105,7 @@ describe("Exercise failing integration tests suite", () => {
                });
           });
 
-          test("4- update exercice with unvalid request body ", async () => {
+          test("4- update exercise with unvalid request body ", async () => {
                // Given
                const updatedExercise = {
                     titre: "updatedExerciseTitre",
@@ -132,7 +132,7 @@ describe("Exercise failing integration tests suite", () => {
                });
           });
 
-          test("5 - Get exercice with wrong id", async () => {
+          test("5 - Get exercise with wrong id", async () => {
                // Given
                const fake_id = Math.floor(Math.random() * 9 + 1000000000);
                // When
