@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ITopicsService } from "../services/topics_service";
+import { ITopicsService } from "../services/topics.service";
 import { ITopic } from "../models/topic";
 import {
      TopicErrorMessages,

@@ -1,6 +1,6 @@
-import { ITopicDAO } from "../../dao/topic_dao";
+import { ITopicDAO } from "../../dao/topic.dao.interface";
 import { ITopic } from "../../models/topic";
-import { ITopicsService } from "../topics_service";
+import { ITopicsService } from "../topics.service";
 
 export class TopicsService implements ITopicsService {
      dao: ITopicDAO;

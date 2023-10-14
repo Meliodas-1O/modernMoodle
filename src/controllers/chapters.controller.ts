@@ -5,7 +5,7 @@ import {
      areKeysNotValid,
      errorMessage,
 } from "../utils/helpers";
-import { IChaptersService } from "../services/chapters_service";
+import { IChaptersService } from "../services/chapters.service";
 
 export class ChaptersController {
      service: IChaptersService;

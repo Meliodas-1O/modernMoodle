@@ -1,4 +1,4 @@
-import { IExerciseDAO } from "../../../src/dao/exercise_dao";
+import { IExerciseDAO } from "../../../src/dao/exercise.dao.interface";
 import { IExercise } from "../../../src/models/exercise";
 import { ExercisesService } from "../../../src/services/impl/exercises_service.impl";
 
