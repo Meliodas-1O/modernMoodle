@@ -1,4 +1,4 @@
-import { IChapterDAO } from "../../../src/dao/chapter_dao";
+import { IChapterDAO } from "../../../src/dao/chapter.dao.interface";
 import { IChapter } from "../../../src/models/chapter";
 import { ChaptersService } from "../../../src/services/impl/chapters_service.impl";
 

@@ -1,4 +1,4 @@
-import { ITopicDAO } from "../../../src/dao/topic_dao";
+import { ITopicDAO } from "../../../src/dao/topic.dao.interface";
 import { ITopic } from "../../../src/models/topic";
 import { TopicsService } from "../../../src/services/impl/topics_service.impl";
 
