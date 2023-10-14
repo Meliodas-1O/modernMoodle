@@ -95,7 +95,7 @@ describe("Chapter failing integration tests suite", () => {
                });
           });
 
-          test("4- update chapter with empty request body ", async () => {
+          test("4- update chapter with unvalid request body ", async () => {
                // Given
                const updatedChapter = {
                     titre: "updatedChapterTitre",
