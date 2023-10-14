@@ -2,12 +2,16 @@ import { Request, Response } from "express";
 import { ChapterService } from "../services/chapters_service";
 import { PostgresChapterDAO } from "../dao/impl/postgres/postgres_chapters_dao";
 import { IChapter } from "../models/chapter";
-import { ChapterErrorMessages, areKeysNotValid, errorMessage } from "../utils/helpers";
+import {
+     ChapterErrorMessages,
+     areKeysNotValid,
+     errorMessage,
+} from "../utils/helpers";
 
 export class ChaptersController {
      service: ChapterService;
      validKeys: string[] = ["topic_id", "title", "description"];
-        
+
      constructor() {
           this.service = new ChapterService(new PostgresChapterDAO());
      }
@@ -16,10 +20,16 @@ export class ChaptersController {
      async getAllChapters(_req: Request, res: Response) {
           const chapters = await this.service.getAll();
           if (!chapters) {
-               return res.status(404).send(errorMessage(404, ChapterErrorMessages.RETRIEVAL_ERROR));
+               return res
+                    .status(404)
+                    .send(
+                         errorMessage(404, ChapterErrorMessages.RETRIEVAL_ERROR)
+                    );
           }
           if (!chapters.length) {
-               return res.status(200).send(errorMessage(200, ChapterErrorMessages.NO_CHAPTERS));
+               return res
+                    .status(200)
+                    .send(errorMessage(200, ChapterErrorMessages.NO_CHAPTERS));
           }
           return res.status(200).send(chapters);
      }
@@ -30,7 +40,14 @@ export class ChaptersController {
           const id = parseInt(req.params.id);
           const chapter = await this.service.getById(id);
           if (!chapter) {
-               return res.status(404).send(errorMessage(404, ChapterErrorMessages.NO_CHAPTER_BY_ID));
+               return res
+                    .status(404)
+                    .send(
+                         errorMessage(
+                              404,
+                              ChapterErrorMessages.NO_CHAPTER_BY_ID
+                         )
+                    );
           }
           return res.status(200).send(chapter);
      }
@@ -42,12 +59,32 @@ export class ChaptersController {
                req.body.constructor === Object &&
                Object.keys(req.body).length === 0
           ) {
-               return res.status(400).send(errorMessage(400, ChapterErrorMessages.EMPTY_REQUEST_BODY));
+               return res
+                    .status(400)
+                    .send(
+                         errorMessage(
+                              400,
+                              ChapterErrorMessages.EMPTY_REQUEST_BODY
+                         )
+                    );
+          }
+          if (areKeysNotValid(req.body, this.validKeys)) {
+               return res
+                    .status(403)
+                    .send(
+                         errorMessage(
+                              403,
+                              ChapterErrorMessages.INVALID_FIELD +
+                                   `${this.validKeys}`
+                         )
+                    );
           }
           const chapter: IChapter = req.body as IChapter;
           const chapter_id = await this.service.createChapter(chapter);
           if (!chapter_id) {
-               return res.send(400).send(errorMessage(400, ChapterErrorMessages.CREATE_ERROR));
+               return res
+                    .send(400)
+                    .send(errorMessage(400, ChapterErrorMessages.CREATE_ERROR));
           }
           return res.status(200).send(chapter_id);
      }
@@ -70,18 +107,31 @@ export class ChaptersController {
                req.body.constructor === Object &&
                Object.keys(req.body).length === 0
           ) {
-               return res.status(400).send(errorMessage(400, ChapterErrorMessages.EMPTY_REQUEST_BODY));
+               return res
+                    .status(400)
+                    .send(
+                         errorMessage(
+                              400,
+                              ChapterErrorMessages.EMPTY_REQUEST_BODY
+                         )
+                    );
           }
 
           if (areKeysNotValid(newChapter, this.validKeys)) {
-               return res.status(403).send(errorMessage(403, ChapterErrorMessages.INVALID_FIELD));
+               return res
+                    .status(403)
+                    .send(
+                         errorMessage(403, ChapterErrorMessages.INVALID_FIELD)
+                    );
           }
           const returnedChapter = await this.service.updateChapter(
                id,
                newChapter
           );
           if (!returnedChapter) {
-               return res.status(404).send(errorMessage(404, ChapterErrorMessages.UPDATE_ERROR));
+               return res
+                    .status(404)
+                    .send(errorMessage(404, ChapterErrorMessages.UPDATE_ERROR));
           }
           return res.status(200).send(returnedChapter);
      }
