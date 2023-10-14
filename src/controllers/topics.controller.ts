@@ -16,7 +16,7 @@ export class TopicsController {
      }
 
      // GET /topics
-     async getAllTopics(_req: Request, res: Response) {
+     getAllTopics = async (_req: Request, res: Response) => {
           const topics = await this.service.getAll();
           if (!topics) {
                res.status(500).send(
@@ -25,10 +25,10 @@ export class TopicsController {
                return;
           }
           res.status(200).send(topics);
-     }
+     };
 
      // GET /topics/:id
-     async getTopicById(req: Request, res: Response) {
+     getTopicById = async (req: Request, res: Response) => {
           // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
           const topic = await this.service.getById(id);
@@ -39,10 +39,10 @@ export class TopicsController {
                return;
           }
           res.status(200).send(topic);
-     }
+     };
 
      // POST /topics, topic to create is in the body
-     async createTopic(req: Request, res: Response) {
+     createTopic = async (req: Request, res: Response) => {
           // TODO: check if topic is not undefined | null
           const topic: ITopic = req.body;
           if (
@@ -71,18 +71,18 @@ export class TopicsController {
                return;
           }
           res.status(200).send(topic_id);
-     }
+     };
 
      // DELETE /topics/:id
-     async deleteTopic(req: Request, res: Response) {
+     deleteTopic = async (req: Request, res: Response) => {
           // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
           await this.service.deleteTopic(id);
           res.status(200).send();
-     }
+     };
 
      // PATH /topics/:id, new topic is in the body
-     async updateTopic(req: Request, res: Response) {
+     updateTopic = async (req: Request, res: Response) => {
           // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
           const newTopic = req.body;
@@ -113,5 +113,5 @@ export class TopicsController {
                return;
           }
           res.status(200).send(returnedTopic);
-     }
+     };
 }

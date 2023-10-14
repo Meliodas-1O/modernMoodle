@@ -20,7 +20,7 @@ export class ExercisesController {
      }
 
      // GET /exercises
-     async getAllExercises(_req: Request, res: Response) {
+     getAllExercises = async (_req: Request, res: Response) => {
           const exercises = await this.service.getAll();
           if (!exercises) {
                res.status(404).send(
@@ -29,10 +29,10 @@ export class ExercisesController {
                return;
           }
           res.status(200).send(exercises);
-     }
+     };
 
      // GET /exercises/:id
-     async getExerciseById(req: Request, res: Response) {
+     getExerciseById = async (req: Request, res: Response) => {
           // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
           const exercise = await this.service.getById(id);
@@ -43,10 +43,10 @@ export class ExercisesController {
                return;
           }
           res.status(200).send(exercise);
-     }
+     };
 
      // POST /exercises, exercise to create is in the body
-     async createExercise(req: Request, res: Response) {
+     createExercise = async (req: Request, res: Response) => {
           // TODO: check if exercise is not undefined | null
 
           const exercise = req.body;
@@ -77,18 +77,18 @@ export class ExercisesController {
                return;
           }
           res.status(200).send(exercise_id);
-     }
+     };
 
      // DELETE /exercises/:id
-     async deleteExercise(req: Request, res: Response) {
+     deleteExercise = async (req: Request, res: Response) => {
           // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
           await this.service.deleteExercise(id);
           res.status(200).send();
-     }
+     };
 
      // PATH /exercises/:id, new exercise is in the body
-     async updateExercise(req: Request, res: Response) {
+     updateExercise = async (req: Request, res: Response) => {
           // TODO: check if id is not undefined | null
 
           const id = parseInt(req.params.id);
@@ -124,5 +124,5 @@ export class ExercisesController {
                return;
           }
           res.status(200).send(returnedExercise);
-     }
+     };
 }
