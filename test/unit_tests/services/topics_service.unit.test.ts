@@ -1,6 +1,6 @@
 import { ITopicDAO } from "../../../src/dao/topic_dao";
 import { ITopic } from "../../../src/models/topic";
-import { TopicsService } from "../../../src/services/topics_service";
+import { TopicsService } from "../../../src/services/impl/topics_service.impl";
 
 describe("Topics service", () => {
      // System Under Test

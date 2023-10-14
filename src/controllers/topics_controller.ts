@@ -1,15 +1,16 @@
 import { Request, Response } from "express";
 import { PostgresTopicsDAO } from "../dao/impl/postgres/postgres_topics_dao";
-import { TopicsService } from "../services/topics_service";
+import { ITopicsService } from "../services/topics_service";
 import { ITopic } from "../models/topic";
 import {
      TopicErrorMessages,
      areKeysNotValid,
      errorMessage,
 } from "../utils/helpers";
+import { TopicsService } from "../services/impl/topics_service.impl";
 
 export class TopicsController {
-     service: TopicsService;
+     service: ITopicsService;
      validKeys: string[] = ["title", "description"];
 
      constructor() {
