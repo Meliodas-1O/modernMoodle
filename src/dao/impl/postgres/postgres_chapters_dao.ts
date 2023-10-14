@@ -26,11 +26,11 @@ export class PostgresChapterDAO implements IChapterDAO {
           await this.db("chapters").delete().where("id", id);
      }
 
-     async create(chapter: IChapter): Promise<number> {
+     async create(chapter: IChapter): Promise<number | undefined> {
           const id: number[] = await this.db("chapters")
                .insert(chapter)
                .returning("id");
-          return id[0];
+          return id[0] || undefined;
      }
 
      async update(

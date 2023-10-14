@@ -17,7 +17,7 @@ export class ChapterService {
           return chapter;
      }
 
-     async createChapter(chapter: IChapter): Promise<number> {
+     async createChapter(chapter: IChapter): Promise<number | undefined> {
           return await this.dao.create(chapter);
      }
 
