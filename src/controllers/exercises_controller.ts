@@ -32,13 +32,6 @@ export class ExercisesController {
                          )
                     );
           }
-          if (!exercises.length) {
-               return res
-                    .status(200)
-                    .send(
-                         errorMessage(200, ExerciseErrorMessages.NO_EXERCICES)
-                    );
-          }
           return res.status(200).send(exercises);
      }
 
