@@ -2,7 +2,7 @@ import { ChaptersController } from "../controllers/chapters_controller";
 import { TopicsController } from "../controllers/topics_controller";
 import { PostgresChapterDAO } from "../dao/impl/postgres/postgres_chapters_dao";
 import { PostgresTopicsDAO } from "../dao/impl/postgres/postgres_topics_dao";
-import { ChapterService } from "../services/chapters_service";
+import { ChaptersService } from "../services/impl/chapters_service.impl";
 import { TopicsService } from "../services/impl/topics_service.impl";
 
 // For now, we create objects "manually".
@@ -25,7 +25,7 @@ export function createChaptersController(): ChaptersController {
      const postgres_chapters_dao = new PostgresChapterDAO();
 
      // Then, create a ChaptersService
-     const chapters_service = new ChapterService(postgres_chapters_dao);
+     const chapters_service = new ChaptersService(postgres_chapters_dao);
 
      // Finally, create the ChaptersController
      const chapters_controller = new ChaptersController(chapters_service);
