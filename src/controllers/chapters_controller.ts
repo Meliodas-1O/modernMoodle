@@ -1,19 +1,18 @@
 import { Request, Response } from "express";
-import { ChapterService } from "../services/chapters_service";
-import { PostgresChapterDAO } from "../dao/impl/postgres/postgres_chapters_dao";
 import { IChapter } from "../models/chapter";
 import {
      ChapterErrorMessages,
      areKeysNotValid,
      errorMessage,
 } from "../utils/helpers";
+import { IChaptersService } from "../services/chapters_service";
 
 export class ChaptersController {
-     service: ChapterService;
+     service: IChaptersService;
      validKeys: string[] = ["topic_id", "title", "description"];
 
-     constructor() {
-          this.service = new ChapterService(new PostgresChapterDAO());
+     constructor(service: IChaptersService) {
+          this.service = service;
      }
 
      // GET /chapters

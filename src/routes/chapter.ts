@@ -1,4 +1,4 @@
-import { ChaptersController } from "../controllers/chapters_controller";
+import { createChaptersController } from "../di/dependency_injection";
 import { app } from "../index";
 import { Request, Response } from "express";
 
@@ -8,7 +8,7 @@ import { Request, Response } from "express";
 // PATCH    /chapters/:id -> update chapter with id
 // DELETE   /chapters/:id -> delete chapter with id
 
-const controller = new ChaptersController();
+const controller = createChaptersController();
 
 export function addRoutes() {
      app.get("/chapters", async (req: Request, res: Response) => {
