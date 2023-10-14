@@ -1,8 +1,7 @@
 import request from "supertest";
 import { app } from "../../../src";
-import { setup, teardown } from "../utils/setup";
 import { IExercise } from "../../../src/models/exercise";
-import { ITopic } from "../../../src/models/topic";
+import { setup, teardown } from "../utils/setup";
 
 describe("Exercice integration tests suite", () => {
      jest.setTimeout(60 * 1000);

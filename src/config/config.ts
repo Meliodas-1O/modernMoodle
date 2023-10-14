@@ -1,8 +1,7 @@
 import dotenv from "dotenv";
 
 // Read .env file
-const _result = dotenv.config();
-//console.log(_result);
+dotenv.config();
 
 // Express configuration
 const EXPRESS_PORT = parseInt(process.env.EXPRESS_APP_PORT || "4500");
