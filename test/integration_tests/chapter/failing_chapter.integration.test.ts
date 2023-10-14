@@ -62,7 +62,6 @@ describe("Chapter failing integration tests suite", () => {
                     .set("Content-Type", "application/json");
 
                // Then
-               console.log(response.body);
                expect(response.statusCode).toBe(403);
                expect(response.body).toBeDefined();
                expect(response.body).toEqual({
