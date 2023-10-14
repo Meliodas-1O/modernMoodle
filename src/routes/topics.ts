@@ -1,8 +1,5 @@
-import { TopicsController } from "../controllers/topics_controller";
 import { app } from "../index";
 import { Request, Response } from "express";
-import { TopicsService } from "../services/impl/topics_service.impl";
-import { PostgresTopicsDAO } from "../dao/impl/postgres/postgres_topics_dao";
 import { createTopicsController } from "../di/dependency_injection";
 
 // GET      /topics -> all topics
