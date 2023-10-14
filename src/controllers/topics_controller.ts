@@ -45,7 +45,6 @@ export class TopicsController {
      createTopic = async (req: Request, res: Response) => {
           // TODO: check if topic is not undefined | null
           const topic: ITopic = req.body;
-          console.log("aaaaaaaaaaaaaaaaaaaa");
 
           if (
                req.body.constructor === Object &&
