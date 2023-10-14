@@ -1,9 +1,15 @@
-export function errorMessage(status: number, errorMessage: string) {
+export interface ErrorMessage {
+     status: number;
+     message: string;
+}
+
+export function errorMessage(
+     status: number,
+     errorMessage: string
+): ErrorMessage {
      return {
-          error: {
-               status: status,
-               message: errorMessage,
-          },
+          status: status,
+          message: errorMessage,
      };
 }
 
@@ -46,5 +52,4 @@ export enum TopicErrorMessages {
      RETRIEVAL_ERROR = "Error while retrieving topics. Please try again.",
      NO_TOPIC_BY_ID = "There is no topic with the given id. Please check your input values or try again later.",
      UPDATE_ERROR = "Error while updating the topic. Please check your input values or try again later.",
-     NO_TOPICS = "There is no topic yet !",
 }

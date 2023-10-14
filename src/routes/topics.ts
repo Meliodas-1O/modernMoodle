@@ -1,6 +1,6 @@
-import { TopicsController } from "../controllers/topics_controller";
 import { app } from "../index";
 import { Request, Response } from "express";
+import { createTopicsController } from "../di/dependency_injection";
 
 // GET      /topics -> all topics
 // GET      /topics/:id -> topic with id
@@ -8,7 +8,7 @@ import { Request, Response } from "express";
 // PATCH    /topics/:id -> update topic with id
 // DELETE   /topics/:id -> delete topic with id
 
-const controller = new TopicsController();
+const controller = createTopicsController();
 
 export function addRoutes() {
      app.get("/topics", async (req: Request, res: Response) => {
