@@ -50,7 +50,18 @@ describe("Exercice integration tests suite", () => {
                id = response.body.id;
           });
 
-          test("3- Get created exercice", async () => {
+          test("3- Get all exercices again", async () => {
+               // Given
+               // When
+               const response = await request(app).get("/exercices");
+
+               // Then
+               expect(response.statusCode).toBe(200);
+               const exercices: IExercise[] = response.body;
+               expect(exercices.length).toBe(1);
+          });
+
+          test("4- Get created exercice", async () => {
                // Given
                // When
                const response = await request(app).get("/exercises/" + id);
@@ -64,7 +75,7 @@ describe("Exercice integration tests suite", () => {
                expect(exercice.difficulty_level).toBe(1);
           });
 
-          test("4- Update exercice", async () => {
+          test("5- Update exercice", async () => {
                // Given
                const updatedExercise = {
                     statement: "updatedExerciceStatement",
@@ -90,7 +101,7 @@ describe("Exercice integration tests suite", () => {
                );
           });
 
-          test("5- Delete exercise", async () => {
+          test("6 - Delete exercise", async () => {
                // Given
                // When
                const response = await request(app).delete("/exercises/" + id);
@@ -101,7 +112,7 @@ describe("Exercice integration tests suite", () => {
                expect(response.statusCode).toBe(200);
           });
 
-          test("6 - Get all exercices", async () => {
+          test("7 - Get all exercices", async () => {
                // Given
                // When
                const response = await request(app).get("/exercises");

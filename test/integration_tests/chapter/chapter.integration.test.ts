@@ -48,7 +48,18 @@ describe("Chapter integration tests suite", () => {
                id = response.body.id;
           });
 
-          test("3- Get the created chapter", async () => {
+          test("3- Get all chapters again", async () => {
+               // Given
+               // When
+               const response = await request(app).get("/chapters");
+
+               // Then
+               expect(response.statusCode).toBe(200);
+               const chapters: IChapter[] = response.body;
+               expect(chapters.length).toBe(1);
+          });
+
+          test("4- Get the created chapter", async () => {
                // Given
                // When
                const response = await request(app).get("/chapters/" + id);
@@ -63,7 +74,7 @@ describe("Chapter integration tests suite", () => {
                expect(chapter.id).toBe(id);
           });
 
-          test("4- Update chapter", async () => {
+          test("5- Update chapter", async () => {
                // Given
                const updateDescription = {
                     title: "updatedChapterTitle",
@@ -86,7 +97,7 @@ describe("Chapter integration tests suite", () => {
                expect(chapter.id).toBe(id);
           });
 
-          test("5- Delete chapter", async () => {
+          test("6- Delete chapter", async () => {
                // Given
                // When
                const response = await request(app).delete("/chapters/" + id);
@@ -97,7 +108,7 @@ describe("Chapter integration tests suite", () => {
                expect(response.statusCode).toBe(200);
           });
 
-          test("6 - Get all chapters", async () => {
+          test("7 - Get all chapters", async () => {
                // Given
                // When
                const response = await request(app).get("/chapters");
