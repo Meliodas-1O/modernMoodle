@@ -111,7 +111,7 @@ export class TopicsController {
                     .send(
                          errorMessage(
                               403,
-                              TopicErrorMessages.EMPTY_REQUEST_BODY +
+                              TopicErrorMessages.INVALID_FIELD +
                                    `${this.validKeys}`
                          )
                     );
