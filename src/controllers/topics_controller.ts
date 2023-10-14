@@ -1,29 +1,30 @@
 import { Request, Response } from "express";
-import { TopicService } from "../services/topics_service";
-import { PostgresTopicsDAO } from "../dao/postgres_impl/postgres_topics_dao";
+import { ITopicsService } from "../services/topics_service";
 import { ITopic } from "../models/topic";
-import { TopicErrorMessages, areKeysNotValid, errorMessage } from "../utils/helpers";
+import {
+     TopicErrorMessages,
+     areKeysNotValid,
+     errorMessage,
+} from "../utils/helpers";
 
 export class TopicsController {
-     service: TopicService;
+     service: ITopicsService;
      validKeys: string[] = ["title", "description"];
 
-     constructor() {
-          this.service = new TopicService(new PostgresTopicsDAO());
+     constructor(service: ITopicsService) {
+          this.service = service;
      }
 
      // GET /topics
      async getAllTopics(_req: Request, res: Response) {
           const topics = await this.service.getAll();
           if (!topics) {
-               return res.status(404).send(errorMessage(404, TopicErrorMessages.RETRIEVAL_ERROR));
+               res.status(500).send(
+                    errorMessage(500, TopicErrorMessages.RETRIEVAL_ERROR)
+               );
+               return;
           }
-          if (!topics.length) {
-               return res
-                    .status(200)
-                    .send(errorMessage(200, TopicErrorMessages.NO_TOPICS));
-          }
-          return res.status(200).send(topics);
+          res.status(200).send(topics);
      }
 
      // GET /topics/:id
@@ -32,9 +33,12 @@ export class TopicsController {
           const id = parseInt(req.params.id);
           const topic = await this.service.getById(id);
           if (!topic) {
-               return res.status(404).send(errorMessage(404, TopicErrorMessages.NO_TOPIC_BY_ID));
+               res.status(404).send(
+                    errorMessage(404, TopicErrorMessages.NO_TOPIC_BY_ID)
+               );
+               return;
           }
-          return res.status(200).send(topic);
+          res.status(200).send(topic);
      }
 
      // POST /topics, topic to create is in the body
@@ -45,16 +49,28 @@ export class TopicsController {
                req.body.constructor === Object &&
                Object.keys(req.body).length === 0
           ) {
-               return res.status(400).send(errorMessage(400, TopicErrorMessages.EMPTY_REQUEST_BODY));
+               res.status(400).send(
+                    errorMessage(400, TopicErrorMessages.EMPTY_REQUEST_BODY)
+               );
+               return;
           }
           if (areKeysNotValid(req.body, this.validKeys)) {
-               return res.status(403).send(errorMessage(403, TopicErrorMessages.INVALID_FIELD + `${this.validKeys}`));
+               res.status(403).send(
+                    errorMessage(
+                         403,
+                         TopicErrorMessages.INVALID_FIELD + `${this.validKeys}`
+                    )
+               );
+               return;
           }
           const topic_id = await this.service.createTopic(topic);
           if (!topic_id) {
-               return res.send(400).send(errorMessage(400, TopicErrorMessages.CREATE_ERROR));
+               res.send(400).send(
+                    errorMessage(400, TopicErrorMessages.CREATE_ERROR)
+               );
+               return;
           }
-          return res.status(200).send(topic_id);
+          res.status(200).send(topic_id);
      }
 
      // DELETE /topics/:id
@@ -74,16 +90,28 @@ export class TopicsController {
                req.body.constructor === Object &&
                Object.keys(req.body).length === 0
           ) {
-               return res.status(400).send(errorMessage(400, TopicErrorMessages.EMPTY_REQUEST_BODY));
+               res.status(400).send(
+                    errorMessage(400, TopicErrorMessages.EMPTY_REQUEST_BODY)
+               );
+               return;
           }
 
           if (areKeysNotValid(newTopic, this.validKeys)) {
-               return res.status(403).send(errorMessage(403, TopicErrorMessages.EMPTY_REQUEST_BODY + `${this.validKeys}`));
+               res.status(403).send(
+                    errorMessage(
+                         403,
+                         TopicErrorMessages.INVALID_FIELD + `${this.validKeys}`
+                    )
+               );
+               return;
           }
           const returnedTopic = await this.service.updateTopic(id, newTopic);
           if (!returnedTopic) {
-               return res.status(404).send(errorMessage(404, TopicErrorMessages.UPDATE_ERROR));
+               res.status(404).send(
+                    errorMessage(404, TopicErrorMessages.UPDATE_ERROR)
+               );
+               return;
           }
-          return res.status(200).send(returnedTopic);
+          res.status(200).send(returnedTopic);
      }
 }

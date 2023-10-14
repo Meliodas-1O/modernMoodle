@@ -21,7 +21,7 @@ modernMoodle currently needs an up and running Postgres database.
 The easiest way to get started is to use docker :
 
 ```shell
-docker run -p 5432:5432 --name modernmoodle-db-pg -e POSTGRES_PASSWORD=password -e POSTGRES_USER=root -ePOSTGRES_DB=modernmoodledb -d postgres
+docker run -p 5432:5432 --name modernmoodle-db-pg -e POSTGRES_PASSWORD=password -e POSTGRES_USER=root -ePOSTGRES_DB=modernmoodledb -d postgres:16
 ```
 
 > If you change any of the settings, please make sure to update them in the .env file.

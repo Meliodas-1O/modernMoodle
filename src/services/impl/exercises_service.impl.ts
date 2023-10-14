@@ -1,7 +1,8 @@
-import { IExerciseDAO } from "../dao/exercise_dao";
-import { IExercise } from "../models/exercise";
+import { IExerciseDAO } from "../../dao/exercise_dao";
+import { IExercise } from "../../models/exercise";
+import { IExercisesService } from "../exercises_service";
 
-export class ExerciseService {
+export class ExercisesService implements IExercisesService {
      dao: IExerciseDAO;
 
      constructor(dao: IExerciseDAO) {

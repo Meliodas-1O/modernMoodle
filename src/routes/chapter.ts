@@ -1,4 +1,4 @@
-import { ChaptersController } from "../controllers/chapters_controller";
+import { createChaptersController } from "../di/dependency_injection";
 import { app } from "../index";
 import { Request, Response } from "express";
 
@@ -8,19 +8,19 @@ import { Request, Response } from "express";
 // PATCH    /chapters/:id -> update chapter with id
 // DELETE   /chapters/:id -> delete chapter with id
 
-const controller = new ChaptersController();
+const controller = createChaptersController();
 
 export function addRoutes() {
      app.get("/chapters", async (req: Request, res: Response) => {
-          return await controller.getAllChapters(req, res);
+          await controller.getAllChapters(req, res);
      });
 
      app.get("/chapters/:id", async (req: Request, res: Response) => {
-          return await controller.getChapterById(req, res);
+          await controller.getChapterById(req, res);
      });
 
      app.post("/chapters", async (req: Request, res: Response) => {
-          return await controller.createChapter(req, res);
+          await controller.createChapter(req, res);
      });
 
      app.delete("/chapters/:id", async (req: Request, res: Response) => {
@@ -28,6 +28,6 @@ export function addRoutes() {
      });
 
      app.patch("/chapters/:id", async (req: Request, res: Response) => {
-          return await controller.updateChapter(req, res);
+          await controller.updateChapter(req, res);
      });
 }

@@ -1,10 +1,13 @@
 import { Request, Response } from "express";
-import { PostgresExerciseDAO } from "../dao/postgres_impl/postgres_exercises_dao";
-import { ExerciseService } from "../services/exercise_servce";
-import { ExerciseErrorMessages, areKeysNotValid, errorMessage } from "../utils/helpers";
+import { IExercisesService } from "../services/exercises_service";
+import {
+     ExerciseErrorMessages,
+     areKeysNotValid,
+     errorMessage,
+} from "../utils/helpers";
 
 export class ExercisesController {
-     service: ExerciseService;
+     service: IExercisesService;
      validKeys: string[] = [
           "chapter_id",
           "statement",
@@ -12,22 +15,20 @@ export class ExercisesController {
           "difficulty_level",
      ];
 
-     constructor() {
-          this.service = new ExerciseService(new PostgresExerciseDAO());
+     constructor(service: IExercisesService) {
+          this.service = service;
      }
 
      // GET /exercises
      async getAllExercises(_req: Request, res: Response) {
           const exercises = await this.service.getAll();
           if (!exercises) {
-               return res.status(404).send(errorMessage(404, ExerciseErrorMessages.RETRIEVAL_ERROR));
+               res.status(404).send(
+                    errorMessage(404, ExerciseErrorMessages.RETRIEVAL_ERROR)
+               );
+               return;
           }
-          if (!exercises.length) {
-               return res
-                    .status(200)
-                    .send(errorMessage(200, ExerciseErrorMessages.NO_EXERCICES));
-          }
-          return res.status(200).send(exercises);
+          res.status(200).send(exercises);
      }
 
      // GET /exercises/:id
@@ -36,9 +37,12 @@ export class ExercisesController {
           const id = parseInt(req.params.id);
           const exercise = await this.service.getById(id);
           if (!exercise) {
-               return res.status(404).send(errorMessage(404, ExerciseErrorMessages.NO_EXERCISE_BY_ID));
+               res.status(404).send(
+                    errorMessage(404, ExerciseErrorMessages.NO_EXERCISE_BY_ID)
+               );
+               return;
           }
-          return res.status(200).send(exercise);
+          res.status(200).send(exercise);
      }
 
      // POST /exercises, exercise to create is in the body
@@ -50,14 +54,27 @@ export class ExercisesController {
                req.body.constructor === Object &&
                Object.keys(req.body).length === 0
           ) {
-               return res.status(400).send(errorMessage(400, ExerciseErrorMessages.EMPTY_REQUEST_BODY));
+               res.status(400).send(
+                    errorMessage(400, ExerciseErrorMessages.EMPTY_REQUEST_BODY)
+               );
+               return;
           }
           if (areKeysNotValid(req.body, this.validKeys)) {
-               return res.status(403).send(errorMessage(403, ExerciseErrorMessages.INVALID_FIELD + `${this.validKeys}`));
+               res.status(403).send(
+                    errorMessage(
+                         403,
+                         ExerciseErrorMessages.INVALID_FIELD +
+                              `${this.validKeys}`
+                    )
+               );
+               return;
           }
           const exercise_id = await this.service.createExercise(exercise);
           if (!exercise_id) {
-               return res.send(400).send(errorMessage(400, ExerciseErrorMessages.CREATE_ERROR));
+               res.send(400).send(
+                    errorMessage(400, ExerciseErrorMessages.CREATE_ERROR)
+               );
+               return;
           }
           res.status(200).send(exercise_id);
      }
@@ -80,19 +97,32 @@ export class ExercisesController {
                req.body.constructor === Object &&
                Object.keys(req.body).length === 0
           ) {
-               return res.status(400).send(errorMessage(400, ExerciseErrorMessages.EMPTY_REQUEST_BODY));
+               res.status(400).send(
+                    errorMessage(400, ExerciseErrorMessages.EMPTY_REQUEST_BODY)
+               );
+               return;
           }
 
           if (areKeysNotValid(newExercise, this.validKeys)) {
-               return res.status(403).send(errorMessage(403, ExerciseErrorMessages.INVALID_FIELD + `${this.validKeys}`));
+               res.status(403).send(
+                    errorMessage(
+                         403,
+                         ExerciseErrorMessages.INVALID_FIELD +
+                              `${this.validKeys}`
+                    )
+               );
+               return;
           }
           const returnedExercise = await this.service.updateExercise(
                id,
                newExercise
           );
           if (!returnedExercise) {
-               return res.status(404).send(errorMessage(404, ExerciseErrorMessages.UPDATE_ERROR));
+               res.status(404).send(
+                    errorMessage(404, ExerciseErrorMessages.UPDATE_ERROR)
+               );
+               return;
           }
-          return res.status(200).send(returnedExercise);
+          res.status(200).send(returnedExercise);
      }
 }
