@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { PostgresExerciseDAO } from "../dao/impl/postgres/postgres_exercises_dao";
-import { ExerciseService } from "../services/exercise_servce";
+import { IExercisesService } from "../services/exercises_service";
 import {
      ExerciseErrorMessages,
      areKeysNotValid,
@@ -8,7 +7,7 @@ import {
 } from "../utils/helpers";
 
 export class ExercisesController {
-     service: ExerciseService;
+     service: IExercisesService;
      validKeys: string[] = [
           "chapter_id",
           "statement",
@@ -16,8 +15,8 @@ export class ExercisesController {
           "difficulty_level",
      ];
 
-     constructor() {
-          this.service = new ExerciseService(new PostgresExerciseDAO());
+     constructor(service: IExercisesService) {
+          this.service = service;
      }
 
      // GET /exercises
