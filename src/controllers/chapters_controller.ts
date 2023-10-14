@@ -19,13 +19,12 @@ export class ChaptersController {
      async getAllChapters(_req: Request, res: Response) {
           const chapters = await this.service.getAll();
           if (!chapters) {
-               return res
-                    .status(404)
-                    .send(
-                         errorMessage(404, ChapterErrorMessages.RETRIEVAL_ERROR)
-                    );
+               res.status(404).send(
+                    errorMessage(404, ChapterErrorMessages.RETRIEVAL_ERROR)
+               );
+               return;
           }
-          return res.status(200).send(chapters);
+          res.status(200).send(chapters);
      }
 
      // GET /chapters/:id
@@ -34,16 +33,12 @@ export class ChaptersController {
           const id = parseInt(req.params.id);
           const chapter = await this.service.getById(id);
           if (!chapter) {
-               return res
-                    .status(404)
-                    .send(
-                         errorMessage(
-                              404,
-                              ChapterErrorMessages.NO_CHAPTER_BY_ID
-                         )
-                    );
+               res.status(404).send(
+                    errorMessage(404, ChapterErrorMessages.NO_CHAPTER_BY_ID)
+               );
+               return;
           }
-          return res.status(200).send(chapter);
+          res.status(200).send(chapter);
      }
 
      // POST /chapters, chapter to create is in the body
@@ -53,34 +48,30 @@ export class ChaptersController {
                req.body.constructor === Object &&
                Object.keys(req.body).length === 0
           ) {
-               return res
-                    .status(400)
-                    .send(
-                         errorMessage(
-                              400,
-                              ChapterErrorMessages.EMPTY_REQUEST_BODY
-                         )
-                    );
+               res.status(400).send(
+                    errorMessage(400, ChapterErrorMessages.EMPTY_REQUEST_BODY)
+               );
+               return;
           }
           if (areKeysNotValid(req.body, this.validKeys)) {
-               return res
-                    .status(403)
-                    .send(
-                         errorMessage(
-                              403,
-                              ChapterErrorMessages.INVALID_FIELD +
-                                   `${this.validKeys}`
-                         )
-                    );
+               res.status(403).send(
+                    errorMessage(
+                         403,
+                         ChapterErrorMessages.INVALID_FIELD +
+                              `${this.validKeys}`
+                    )
+               );
+               return;
           }
           const chapter: IChapter = req.body as IChapter;
           const chapter_id = await this.service.createChapter(chapter);
           if (!chapter_id) {
-               return res
-                    .send(400)
-                    .send(errorMessage(400, ChapterErrorMessages.CREATE_ERROR));
+               res.send(400).send(
+                    errorMessage(400, ChapterErrorMessages.CREATE_ERROR)
+               );
+               return;
           }
-          return res.status(200).send(chapter_id);
+          res.status(200).send(chapter_id);
      }
 
      // DELETE /chapters/:id
@@ -101,36 +92,32 @@ export class ChaptersController {
                req.body.constructor === Object &&
                Object.keys(req.body).length === 0
           ) {
-               return res
-                    .status(400)
-                    .send(
-                         errorMessage(
-                              400,
-                              ChapterErrorMessages.EMPTY_REQUEST_BODY
-                         )
-                    );
+               res.status(400).send(
+                    errorMessage(400, ChapterErrorMessages.EMPTY_REQUEST_BODY)
+               );
+               return;
           }
 
           if (areKeysNotValid(newChapter, this.validKeys)) {
-               return res
-                    .status(403)
-                    .send(
-                         errorMessage(
-                              403,
-                              ChapterErrorMessages.INVALID_FIELD +
-                                   `${this.validKeys}`
-                         )
-                    );
+               res.status(403).send(
+                    errorMessage(
+                         403,
+                         ChapterErrorMessages.INVALID_FIELD +
+                              `${this.validKeys}`
+                    )
+               );
+               return;
           }
           const returnedChapter = await this.service.updateChapter(
                id,
                newChapter
           );
           if (!returnedChapter) {
-               return res
-                    .status(404)
-                    .send(errorMessage(404, ChapterErrorMessages.UPDATE_ERROR));
+               res.status(404).send(
+                    errorMessage(404, ChapterErrorMessages.UPDATE_ERROR)
+               );
+               return;
           }
-          return res.status(200).send(returnedChapter);
+          res.status(200).send(returnedChapter);
      }
 }
