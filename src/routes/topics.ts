@@ -12,15 +12,15 @@ const controller = createTopicsController();
 
 export function addRoutes() {
      app.get("/topics", async (req: Request, res: Response) => {
-          return await controller.getAllTopics(req, res);
+          await controller.getAllTopics(req, res);
      });
 
      app.get("/topics/:id", async (req: Request, res: Response) => {
-          return await controller.getTopicById(req, res);
+          await controller.getTopicById(req, res);
      });
 
      app.post("/topics", async (req: Request, res: Response) => {
-          return await controller.createTopic(req, res);
+          await controller.createTopic(req, res);
      });
 
      app.delete("/topics/:id", async (req: Request, res: Response) => {
@@ -28,6 +28,6 @@ export function addRoutes() {
      });
 
      app.patch("/topics/:id", async (req: Request, res: Response) => {
-          return await controller.updateTopic(req, res);
+          await controller.updateTopic(req, res);
      });
 }
