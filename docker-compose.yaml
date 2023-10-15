@@ -1,0 +1,39 @@
+version: '3'
+services:
+  backend: # Node.js / Express.js application
+    image: modernmoodle-backend
+    build: ./backend/
+    networks:
+      - backnetwork
+      - frontnetwork
+    ports:
+      - 5050:5050
+    environment:
+      - PG_PORT=5432
+      - PG_HOST=database
+    depends_on:
+      - migration
+  database: # Postgres
+    image: postgres:16
+    networks:
+      - backnetwork
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=root
+      - POSTGRES_DB=modernmoodledb
+  migration: # Helper container to create the db schema
+    image: modernmoodle-backend
+    build: ./backend/
+    command: ["npm", "run", "migrate"]
+    environment:
+      - PG_PORT=5432
+      - PG_HOST=database
+    depends_on:
+      - database
+    networks:
+      - backnetwork
+networks:
+  backnetwork:
+  frontnetwork:
