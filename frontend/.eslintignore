@@ -1,3 +1,0 @@
-*.js
-*.config.ts
-**/src/database/migrations/**.ts
