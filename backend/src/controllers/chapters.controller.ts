@@ -2,10 +2,14 @@ import { Request, Response } from "express";
 import { IChapter } from "../models/chapter";
 import {
      ChapterErrorMessages,
+     TopicErrorMessages,
      areKeysNotValid,
      errorMessage,
 } from "../utils/helpers";
 import { IChaptersService } from "../services/chapters.service";
+import { PostgresTopicsDAO } from "../dao/impl/postgres/postgres_topics.dao.impl";
+import { ITopic } from "../models/topic";
+import { TopicsService } from "../services/impl/topics_service.impl";
 
 export class ChaptersController {
      service: IChaptersService;
@@ -62,6 +66,20 @@ export class ChaptersController {
                     )
                );
                return;
+          }
+          if (req.body.topic_id) {
+               const topicService: TopicsService = new TopicsService(
+                    new PostgresTopicsDAO()
+               );
+               const topic: ITopic | undefined = await topicService.getById(
+                    req.body.topic_id
+               );
+               if (!topic) {
+                    res.status(400).send(
+                         errorMessage(400, TopicErrorMessages.NO_TOPIC_BY_ID)
+                    );
+                    return;
+               }
           }
           const chapter: IChapter = req.body as IChapter;
           const chapter_id = await this.service.createChapter(chapter);
