@@ -1,10 +1,14 @@
 import { Request, Response } from "express";
 import { IExercisesService } from "../services/exercises.service";
 import {
+     ChapterErrorMessages,
      ExerciseErrorMessages,
      areKeysNotValid,
      errorMessage,
 } from "../utils/helpers";
+import { IChapter } from "../models/chapter";
+import { ChaptersService } from "../services/impl/chapters_service.impl";
+import { PostgresChapterDAO } from "../dao/impl/postgres/postgres_chapters.dao.impl";
 
 export class ExercisesController {
      service: IExercisesService;
@@ -69,6 +73,23 @@ export class ExercisesController {
                );
                return;
           }
+          if (req.body.chapter_id) {
+               const chapterService: ChaptersService = new ChaptersService(
+                    new PostgresChapterDAO()
+               );
+               const topic: IChapter | undefined = await chapterService.getById(
+                    req.body.chapter_id
+               );
+               if (!topic) {
+                    res.status(400).send(
+                         errorMessage(
+                              400,
+                              ChapterErrorMessages.NO_CHAPTER_BY_ID
+                         )
+                    );
+                    return;
+               }
+          }
           const exercise_id = await this.service.createExercise(exercise);
           if (!exercise_id) {
                res.send(400).send(
@@ -113,6 +134,7 @@ export class ExercisesController {
                );
                return;
           }
+
           const returnedExercise = await this.service.updateExercise(
                id,
                newExercise
