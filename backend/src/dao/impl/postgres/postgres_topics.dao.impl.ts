@@ -22,22 +22,41 @@ export class PostgresTopicsDAO implements ITopicDAO {
           return topic;
      }
 
-     async delete(id: number): Promise<void> {
-          await this.db("topics").delete().where("id", id);
+     async delete(id: number): Promise<number | undefined> {
+          try {
+               const topicId: number = await this.db("topics")
+                    .delete()
+                    .where("id", id)
+                    .returning("id");
+               return topicId;
+          } catch (error) {
+               console.error(error);
+               return undefined;
+          }
      }
 
-     async create(topic: ITopic): Promise<number> {
-          const id: number[] = await this.db("topics")
-               .insert(topic)
-               .returning("id");
-          return id[0];
+     async create(topic: ITopic): Promise<number | undefined> {
+          try {
+               const id: number[] = await this.db("topics")
+                    .insert(topic)
+                    .returning("id");
+               return id[0];
+          } catch (error) {
+               console.error(error);
+               return undefined;
+          }
      }
 
      async update(id: number, newTopic: ITopic): Promise<ITopic | undefined> {
-          const topic = (await this.db("topics")
-               .update(newTopic)
-               .where("id", id)
-               .returning("*")) as ITopic[];
-          return topic[0];
+          try {
+               const topic = (await this.db("topics")
+                    .update(newTopic)
+                    .where("id", id)
+                    .returning("*")) as ITopic[];
+               return topic[0];
+          } catch (error) {
+               console.error(error);
+               return undefined;
+          }
      }
 }
