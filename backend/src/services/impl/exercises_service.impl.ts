@@ -18,12 +18,12 @@ export class ExercisesService implements IExercisesService {
           return exercise;
      }
 
-     async createExercise(exercise: IExercise): Promise<number> {
+     async createExercise(exercise: IExercise): Promise<number | undefined> {
           return await this.dao.create(exercise);
      }
 
      async deleteExercise(id: number) {
-          await this.dao.delete(id);
+          return await this.dao.delete(id);
      }
 
      async updateExercise(

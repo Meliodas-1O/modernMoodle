@@ -18,12 +18,12 @@ export class TopicsService implements ITopicsService {
           return topic;
      }
 
-     async createTopic(topic: ITopic): Promise<number> {
+     async createTopic(topic: ITopic): Promise<number | undefined> {
           return await this.dao.create(topic);
      }
 
-     async deleteTopic(id: number) {
-          await this.dao.delete(id);
+     async deleteTopic(id: number): Promise<number | undefined> {
+          return await this.dao.delete(id);
      }
 
      async updateTopic(

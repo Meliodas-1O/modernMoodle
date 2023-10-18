@@ -69,9 +69,10 @@ export class ExercisesController {
                );
                return;
           }
+
           const exercise_id = await this.service.createExercise(exercise);
           if (!exercise_id) {
-               res.send(400).send(
+               res.status(400).send(
                     errorMessage(400, ExerciseErrorMessages.CREATE_ERROR)
                );
                return;
@@ -113,6 +114,7 @@ export class ExercisesController {
                );
                return;
           }
+
           const returnedExercise = await this.service.updateExercise(
                id,
                newExercise

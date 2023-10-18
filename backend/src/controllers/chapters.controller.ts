@@ -63,10 +63,11 @@ export class ChaptersController {
                );
                return;
           }
+
           const chapter: IChapter = req.body as IChapter;
           const chapter_id = await this.service.createChapter(chapter);
           if (!chapter_id) {
-               res.send(400).send(
+               res.status(400).send(
                     errorMessage(400, ChapterErrorMessages.CREATE_ERROR)
                );
                return;

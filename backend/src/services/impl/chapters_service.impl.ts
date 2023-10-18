@@ -23,7 +23,7 @@ export class ChaptersService implements IChaptersService {
      }
 
      async deleteChapter(id: number) {
-          await this.dao.delete(id);
+          return await this.dao.delete(id);
      }
 
      async updateChapter(

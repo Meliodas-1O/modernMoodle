@@ -22,25 +22,44 @@ export class PostgresChapterDAO implements IChapterDAO {
           return chapter;
      }
 
-     async delete(id: number): Promise<void> {
-          await this.db("chapters").delete().where("id", id);
+     async delete(id: number): Promise<number | undefined> {
+          try {
+               const chapterId: number = await this.db("chapters")
+                    .delete()
+                    .where("id", id)
+                    .returning("id");
+               return chapterId;
+          } catch (error) {
+               console.error(error);
+               return undefined;
+          }
      }
 
      async create(chapter: IChapter): Promise<number | undefined> {
-          const id: number[] = await this.db("chapters")
-               .insert(chapter)
-               .returning("id");
-          return id[0] || undefined;
+          try {
+               const id: number[] = await this.db("chapters")
+                    .insert(chapter)
+                    .returning("id");
+               return id[0];
+          } catch (error) {
+               console.error(error);
+               return undefined;
+          }
      }
 
      async update(
           id: number,
           newChapter: IChapter
      ): Promise<IChapter | undefined> {
-          const chapter = (await this.db("chapters")
-               .update(newChapter)
-               .where("id", id)
-               .returning("*")) as IChapter[];
-          return chapter[0];
+          try {
+               const chapter = (await this.db("chapters")
+                    .update(newChapter)
+                    .where("id", id)
+                    .returning("*")) as IChapter[];
+               return chapter[0];
+          } catch (error) {
+               console.error(error);
+               return undefined;
+          }
      }
 }
