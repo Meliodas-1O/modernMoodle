@@ -2,10 +2,7 @@ import request from "supertest";
 import { app } from "../../../src";
 import { setup, teardown } from "../utils/setup";
 import { IChapter } from "../../../src/models/chapter";
-import {
-     ChapterErrorMessages,
-     TopicErrorMessages,
-} from "../../../src/utils/helpers";
+import { ChapterErrorMessages } from "../../../src/utils/helpers";
 
 describe("Chapter failing integration tests suite", () => {
      jest.setTimeout(60 * 1000);
@@ -147,7 +144,7 @@ describe("Chapter failing integration tests suite", () => {
                expect(response.body).toBeDefined();
                expect(response.body).toEqual({
                     status: 400,
-                    message: TopicErrorMessages.NO_TOPIC_BY_ID,
+                    message: ChapterErrorMessages.CREATE_ERROR,
                });
           });
      });

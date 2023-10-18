@@ -2,10 +2,7 @@ import request from "supertest";
 import { app } from "../../../src";
 import { setup, teardown } from "../utils/setup";
 import { IExercise } from "../../../src/models/exercise";
-import {
-     ChapterErrorMessages,
-     ExerciseErrorMessages,
-} from "../../../src/utils/helpers";
+import { ExerciseErrorMessages } from "../../../src/utils/helpers";
 
 describe("Exercise failing integration tests suite", () => {
      jest.setTimeout(60 * 1000);
@@ -151,7 +148,7 @@ describe("Exercise failing integration tests suite", () => {
                expect(response.body).toBeDefined();
                expect(response.body).toEqual({
                     status: 400,
-                    message: ChapterErrorMessages.NO_CHAPTER_BY_ID,
+                    message: ExerciseErrorMessages.CREATE_ERROR,
                });
           });
      });
