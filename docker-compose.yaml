@@ -1,11 +1,20 @@
 version: '3'
 services:
+  frontend: # React app with nginx as web server
+    image: modernmoodle-frontend
+    build: ./frontend/
+    networks:
+      - dbnetwork
+    ports:
+      - 8080:80
+    depends_on:
+      - backend
   backend: # Node.js / Express.js application
     image: modernmoodle-backend
     build: ./backend/
     networks:
-      - backnetwork
-      - frontnetwork
+      - dbnetwork
+      - apinetwork
     ports:
       - 5050:5050
     environment:
@@ -13,10 +22,10 @@ services:
       - PG_HOST=database
     depends_on:
       - migration
-  database: # Postgres
+  database: # Postgres database
     image: postgres:16
     networks:
-      - backnetwork
+      - apinetwork
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=root
@@ -31,7 +40,8 @@ services:
     depends_on:
       - database
     networks:
-      - backnetwork
+      - dbnetwork
 networks:
-  backnetwork:
-  frontnetwork:
+  dbnetwork:
+  apinetwork:
+    driver: bridge
