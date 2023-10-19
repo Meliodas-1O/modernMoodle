@@ -128,5 +128,28 @@ describe("Exercise failing integration tests suite", () => {
                     message: ExerciseErrorMessages.NO_EXERCISE_BY_ID,
                });
           });
+
+          test("6 - Create exercise with wrong chapter_id", async () => {
+               // Given
+               const fakeChapterId = Math.floor(Math.random() * 9 + 1000000000);
+               const newExercise = {
+                    statement: "exerciseTitre",
+                    chapter_id: fakeChapterId,
+               };
+
+               // When
+               const response = await request(app)
+                    .post("/exercises")
+                    .send(newExercise)
+                    .set("Content-Type", "application/json");
+
+               // Then
+               expect(response.statusCode).toBe(400);
+               expect(response.body).toBeDefined();
+               expect(response.body).toEqual({
+                    status: 400,
+                    message: ExerciseErrorMessages.CREATE_ERROR,
+               });
+          });
      });
 });

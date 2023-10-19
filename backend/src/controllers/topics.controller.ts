@@ -65,7 +65,7 @@ export class TopicsController {
           }
           const topic_id = await this.service.createTopic(topic);
           if (!topic_id) {
-               res.send(400).send(
+               res.status(400).send(
                     errorMessage(400, TopicErrorMessages.CREATE_ERROR)
                );
                return;

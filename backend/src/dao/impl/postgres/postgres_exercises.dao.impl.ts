@@ -22,25 +22,44 @@ export class PostgresExerciseDAO implements IExerciseDAO {
           return exercise;
      }
 
-     async delete(id: number): Promise<void> {
-          await this.db("exercises").delete().where("id", id);
+     async delete(id: number): Promise<number | undefined> {
+          try {
+               const exercise_id: number[] = await this.db("exercises")
+                    .delete()
+                    .where("id", id)
+                    .returning("id");
+               return exercise_id[0];
+          } catch (error) {
+               console.error(error);
+               return undefined;
+          }
      }
 
-     async create(exercise: IExercise): Promise<number> {
-          const id: number[] = await this.db("exercises")
-               .insert(exercise)
-               .returning("id");
-          return id[0];
+     async create(exercise: IExercise): Promise<number | undefined> {
+          try {
+               const id: number[] = await this.db("exercises")
+                    .insert(exercise)
+                    .returning("id");
+               return id[0];
+          } catch (error) {
+               console.error(error);
+               return undefined;
+          }
      }
 
      async update(
           id: number,
           newExercise: IExercise
      ): Promise<IExercise | undefined> {
-          const exercise = (await this.db("exercises")
-               .update(newExercise)
-               .where("id", id)
-               .returning("*")) as IExercise[];
-          return exercise[0];
+          try {
+               const exercise = (await this.db("exercises")
+                    .update(newExercise)
+                    .where("id", id)
+                    .returning("*")) as IExercise[];
+               return exercise[0];
+          } catch (error) {
+               console.error(error);
+               return undefined;
+          }
      }
 }
