@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import topicRoutes from "./routes/topics.routes";
 import chapterRoutes from "./routes/chapter.routes";
 import exercisesRoutes from "./routes/exercise.routes";
+import healthcheckRoutes from "./routes/healthcheck.routes";
 import { config } from "./config/config";
 import { Server } from "http";
 
@@ -13,6 +14,7 @@ const port: number = config.EXPRESS_CONFIG.port;
 app.use(express.json());
 
 // Add all routes
+app.use("/healthcheck", healthcheckRoutes);
 app.use("/topics", topicRoutes);
 app.use("/chapters", chapterRoutes);
 app.use("/exercises", exercisesRoutes);

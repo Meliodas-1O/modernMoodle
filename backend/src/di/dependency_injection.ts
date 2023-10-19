@@ -1,5 +1,6 @@
 import { ChaptersController } from "../controllers/chapters.controller";
 import { ExercisesController } from "../controllers/exercises.controller";
+import { HealthcheckController } from "../controllers/healthcheck.controller";
 import { TopicsController } from "../controllers/topics.controller";
 import { PostgresChapterDAO } from "../dao/impl/postgres/postgres_chapters.dao.impl";
 import { PostgresExerciseDAO } from "../dao/impl/postgres/postgres_exercises.dao.impl";
@@ -14,6 +15,7 @@ import { TopicsService } from "../services/impl/topics_service.impl";
 let topics_controller: TopicsController | null = null;
 let chapters_controller: ChaptersController | null = null;
 let exercises_controller: ExercisesController | null = null;
+let healthcheck_controller: HealthcheckController | null = null;
 
 export function createTopicsController(): TopicsController {
      if (topics_controller !== null) {
@@ -61,4 +63,14 @@ export function createExercisesController(): ExercisesController {
      // Finally, create the ExercisesController
      exercises_controller = new ExercisesController(exercises_service);
      return exercises_controller;
+}
+
+export function createHealthcheckController(): HealthcheckController {
+     if (healthcheck_controller !== null) {
+          return healthcheck_controller;
+     }
+
+     // Create the HealthCheckController
+     healthcheck_controller = new HealthcheckController();
+     return healthcheck_controller;
 }
