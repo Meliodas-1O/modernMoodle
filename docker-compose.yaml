@@ -25,20 +25,27 @@ services:
   database: # Postgres database
     image: postgres:16
     networks:
-      - apinetwork
+      - dbnetwork
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=root
       - POSTGRES_DB=modernmoodledb
+      - PG_HOST=database
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "modernmoodledb"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
   migration: # Helper container to create the db schema
     image: modernmoodle-backend
     build: ./backend/
     command: ["npm", "run", "migrate"]
     environment:
-      - PG_PORT=5432
       - PG_HOST=database
     depends_on:
-      - database
+      database:
+        condition: service_healthy
     networks:
       - dbnetwork
 networks:
