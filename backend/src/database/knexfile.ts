@@ -3,7 +3,7 @@ import { config as app_config } from "../config/config";
 // Create knex config
 const config = {
      development: {
-          client: "postgresql",
+          client: "pg",
           connection: {
                database: app_config.PG_CONFIG.database,
                user: app_config.PG_CONFIG.user,

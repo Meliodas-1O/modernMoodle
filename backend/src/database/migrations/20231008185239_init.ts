@@ -2,12 +2,12 @@ import { Knex } from "knex";
 
 export async function up(knex: Knex): Promise<void> {
      return knex.schema
-          .createTable("topics", (table) => {
+          .createTableIfNotExists("topics", (table) => {
                table.bigIncrements("id").primary;
                table.string("title", 255);
                table.string("description", 255);
           })
-          .createTable("chapters", (table) => {
+          .createTableIfNotExists("chapters", (table) => {
                table.bigIncrements("id").primary;
                table.bigInteger("topic_id")
                     .references("id")
@@ -17,7 +17,7 @@ export async function up(knex: Knex): Promise<void> {
                table.string("title", 255);
                table.string("description", 255);
           })
-          .createTable("exercises", (table) => {
+          .createTableIfNotExists("exercises", (table) => {
                table.bigIncrements("id").primary;
                table.bigInteger("chapter_id")
                     .references("id")

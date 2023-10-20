@@ -1,0 +1,60 @@
+version: '3'
+services:
+  frontend: # React app with nginx as web server
+    image: modernmoodle-frontend
+    build: ./frontend/
+    networks:
+      - dbnetwork
+    ports:
+      - 8080:80
+    depends_on:
+      - backend
+  backend: # Node.js / Express.js application
+    image: modernmoodle-backend
+    build: ./backend/
+    networks:
+      - dbnetwork
+      - apinetwork
+    ports:
+      - 5050:5050
+    environment:
+      - PG_PORT=5432
+      - PG_HOST=database
+    depends_on:
+      - migration
+    healthcheck:
+      test: ["CMD", "/bin/bash", "-c", "curl -X GET http://localhost:5050/healthcheck | grep 'All good mate'"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+  database: # Postgres database
+    image: postgres:16
+    networks:
+      - dbnetwork
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=root
+      - POSTGRES_DB=modernmoodledb
+      - PG_HOST=database
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "modernmoodledb"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+  migration: # Helper container to create the db schema
+    image: modernmoodle-backend
+    build: ./backend/
+    command: ["npm", "run", "migrate"]
+    environment:
+      - PG_HOST=database
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - dbnetwork
+networks:
+  dbnetwork:
+  apinetwork:
+    driver: bridge
