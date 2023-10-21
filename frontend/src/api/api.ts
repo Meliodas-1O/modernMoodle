@@ -33,7 +33,7 @@ export async function createTopic(topic: ITopic): Promise<number | undefined> {
 
 export async function deleteTopic(topicId: number): Promise<void> {
      // TODO: wait for backend update as it always return HTTP 200
-     const _ = await fetch(`${config.BACKEND.url}/topics/${topicId}`, {
+     await fetch(`${config.BACKEND.url}/topics/${topicId}`, {
           method: "DELETE",
      });
 }
