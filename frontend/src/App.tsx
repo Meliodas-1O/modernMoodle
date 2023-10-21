@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Administration from "./pages/Administration";
 import Home from "./pages/Home";
@@ -14,6 +14,7 @@ function App() {
                     <Route path="/createTopic" element={<CreateTopic />} />
                     <Route path="/admin" element={<Administration />} />
                     <Route path="/topic/:id" element={<Topic />} />
+                    <Route path="*" element={<Navigate to="/" />} />
                </Routes>
           </div>
      );
