@@ -7,11 +7,8 @@ function TopicCard({ topic }: { topic: ITopic }) {
                     border: "2px solid black",
                }}
           >
-               <strong>topic #{topic.id}</strong>
-               <ul>
-                    <li>title: {topic.title}</li>
-                    <li>description: {topic.description}</li>
-               </ul>
+               <h2>{topic.title} (#{topic.id})</h2>
+               <p>{topic.description}</p>
           </div>
      );
 }

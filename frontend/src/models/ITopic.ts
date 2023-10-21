@@ -1,5 +1,10 @@
 export interface ITopic {
-     id?: number;
+     id: number;
+     title: string;
+     description: string;
+}
+
+export interface ITopicCreation {
      title: string;
      description: string;
 }

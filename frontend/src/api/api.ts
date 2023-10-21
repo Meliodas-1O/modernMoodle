@@ -1,7 +1,7 @@
 import { config } from "../config/config";
-import { ITopic } from "../models/ITopic";
+import { ITopic, ITopicCreation } from "../models/ITopic";
 
-export async function getAllTopics(): Promise<ITopic[] | undefined> {
+async function getAllTopics(): Promise<ITopic[] | undefined> {
      const response = await fetch(`${config.BACKEND.url}/topics`);
 
      if (response.status.toString().startsWith("2")) {
@@ -13,7 +13,7 @@ export async function getAllTopics(): Promise<ITopic[] | undefined> {
      return undefined;
 }
 
-export async function createTopic(topic: ITopic): Promise<number | undefined> {
+async function createTopic(topic: ITopicCreation): Promise<number | undefined> {
      const response = await fetch(`${config.BACKEND.url}/topics`, {
           method: "POST",
           headers: {
@@ -31,14 +31,14 @@ export async function createTopic(topic: ITopic): Promise<number | undefined> {
      return undefined;
 }
 
-export async function deleteTopic(topicId: number): Promise<void> {
+async function deleteTopic(topicId: number): Promise<void> {
      // TODO: wait for backend update as it always return HTTP 200
      await fetch(`${config.BACKEND.url}/topics/${topicId}`, {
           method: "DELETE",
      });
 }
 
-export async function updateTopic(
+async function updateTopic(
      topicId: number,
      newTopic: ITopic
 ): Promise<ITopic | undefined> {
@@ -58,3 +58,11 @@ export async function updateTopic(
 
      return undefined;
 }
+
+// Export functions
+export const backendAPI = {
+     getAllTopics,
+     createTopic,
+     deleteTopic,
+     updateTopic
+};
