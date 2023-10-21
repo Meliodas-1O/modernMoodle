@@ -24,7 +24,7 @@ async function createTopic(topic: ITopicCreation): Promise<number | undefined> {
 
      if (response.status.toString().startsWith("2")) {
           // HTTP OK 2xx
-          const id: {id: number} = await response.json();
+          const id: { id: number } = await response.json();
           return id.id;
      }
 
@@ -64,5 +64,5 @@ export const backendAPI = {
      getAllTopics,
      createTopic,
      deleteTopic,
-     updateTopic
+     updateTopic,
 };

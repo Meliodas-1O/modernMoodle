@@ -6,7 +6,7 @@ import {
      CardHeader,
      Divider,
      HStack,
-     Heading
+     Heading,
 } from "@chakra-ui/react";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { ITopic } from "../models/ITopic";
