@@ -1,9 +1,16 @@
-function Administration() {
-     return(
-          <div>
-               <h1>Adminstration</h1>
+import { Center, Heading, Text } from "@chakra-ui/react";
 
-               <p>👷‍♂️This page is under construction, come back later 🔨</p>
+function Administration() {
+     return (
+          <div>
+               <Center>
+                    <Heading>Administration</Heading>
+               </Center>
+               <Center marginTop={"20px"}>
+                    <Text>
+                         👷‍♂️ This page is under construction, come back later 🔨
+                    </Text>
+               </Center>
           </div>
      );
 }
