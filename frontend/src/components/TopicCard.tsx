@@ -6,11 +6,10 @@ import {
      CardHeader,
      Divider,
      HStack,
-     Heading,
-     VStack,
+     Heading
 } from "@chakra-ui/react";
-import { ITopic } from "../models/ITopic";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import { ITopic } from "../models/ITopic";
 
 function TopicCard({ topic }: { topic: ITopic }) {
      function getDisplayableDescription(description: string): string {
