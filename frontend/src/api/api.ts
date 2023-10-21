@@ -24,8 +24,8 @@ export async function createTopic(topic: ITopic): Promise<number | undefined> {
 
      if (response.status.toString().startsWith("2")) {
           // HTTP OK 2xx
-          const id: number = await response.json();
-          return id;
+          const id: {id: number} = await response.json();
+          return id.id;
      }
 
      return undefined;
