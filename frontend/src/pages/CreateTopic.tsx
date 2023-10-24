@@ -22,8 +22,8 @@ function CreateTopic() {
 
      function handleCreateTopic() {
           if (
-               formData.title.trim().length === 0 ||
-               formData.description.trim().length === 0
+               !formData.title.trim().length ||
+               !formData.description.trim().length
           ) {
                return;
           }
