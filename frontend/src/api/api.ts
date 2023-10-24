@@ -1,5 +1,5 @@
 import { config } from "../config/config";
-import { ITopic, ITopicCreation } from "../models/ITopic";
+import { IChapter, ITopic, ITopicCreation } from "../models/ITopic";
 
 async function getAllTopics(): Promise<ITopic[] | undefined> {
      const response = await fetch(`${config.BACKEND.url}/topics`);
@@ -59,10 +59,27 @@ async function updateTopic(
      return undefined;
 }
 
+async function getChapter(chapterId: number): Promise<IChapter | undefined> {
+     const response = await fetch(
+          `${config.BACKEND.url}/chapters/${chapterId}`,
+          {
+               method: "GET",
+          }
+     );
+
+     if(response.status.toString().startsWith("2")) {
+          // HTTP OK 2xx
+          const chapter: IChapter = await response.json();
+          return chapter;
+     }
+     return undefined;
+}
+
 // Export functions
 export const backendAPI = {
      getAllTopics,
      createTopic,
      deleteTopic,
      updateTopic,
+     getChapter,
 };
