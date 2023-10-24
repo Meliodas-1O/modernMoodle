@@ -3,3 +3,8 @@ export interface ITopic {
      title: string;
      description: string;
 }
+
+export interface ITopicCreation {
+     title: string;
+     description: string;
+}

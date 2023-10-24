@@ -1,14 +1,45 @@
+import {
+     Box,
+     Button,
+     Card,
+     CardBody,
+     CardHeader,
+     Divider,
+     HStack,
+     Heading,
+} from "@chakra-ui/react";
+import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { ITopic } from "../models/ITopic";
 
 function TopicCard({ topic }: { topic: ITopic }) {
+     function getDisplayableDescription(description: string): string {
+          let displayableDescription = description.substring(0, 20);
+          if (description.length > 20) {
+               displayableDescription =
+                    displayableDescription.substring(0, 17) + "...";
+          }
+          return displayableDescription;
+     }
+
      return (
-          <div>
-               <strong>topic #{topic.id}</strong>
-               <ul>
-                    <li>title: {topic.title}</li>
-                    <li>description: {topic.description}</li>
-               </ul>
-          </div>
+          <Card>
+               <CardHeader>
+                    <Heading size={"md"}>{topic.title}</Heading>
+                    <Divider width={"80%"} marginTop={"5px"} />
+               </CardHeader>
+               <CardBody>
+                    <HStack>
+                         <Box width={"90%"}>
+                              {getDisplayableDescription(topic.description)}
+                         </Box>
+                         <Box>
+                              <Button
+                                   rightIcon={<BsFillArrowRightCircleFill />}
+                              />
+                         </Box>
+                    </HStack>
+               </CardBody>
+          </Card>
      );
 }
 

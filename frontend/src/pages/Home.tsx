@@ -1,7 +1,14 @@
+import { Center, Heading } from "@chakra-ui/react";
+import TopicsList from "../components/TopicsList";
+
 function Home() {
      return (
           <div>
-               <h1>Home</h1>
+               <Center>
+                    <Heading>Home</Heading>
+               </Center>
+
+               <TopicsList />
           </div>
      );
 }
