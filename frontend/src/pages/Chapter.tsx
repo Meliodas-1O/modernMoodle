@@ -27,6 +27,8 @@ function Chapter() {
                     setChapter(response);
                })
                .catch((err) => console.error(`err: ${err}`));
+               
+          // eslint-disable-next-line react-hooks/exhaustive-deps
      }, []);
 
      return (
