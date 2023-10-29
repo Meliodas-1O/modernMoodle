@@ -9,13 +9,15 @@ export class PostgresChapterDAO implements IChapterDAO {
      constructor() {
           this.db = db;
      }
-     
+
      async getAll(): Promise<IChapter[]> {
           return (await this.db("chapters").select("*")) as IChapter[];
      }
 
      async getAllFilterTopicId(topicId: number): Promise<IChapter[]> {
-          return (await this.db("chapters").select("*").where("topic_id", topicId)) as IChapter[];
+          return (await this.db("chapters")
+               .select("*")
+               .where("topic_id", topicId)) as IChapter[];
      }
 
      async getById(id: number): Promise<IChapter | undefined> {
