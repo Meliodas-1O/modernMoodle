@@ -22,7 +22,7 @@ export class ChaptersController {
           const topicId = isNaN(Number(req.query.topicId))
                ? undefined
                : Number(req.query.topicId);
-          const chapters = this.service.getAll(topicId);
+          const chapters = await this.service.getAll(topicId);
           if (!chapters) {
                res.status(404).send(
                     errorMessage(404, ChapterErrorMessages.RETRIEVAL_ERROR)
