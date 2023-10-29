@@ -9,7 +9,7 @@ import {
      Heading,
 } from "@chakra-ui/react";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
-import { ITopic } from "../models/ITopic";
+import { ITopic } from "../models/ITopic.interface";
 
 function TopicCard({ topic }: { topic: ITopic }) {
      function getDisplayableDescription(description: string): string {

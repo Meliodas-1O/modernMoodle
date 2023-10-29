@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ITopicCreation } from "../models/ITopic";
+import { ITopicCreation } from "../models/ITopic.interface";
 import { backendAPI } from "../api/api";
 import {
      Button,

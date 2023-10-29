@@ -1,5 +1,5 @@
 import { config } from "../config/config";
-import { ITopic, ITopicCreation } from "../models/ITopic";
+import { ITopic, ITopicCreation } from "../models/ITopic.interface";
 
 async function getAllTopics(): Promise<ITopic[] | undefined> {
      const response = await fetch(`${config.BACKEND.url}/topics`);
