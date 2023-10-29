@@ -20,9 +20,30 @@ router.get(
      validator.query(validatorMiddleware.chapter.chaptersGetAllSchema),
      controller.getAllChapters
 );
-router.get("/:id", controller.getChapterById);
-router.post("/", controller.createChapter);
-router.patch("/:id", controller.updateChapter);
-router.delete("/:id", controller.deleteChapter);
+
+router.get(
+     "/:id",
+     validator.params(validatorMiddleware.chapter.chaptersGetById),
+     controller.getChapterById
+);
+
+router.post(
+     "/",
+     validator.body(validatorMiddleware.chapter.chaptersCreate),
+     controller.createChapter
+);
+
+router.patch(
+     "/:id",
+     validator.params(validatorMiddleware.chapter.chaptersUpdateParams),
+     validator.body(validatorMiddleware.chapter.chaptersUpdateBody),
+     controller.updateChapter
+);
+
+router.delete(
+     "/:id",
+     validator.params(validatorMiddleware.chapter.chaptersDelete),
+     controller.deleteChapter
+);
 
 export default router;
