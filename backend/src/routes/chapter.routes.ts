@@ -6,6 +6,7 @@ import express from "express";
 // POST     /chapters -> create chapter
 // PATCH    /chapters/:id -> update chapter with id
 // DELETE   /chapters/:id -> delete chapter with id
+// GET      /chapters?:topic_id=? -> get all chapters for the given topic_id
 
 const controller = createChaptersController();
 

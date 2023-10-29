@@ -16,8 +16,11 @@ export class ChaptersController {
      }
 
      // GET /chapters
-     getAllChapters = async (_req: Request, res: Response) => {
-          const chapters = await this.service.getAll();
+     // Arguments:
+     //   - topicId (optional): filter by `topic_id`
+     getAllChapters = async (req: Request, res: Response) => {          
+          const topicId = Number(req.query.topicId);
+          const chapters = this.service.getAll(topicId);
           if (!chapters) {
                res.status(404).send(
                     errorMessage(404, ChapterErrorMessages.RETRIEVAL_ERROR)
@@ -83,7 +86,7 @@ export class ChaptersController {
           res.status(200).send();
      };
 
-     // PATH /chapters/:id, new chapter is in the body
+     // PATCH /chapters/:id, new chapter is in the body
      updateChapter = async (req: Request, res: Response) => {
           // TODO: check if id is not undefined | null
 
