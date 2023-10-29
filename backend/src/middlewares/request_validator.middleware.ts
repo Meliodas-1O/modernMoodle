@@ -8,7 +8,7 @@ const chaptersGetAllSchema = Joi.object({
 // -- Chapters section end
 
 // Export validator
-export const validator = {
+export const validatorMiddleware = {
     chapter: {
         chaptersGetAllSchema,
     }
