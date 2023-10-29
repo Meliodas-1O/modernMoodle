@@ -19,7 +19,7 @@ export class ChaptersController {
      // Arguments:
      //   - topicId (optional): filter by `topic_id`
      getAllChapters = async (req: Request, res: Response) => {          
-          const topicId = Number(req.query.topicId);
+          const topicId = isNaN(Number(req.query.topicId)) ? undefined : Number(req.query.topicId);
           const chapters = this.service.getAll(topicId);
           if (!chapters) {
                res.status(404).send(
