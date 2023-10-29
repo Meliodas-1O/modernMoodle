@@ -1,5 +1,7 @@
-import { createChaptersController } from "../di/dependency_injection";
 import express from "express";
+import { createValidator } from "express-joi-validation";
+import { createChaptersController } from "../di/dependency_injection";
+import { validatorMiddleware } from "../middlewares/request_validator.middleware";
 
 // GET      /chapters -> all chapters
 // GET      /chapters/:id -> chapter with id
@@ -9,10 +11,15 @@ import express from "express";
 // GET      /chapters?:topic_id=? -> get all chapters for the given topic_id
 
 const controller = createChaptersController();
+const validator = createValidator();
 
 const router = express.Router();
 
-router.get("/", controller.getAllChapters);
+router.get(
+     "/",
+     validator.query(validatorMiddleware.chapter.chaptersGetAllSchema),
+     controller.getAllChapters
+);
 router.get("/:id", controller.getChapterById);
 router.post("/", controller.createChapter);
 router.patch("/:id", controller.updateChapter);
