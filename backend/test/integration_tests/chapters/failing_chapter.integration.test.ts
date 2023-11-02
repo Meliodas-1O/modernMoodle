@@ -1,8 +1,7 @@
 import request from "supertest";
 import { app } from "../../../src";
-import { setup, teardown } from "../utils/setup";
-import { IChapter } from "../../../src/models/chapter";
 import { ChapterErrorMessages } from "../../../src/utils/helpers";
+import { setup, teardown } from "../utils/setup";
 
 describe("Chapter failing integration tests suite", () => {
      jest.setTimeout(60 * 1000);
@@ -13,15 +12,15 @@ describe("Chapter failing integration tests suite", () => {
           await setup();
 
           // Create a topic
-          let createdTopicId = await createTopic();
-          if(!createdTopicId) {
+          const createdTopicId = await createTopic();
+          if (!createdTopicId) {
                throw new Error("Could not create a new topic");
           }
           topicId = createdTopicId!;
 
           // Create a chapter
-          let createdChapterId = await createChapter();
-          if(!createdChapterId) {
+          const createdChapterId = await createChapter();
+          if (!createdChapterId) {
                throw new Error("Could not create a new chapter");
           }
           firstChapterId = createdChapterId!;
@@ -41,8 +40,8 @@ describe("Chapter failing integration tests suite", () => {
                .post("/topics")
                .send(topic)
                .set("Content-Type", "application/json");
-          if(!response.status.toString().startsWith("2")) return undefined;
-          return response.body.id;
+          if (!response.status.toString().startsWith("2")) return undefined;
+          return response.body.id as number;
      }
 
      async function createChapter(): Promise<number | undefined> {
@@ -55,8 +54,8 @@ describe("Chapter failing integration tests suite", () => {
                .post("/chapters")
                .send(chapter)
                .set("Content-Type", "application/json");
-          if(!response.status.toString().startsWith("2")) return undefined;
-          return response.body.id;
+          if (!response.status.toString().startsWith("2")) return undefined;
+          return response.body.id as number;
      }
 
      describe("Chapter routes", () => {

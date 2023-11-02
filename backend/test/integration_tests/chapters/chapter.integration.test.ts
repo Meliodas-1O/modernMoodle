@@ -11,7 +11,7 @@ describe("Chapter integration tests suite", () => {
      beforeAll(async () => {
           await setup();
           const id = await createTopic();
-          if(!id) {
+          if (!id) {
                throw new Error("Could not create a topic");
           }
           topicId = id!;
@@ -31,8 +31,8 @@ describe("Chapter integration tests suite", () => {
                .post("/topics")
                .send(topic)
                .set("Content-Type", "application/json");
-          if(!response.status.toString().startsWith("2")) return undefined;
-          return response.body.id;
+          if (!response.status.toString().startsWith("2")) return undefined;
+          return response.body.id as number;
      }
 
      describe("Chapter creation routes", () => {

@@ -7,7 +7,6 @@ import { setup, teardown } from "../utils/setup";
 describe("Topics failing integration tests suite", () => {
      jest.setTimeout(60 * 1000);
      let id: number;
-     const validKeys: string[] = ["title", "description"];
 
      beforeAll(async () => {
           await setup();
