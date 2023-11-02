@@ -12,8 +12,8 @@ const chaptersGetByIdSchema = Joi.object({
 
 const chaptersCreateSchema = Joi.object({
      topicId: Joi.number().required(),
-     title: Joi.string().required(),
-     description: Joi.string().required(),
+     title: Joi.string().required().regex(/^[a-zA-Z0-9]+$/),
+     description: Joi.string().required().regex(/^[a-zA-Z0-9]+$/),
 });
 
 const chaptersDeleteSchema = Joi.object({
@@ -25,8 +25,8 @@ const chaptersUpdateParamsSchema = Joi.object({
 });
 
 const chaptersUpdateBodySchema = Joi.object({
-     title: Joi.string().required(),
-     description: Joi.string().required(),
+     title: Joi.string().required().regex(/^[a-zA-Z0-9]+$/),
+     description: Joi.string().required().regex(/^[a-zA-Z0-9]+$/),
 });
 // -- Chapters section end
 
