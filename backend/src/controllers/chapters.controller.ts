@@ -48,27 +48,6 @@ export class ChaptersController {
 
      // POST /chapters, chapter to create is in the body
      createChapter = async (req: Request, res: Response) => {
-          // TODO: check if chapter is not undefined | null
-          if (
-               req.body.constructor === Object &&
-               Object.keys(req.body).length === 0
-          ) {
-               res.status(400).send(
-                    errorMessage(400, ChapterErrorMessages.EMPTY_REQUEST_BODY)
-               );
-               return;
-          }
-          if (areKeysNotValid(req.body, this.validKeys)) {
-               res.status(403).send(
-                    errorMessage(
-                         403,
-                         ChapterErrorMessages.INVALID_FIELD +
-                              `${this.validKeys}`
-                    )
-               );
-               return;
-          }
-
           const chapter: IChapter = req.body as IChapter;
           const chapter_id = await this.service.createChapter(chapter);
           if (!chapter_id) {
@@ -94,26 +73,6 @@ export class ChaptersController {
 
           const id = parseInt(req.params.id);
           const newChapter = req.body;
-          if (
-               req.body.constructor === Object &&
-               Object.keys(req.body).length === 0
-          ) {
-               res.status(400).send(
-                    errorMessage(400, ChapterErrorMessages.EMPTY_REQUEST_BODY)
-               );
-               return;
-          }
-
-          if (areKeysNotValid(newChapter, this.validKeys)) {
-               res.status(403).send(
-                    errorMessage(
-                         403,
-                         ChapterErrorMessages.INVALID_FIELD +
-                              `${this.validKeys}`
-                    )
-               );
-               return;
-          }
           const returnedChapter = await this.service.updateChapter(
                id,
                newChapter
