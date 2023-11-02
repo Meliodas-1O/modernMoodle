@@ -23,26 +23,26 @@ router.get(
 
 router.get(
      "/:id",
-     validator.params(validatorMiddleware.chapter.chaptersGetById),
+     validator.params(validatorMiddleware.chapter.chaptersGetByIdSchema),
      controller.getChapterById
 );
 
 router.post(
      "/",
-     validator.body(validatorMiddleware.chapter.chaptersCreate),
+     validator.body(validatorMiddleware.chapter.chaptersCreateSchema),
      controller.createChapter
 );
 
 router.patch(
      "/:id",
-     validator.params(validatorMiddleware.chapter.chaptersUpdateParams),
-     validator.body(validatorMiddleware.chapter.chaptersUpdateBody),
+     validator.params(validatorMiddleware.chapter.chaptersUpdateParamsSchema),
+     validator.body(validatorMiddleware.chapter.chaptersUpdateBodySchema),
      controller.updateChapter
 );
 
 router.delete(
      "/:id",
-     validator.params(validatorMiddleware.chapter.chaptersDelete),
+     validator.params(validatorMiddleware.chapter.chaptersDeleteSchema),
      controller.deleteChapter
 );
 

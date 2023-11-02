@@ -6,25 +6,25 @@ const chaptersGetAllSchema = Joi.object({
      topicId: Joi.number().optional(),
 });
 
-const chaptersGetById = Joi.object({
+const chaptersGetByIdSchema = Joi.object({
      id: Joi.number().required(),
 });
 
-const chaptersCreate = Joi.object({
+const chaptersCreateSchema = Joi.object({
      topicId: Joi.number().required(),
      title: Joi.string().required(),
      description: Joi.string().required(),
 });
 
-const chaptersDelete = Joi.object({
+const chaptersDeleteSchema = Joi.object({
      id: Joi.number().required(),
 });
 
-const chaptersUpdateParams = Joi.object({
+const chaptersUpdateParamsSchema = Joi.object({
      id: Joi.number().required(),
 });
 
-const chaptersUpdateBody = Joi.object({
+const chaptersUpdateBodySchema = Joi.object({
      title: Joi.string().required(),
      description: Joi.string().required(),
 });
@@ -63,11 +63,11 @@ const topicDeleteSchema = Joi.object({
 export const validatorMiddleware = {
      chapter: {
           chaptersGetAllSchema,
-          chaptersGetById,
-          chaptersCreate,
-          chaptersDelete,
-          chaptersUpdateParams,
-          chaptersUpdateBody,
+          chaptersGetByIdSchema,
+          chaptersCreateSchema,
+          chaptersDeleteSchema,
+          chaptersUpdateParamsSchema,
+          chaptersUpdateBodySchema,
      },
      topic: {
           topicCreationSchema,
