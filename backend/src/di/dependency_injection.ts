@@ -38,14 +38,16 @@ export function createChaptersController(): ChaptersController {
           return chapters_controller;
      }
 
-     // First, create a PostgresDAO
+     // First, create a PostgresDAO for chapters and topics
      const postgres_chapters_dao = new PostgresChapterDAO();
+     const postgres_topics_dao = new PostgresTopicsDAO();
 
-     // Then, create a ChaptersService
+     // Then, create a ChaptersService and a TopicsService
      const chapters_service = new ChaptersService(postgres_chapters_dao);
+     const topics_service = new TopicsService(postgres_topics_dao);
 
      // Finally, create the ChaptersController
-     chapters_controller = new ChaptersController(chapters_service);
+     chapters_controller = new ChaptersController(chapters_service, topics_service);
      return chapters_controller;
 }
 

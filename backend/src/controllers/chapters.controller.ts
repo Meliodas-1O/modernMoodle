@@ -1,18 +1,20 @@
 import { Request, Response } from "express";
 import { IChapter } from "../models/chapter";
-import {
-     ChapterErrorMessages,
-     areKeysNotValid,
-     errorMessage,
-} from "../utils/helpers";
 import { IChaptersService } from "../services/chapters.service";
+import { ITopicsService } from "../services/topics.service";
+import { ChapterErrorMessages, errorMessage } from "../utils/helpers";
+import { ITopic } from "../models/topic";
 
 export class ChaptersController {
-     service: IChaptersService;
-     validKeys: string[] = ["topic_id", "title", "description"];
+     chaptersService: IChaptersService;
+     topicsService: ITopicsService;
 
-     constructor(service: IChaptersService) {
-          this.service = service;
+     constructor(
+          chaptersService: IChaptersService,
+          topicsService: ITopicsService
+     ) {
+          this.chaptersService = chaptersService;
+          this.topicsService = topicsService;
      }
 
      // GET /chapters
@@ -22,7 +24,7 @@ export class ChaptersController {
           const topicId = isNaN(Number(req.query.topicId))
                ? undefined
                : Number(req.query.topicId);
-          const chapters = await this.service.getAll(topicId);
+          const chapters = await this.chaptersService.getAll(topicId);
           if (!chapters) {
                res.status(404).send(
                     errorMessage(404, ChapterErrorMessages.RETRIEVAL_ERROR)
@@ -36,7 +38,7 @@ export class ChaptersController {
      getChapterById = async (req: Request, res: Response) => {
           // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
-          const chapter = await this.service.getById(id);
+          const chapter = await this.chaptersService.getById(id);
           if (!chapter) {
                res.status(404).send(
                     errorMessage(404, ChapterErrorMessages.NO_CHAPTER_BY_ID)
@@ -48,11 +50,25 @@ export class ChaptersController {
 
      // POST /chapters, chapter to create is in the body
      createChapter = async (req: Request, res: Response) => {
+          // TODO: check topic + chapter creation in a transaction
+
           const chapter: IChapter = req.body as IChapter;
-          const chapter_id = await this.service.createChapter(chapter);
+
+          // Check if the topic associated with `topic_id` exists
+          const topic = await this.topicsService.getById(chapter.topic_id);
+          if (!topic) {
+               res.status(404).send(
+                    errorMessage(404, ChapterErrorMessages.TOPIC_DOES_NOT_EXIST)
+               );
+               return;
+          }
+
+          // Create the chapter
+          const chapter_id = await this.chaptersService.createChapter(chapter);
+
           if (!chapter_id) {
-               res.status(400).send(
-                    errorMessage(400, ChapterErrorMessages.CREATE_ERROR)
+               res.status(500).send(
+                    errorMessage(500, ChapterErrorMessages.CREATE_ERROR)
                );
                return;
           }
@@ -63,7 +79,7 @@ export class ChaptersController {
      deleteChapter = async (req: Request, res: Response) => {
           // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
-          await this.service.deleteChapter(id);
+          await this.chaptersService.deleteChapter(id);
           res.status(200).send();
      };
 
@@ -73,7 +89,7 @@ export class ChaptersController {
 
           const id = parseInt(req.params.id);
           const newChapter = req.body;
-          const returnedChapter = await this.service.updateChapter(
+          const returnedChapter = await this.chaptersService.updateChapter(
                id,
                newChapter
           );
