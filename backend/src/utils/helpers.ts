@@ -32,7 +32,8 @@ export enum ChapterErrorMessages {
      CREATE_ERROR = "Error while creating the chapter. Please check your input values or try again later.",
      NO_CHAPTER_BY_ID = "There is no chapter with the given id. Please check your input values or try again later.",
      NO_CHAPTERS = "There is no chapter yet !",
-     RETRIEVAL_ERROR = "Error while retrieving chapters. Please try again",
+     RETRIEVAL_ERROR = "Error while retrieving chapters. Please try again.",
+     TOPIC_DOES_NOT_EXIST = "The topic associated with this chapter does not exist. Please try again.",
 }
 
 export enum ExerciseErrorMessages {

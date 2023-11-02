@@ -11,7 +11,7 @@ const chaptersGetByIdSchema = Joi.object({
 });
 
 const chaptersCreateSchema = Joi.object({
-     topicId: Joi.number().required(),
+     topic_id: Joi.number().required(),
      title: Joi.string().required().regex(/^[a-zA-Z0-9]+$/),
      description: Joi.string().required().regex(/^[a-zA-Z0-9]+$/),
 });
