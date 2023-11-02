@@ -3,7 +3,6 @@ import { IChapter } from "../models/chapter";
 import { IChaptersService } from "../services/chapters.service";
 import { ITopicsService } from "../services/topics.service";
 import { ChapterErrorMessages, errorMessage } from "../utils/helpers";
-import { ITopic } from "../models/topic";
 
 export class ChaptersController {
      chaptersService: IChaptersService;
