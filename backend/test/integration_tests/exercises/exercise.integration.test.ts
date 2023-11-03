@@ -15,7 +15,11 @@ describe("Exercice integration tests suite", () => {
           // Create a chapter as it is required to create exercise(s)
           // But first, create a topic
           const topicId = await createTopic("topicTitle", "topicDescription");
-          chapterId = await createChapter("chapterTitle", "chapterDescription", topicId);
+          chapterId = await createChapter(
+               "chapterTitle",
+               "chapterDescription",
+               topicId
+          );
      });
 
      afterAll(async () => {
@@ -69,7 +73,9 @@ describe("Exercice integration tests suite", () => {
           test("4- Get created exercice", async () => {
                // Given
                // When
-               const response = await request(app).get("/exercises/" + createdExerciseId);
+               const response = await request(app).get(
+                    "/exercises/" + createdExerciseId
+               );
 
                // Then
                expect(response.statusCode).toBe(200);
@@ -109,7 +115,9 @@ describe("Exercice integration tests suite", () => {
           test("6 - Delete exercise", async () => {
                // Given
                // When
-               const response = await request(app).delete("/exercises/" + createdExerciseId);
+               const response = await request(app).delete(
+                    "/exercises/" + createdExerciseId
+               );
 
                // Then
 
