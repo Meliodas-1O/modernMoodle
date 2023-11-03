@@ -12,7 +12,6 @@ import { validatorMiddleware } from "../middlewares/request_validator.middleware
 
 const controller = createChaptersController();
 const validator = createValidator();
-
 const router = express.Router();
 
 router.get(
