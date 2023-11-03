@@ -2,6 +2,7 @@ import request from "supertest";
 import { app } from "../../../src";
 import { ChapterErrorMessages } from "../../../src/utils/helpers";
 import { setup, teardown } from "../utils/setup";
+import { createChapter, createTopic } from "../utils/chapters.utils";
 
 describe("Chapter failing integration tests suite", () => {
      jest.setTimeout(60 * 1000);
@@ -12,51 +13,15 @@ describe("Chapter failing integration tests suite", () => {
           await setup();
 
           // Create a topic
-          const createdTopicId = await createTopic();
-          if (!createdTopicId) {
-               throw new Error("Could not create a new topic");
-          }
-          topicId = createdTopicId!;
+          topicId = await createTopic("topicTitle", "topicDescription");
 
           // Create a chapter
-          const createdChapterId = await createChapter();
-          if (!createdChapterId) {
-               throw new Error("Could not create a new chapter");
-          }
-          firstChapterId = createdChapterId!;
+          firstChapterId = await createChapter("chapterTitle", "chapterDescription", topicId);
      });
 
      afterAll(async () => {
           await teardown();
      });
-
-     async function createTopic(): Promise<number | undefined> {
-          // To create chapter, we need to create at least a topic
-          const topic = {
-               title: "topicTitle",
-               description: "topicDescription",
-          };
-          const response = await request(app)
-               .post("/topics")
-               .send(topic)
-               .set("Content-Type", "application/json");
-          if (!response.status.toString().startsWith("2")) return undefined;
-          return response.body.id as number;
-     }
-
-     async function createChapter(): Promise<number | undefined> {
-          const chapter = {
-               topic_id: topicId,
-               title: "chapterTitle",
-               description: "chapterTitle",
-          };
-          const response = await request(app)
-               .post("/chapters")
-               .send(chapter)
-               .set("Content-Type", "application/json");
-          if (!response.status.toString().startsWith("2")) return undefined;
-          return response.body.id as number;
-     }
 
      describe("Chapter routes", () => {
           test("1 - Create a new chapter with empty request body", async () => {
