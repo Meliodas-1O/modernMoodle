@@ -56,14 +56,16 @@ export function createExercisesController(): ExercisesController {
           return exercises_controller;
      }
 
-     // First, create a PostgresDAO
+     // First, create a PostgresDAO for exercises and chapters
      const postgres_exercises_dao = new PostgresExerciseDAO();
+     const postgres_chapters_dao = new PostgresChapterDAO();
 
-     // Then, create an ExercisesService
+     // Then, create an ExercisesService and a ChaptersService
      const exercises_service = new ExercisesService(postgres_exercises_dao);
+     const chapters_service = new ChaptersService(postgres_chapters_dao);
 
      // Finally, create the ExercisesController
-     exercises_controller = new ExercisesController(exercises_service);
+     exercises_controller = new ExercisesController(exercises_service, chapters_service);
      return exercises_controller;
 }
 
