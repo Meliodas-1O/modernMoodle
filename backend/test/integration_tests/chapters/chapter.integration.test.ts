@@ -1,7 +1,8 @@
 import request from "supertest";
 import { app } from "../../../src";
-import { setup, teardown } from "../utils/setup";
 import { IChapter } from "../../../src/models/chapter";
+import { createChapter, createTopic } from "../utils/chapters.utils";
+import { setup, teardown } from "../utils/setup";
 
 describe("Chapter integration tests suite", () => {
      jest.setTimeout(60 * 1000);
@@ -10,30 +11,15 @@ describe("Chapter integration tests suite", () => {
 
      beforeAll(async () => {
           await setup();
-          const id = await createTopic();
-          if (!id) {
-               throw new Error("Could not create a topic");
-          }
-          topicId = id!;
+
+          // Create a topic since it is required to create chapter(s)
+          const id = await createTopic("topicTitle", "topicDescription");
+          topicId = id;
      });
 
      afterAll(async () => {
           await teardown();
      });
-
-     async function createTopic(): Promise<number | undefined> {
-          // To create chapter, we need to create at least a topic
-          const topic = {
-               title: "topicTitle",
-               description: "topicDescription",
-          };
-          const response = await request(app)
-               .post("/topics")
-               .send(topic)
-               .set("Content-Type", "application/json");
-          if (!response.status.toString().startsWith("2")) return undefined;
-          return response.body.id as number;
-     }
 
      describe("Chapter creation routes", () => {
           test("1 - Get all chapters", async () => {
@@ -67,7 +53,7 @@ describe("Chapter integration tests suite", () => {
                createdChapterId = response.body.id;
           });
 
-          test("3- Get all chapters again", async () => {
+          test("3 - Get all chapters again", async () => {
                // Given
                // When
                const response = await request(app).get("/chapters");
@@ -78,10 +64,12 @@ describe("Chapter integration tests suite", () => {
                expect(chapters.length).toBe(1);
           });
 
-          test("4- Get the created chapter", async () => {
+          test("4 - Get the created chapter", async () => {
                // Given
                // When
-               const response = await request(app).get("/chapters/" + createdChapterId);
+               const response = await request(app).get(
+                    "/chapters/" + createdChapterId
+               );
 
                // Then
                expect(response.statusCode).toBe(200);
@@ -93,7 +81,7 @@ describe("Chapter integration tests suite", () => {
                expect(chapter.id).toBe(createdChapterId);
           });
 
-          test("5- Update chapter", async () => {
+          test("5 - Update chapter", async () => {
                // Given
 
                const updateDescription = {
@@ -117,10 +105,12 @@ describe("Chapter integration tests suite", () => {
                expect(chapter.id).toBe(createdChapterId);
           });
 
-          test("6- Delete chapter", async () => {
+          test("6 - Delete first created chapter", async () => {
                // Given
                // When
-               const response = await request(app).delete("/chapters/" + createdChapterId);
+               const response = await request(app).delete(
+                    "/chapters/" + createdChapterId
+               );
 
                // Then
 
@@ -138,6 +128,66 @@ describe("Chapter integration tests suite", () => {
 
                const chapters: IChapter[] = response.body;
                expect(chapters.length).toBe(0);
+          });
+
+          test("8 - Create topics and chapters and get all chapters for a specified topicId", async () => {
+               // Given
+               let topicsId: number[] = [];
+               for (let i = 0; i < 4; i++) {
+                    const topic = {
+                         title: `topic${i}`,
+                         description: `description${i}`,
+                    };
+                    const topicId = await createTopic(
+                         topic.title,
+                         topic.description
+                    );
+                    topicsId.push(topicId);
+               }
+               for (let i = 0; i < 8; i++) {
+                    // topic id is the first one for the first 3 chapters
+                    // for the other, it is anything else except the first one
+                    let topicId: number;
+                    if (i < 3) topicId = topicsId[0];
+                    else topicId = topicsId[1 + (i % (topicsId.length - 1))];
+                    const chapter = {
+                         topic_id: topicId,
+                         title: `chapter${i + 1}`,
+                         description: `description${i + 1}`,
+                    };
+                    await createChapter(
+                         chapter.title,
+                         chapter.description,
+                         chapter.topic_id
+                    );
+               }
+
+               // When
+               const response = await request(app).get(
+                    `/chapters?topicId=${topicsId[0]}`
+               );
+
+               // Then
+               expect(response.statusCode).toBe(200);
+               const chapters: IChapter[] = response.body;
+               expect(chapters.length).toBe(3);
+
+               // ugly but it works !
+               expect(chapters[0].topic_id).toBe(topicsId[0]);
+               expect(chapters[1].topic_id).toBe(topicsId[0]);
+               expect(chapters[2].topic_id).toBe(topicsId[0]);
+               const containsChapter1 = chapters.some(
+                    (chapter) => chapter.title === "chapter1"
+               );
+               const containsChapter2 = chapters.some(
+                    (chapter) => chapter.title === "chapter2"
+               );
+               const containsChapter3 = chapters.some(
+                    (chapter) => chapter.title === "chapter3"
+               );
+               expect(containsChapter1).toBe(true);
+               expect(containsChapter2).toBe(true);
+               expect(containsChapter3).toBe(true);
           });
      });
 });
