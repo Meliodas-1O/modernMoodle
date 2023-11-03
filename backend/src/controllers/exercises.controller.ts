@@ -1,19 +1,9 @@
 import { Request, Response } from "express";
 import { IExercisesService } from "../services/exercises.service";
-import {
-     ExerciseErrorMessages,
-     areKeysNotValid,
-     errorMessage,
-} from "../utils/helpers";
+import { ExerciseErrorMessages, errorMessage } from "../utils/helpers";
 
 export class ExercisesController {
      service: IExercisesService;
-     validKeys: string[] = [
-          "chapter_id",
-          "statement",
-          "solution",
-          "difficulty_level",
-     ];
 
      constructor(service: IExercisesService) {
           this.service = service;
@@ -50,25 +40,6 @@ export class ExercisesController {
           // TODO: check if exercise is not undefined | null
 
           const exercise = req.body;
-          if (
-               req.body.constructor === Object &&
-               Object.keys(req.body).length === 0
-          ) {
-               res.status(400).send(
-                    errorMessage(400, ExerciseErrorMessages.EMPTY_REQUEST_BODY)
-               );
-               return;
-          }
-          if (areKeysNotValid(req.body, this.validKeys)) {
-               res.status(403).send(
-                    errorMessage(
-                         403,
-                         ExerciseErrorMessages.INVALID_FIELD +
-                              `${this.validKeys}`
-                    )
-               );
-               return;
-          }
 
           const exercise_id = await this.service.createExercise(exercise);
           if (!exercise_id) {
@@ -94,26 +65,6 @@ export class ExercisesController {
 
           const id = parseInt(req.params.id);
           const newExercise = req.body;
-          if (
-               req.body.constructor === Object &&
-               Object.keys(req.body).length === 0
-          ) {
-               res.status(400).send(
-                    errorMessage(400, ExerciseErrorMessages.EMPTY_REQUEST_BODY)
-               );
-               return;
-          }
-
-          if (areKeysNotValid(newExercise, this.validKeys)) {
-               res.status(403).send(
-                    errorMessage(
-                         403,
-                         ExerciseErrorMessages.INVALID_FIELD +
-                              `${this.validKeys}`
-                    )
-               );
-               return;
-          }
 
           const returnedExercise = await this.service.updateExercise(
                id,
