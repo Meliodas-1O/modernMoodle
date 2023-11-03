@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
+import { IExercise } from "../models/exercise";
+import { IChaptersService } from "../services/chapters.service";
 import { IExercisesService } from "../services/exercises.service";
 import { ExerciseErrorMessages, errorMessage } from "../utils/helpers";
-import { IChaptersService } from "../services/chapters.service";
 
 export class ExercisesController {
      exercisesService: IExercisesService;
@@ -44,8 +45,21 @@ export class ExercisesController {
      // POST /exercises, exercise to create is in the body
      createExercise = async (req: Request, res: Response) => {
           // TODO: check if exercise is not undefined | null
+          // TODO: check exercise + chapter creation in a transaction
+          const exercise: IExercise = req.body;
 
-          const exercise = req.body;
+          const chapter = await this.chaptersService.getById(
+               exercise.chapter_id
+          );
+          if (!chapter) {
+               res.status(404).send(
+                    errorMessage(
+                         404,
+                         ExerciseErrorMessages.CHAPTER_DOES_NOT_EXIST
+                    )
+               );
+               return;
+          }
 
           const exercise_id =
                await this.exercisesService.createExercise(exercise);

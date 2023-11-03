@@ -36,6 +36,7 @@ export enum ChapterErrorMessages {
      TOPIC_DOES_NOT_EXIST = "The topic associated with this chapter does not exist. Please try again.",
 }
 
+
 export enum ExerciseErrorMessages {
      EMPTY_REQUEST_BODY = "The request body is empty. Please put input values.",
      CREATE_ERROR = "Error while creating the exercise. Please check your input values or try again later.",
@@ -43,6 +44,7 @@ export enum ExerciseErrorMessages {
      RETRIEVAL_ERROR = "Error while retrieving exercises. Please try again.",
      NO_EXERCISE_BY_ID = "There is no exercise with the given id. Please check your input values or try again later.",
      UPDATE_ERROR = "Error while updating the exercise. Please check your input values or try again later.",
+     CHAPTER_DOES_NOT_EXIST = "The chapter associated with this exercise does not exist. Please try again."
 }
 
 export enum TopicErrorMessages {
