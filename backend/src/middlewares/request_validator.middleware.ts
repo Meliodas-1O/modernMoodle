@@ -12,8 +12,12 @@ const chaptersGetByIdSchema = Joi.object({
 
 const chaptersCreateSchema = Joi.object({
      topic_id: Joi.number().required(),
-     title: Joi.string().required().regex(/^[a-zA-Z0-9]+$/),
-     description: Joi.string().required().regex(/^[a-zA-Z0-9]+$/),
+     title: Joi.string()
+          .required()
+          .regex(/^[a-zA-Z0-9]+$/),
+     description: Joi.string()
+          .required()
+          .regex(/^[a-zA-Z0-9]+$/),
 });
 
 const chaptersDeleteSchema = Joi.object({
@@ -25,13 +29,16 @@ const chaptersUpdateParamsSchema = Joi.object({
 });
 
 const chaptersUpdateBodySchema = Joi.object({
-     title: Joi.string().required().regex(/^[a-zA-Z0-9]+$/),
-     description: Joi.string().required().regex(/^[a-zA-Z0-9]+$/),
+     title: Joi.string()
+          .required()
+          .regex(/^[a-zA-Z0-9]+$/),
+     description: Joi.string()
+          .required()
+          .regex(/^[a-zA-Z0-9]+$/),
 });
 // -- Chapters section end
 
 // -- Topics section start
-
 const topicCreationSchema = Joi.object({
      title: Joi.string()
           .required()
@@ -59,6 +66,38 @@ const topicDeleteSchema = Joi.object({
 });
 // -- Topics section end
 
+// -- Exercises section start
+const exerciseGetAllSchema = Joi.object({
+     chapterId: Joi.number().optional(),
+});
+
+const exerciseGetByIdSchema = Joi.object({
+     id: Joi.number().required(),
+});
+
+const exerciseCreateSchema = Joi.object({
+     chapter_id: Joi.number().required(),
+     statement: Joi.string().regex(/^[a-zA-Z0-9]+$/),
+     solution: Joi.string().regex(/^[a-zA-Z0-9]+$/),
+     difficulty_level: Joi.number().required(),
+});
+
+const exerciseUpdateParamsSchema = Joi.object({
+     id: Joi.number().required(),
+});
+
+const exerciseUpdateBodySchema = Joi.object({
+     chapter_id: Joi.number().required(),
+     statement: Joi.string().regex(/^[a-zA-Z0-9]+$/),
+     solution: Joi.string().regex(/^[a-zA-Z0-9]+$/),
+     difficulty_level: Joi.number().required(),
+});
+
+const exerciseDeleteSchema = Joi.object({
+     id: Joi.number().required(),
+});
+// -- Exercises section end
+
 // Export validator
 export const validatorMiddleware = {
      chapter: {
@@ -75,5 +114,13 @@ export const validatorMiddleware = {
           topicUpdateBodySchema,
           topicUpdateParamSchema,
           topicDeleteSchema,
+     },
+     exercise: {
+          exerciseGetAllSchema,
+          exerciseGetByIdSchema,
+          exerciseCreateSchema,
+          exerciseUpdateParamsSchema,
+          exerciseUpdateBodySchema,
+          exerciseDeleteSchema,
      },
 };
