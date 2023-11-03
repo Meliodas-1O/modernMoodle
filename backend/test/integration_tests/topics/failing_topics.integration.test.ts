@@ -1,7 +1,7 @@
 import request from "supertest";
 import { app } from "../../../src";
-import { ITopic } from "../../../src/models/topic";
 import { TopicErrorMessages } from "../../../src/utils/helpers";
+import { createTopic } from "../utils/utils";
 import { setup, teardown } from "../utils/setup";
 
 describe("Topics failing integration tests suite", () => {
@@ -11,17 +11,8 @@ describe("Topics failing integration tests suite", () => {
      beforeAll(async () => {
           await setup();
 
-          const firstTopic: ITopic = (
-               await request(app)
-                    .post("/topics")
-                    .send({
-                         title: "topicTitle",
-                         description: "topicDescription",
-                    })
-                    .set("Content-Type", "application/json")
-          ).body;
-
-          id = firstTopic.id!;
+          // Create a topic
+          id = await createTopic("topicTitle", "topicDescription");
      });
 
      afterAll(async () => {

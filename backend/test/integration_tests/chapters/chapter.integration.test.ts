@@ -1,7 +1,7 @@
 import request from "supertest";
 import { app } from "../../../src";
 import { IChapter } from "../../../src/models/chapter";
-import { createChapter, createTopic } from "../utils/chapters.utils";
+import { createChapter, createTopic } from "../utils/utils";
 import { setup, teardown } from "../utils/setup";
 
 describe("Chapter integration tests suite", () => {

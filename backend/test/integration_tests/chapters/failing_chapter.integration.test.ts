@@ -2,7 +2,7 @@ import request from "supertest";
 import { app } from "../../../src";
 import { ChapterErrorMessages } from "../../../src/utils/helpers";
 import { setup, teardown } from "../utils/setup";
-import { createChapter, createTopic } from "../utils/chapters.utils";
+import { createChapter, createTopic } from "../utils/utils";
 
 describe("Chapter failing integration tests suite", () => {
      jest.setTimeout(60 * 1000);
