@@ -132,7 +132,7 @@ describe("Chapter integration tests suite", () => {
 
           test("8 - Create topics and chapters and get all chapters for a specified topicId", async () => {
                // Given
-               let topicsId: number[] = [];
+               const topicsId: number[] = [];
                for (let i = 0; i < 4; i++) {
                     const topic = {
                          title: `topic${i}`,
