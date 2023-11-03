@@ -1,15 +1,10 @@
 import { Request, Response } from "express";
-import { ITopicsService } from "../services/topics.service";
 import { ITopic } from "../models/topic";
-import {
-     TopicErrorMessages,
-     areKeysNotValid,
-     errorMessage,
-} from "../utils/helpers";
+import { ITopicsService } from "../services/topics.service";
+import { TopicErrorMessages, errorMessage } from "../utils/helpers";
 
 export class TopicsController {
      service: ITopicsService;
-     validKeys: string[] = ["title", "description"];
 
      constructor(service: ITopicsService) {
           this.service = service;
@@ -45,24 +40,6 @@ export class TopicsController {
      createTopic = async (req: Request, res: Response) => {
           // TODO: check if topic is not undefined | null
           const topic: ITopic = req.body;
-          if (
-               req.body.constructor === Object &&
-               Object.keys(req.body).length === 0
-          ) {
-               res.status(400).send(
-                    errorMessage(400, TopicErrorMessages.EMPTY_REQUEST_BODY)
-               );
-               return;
-          }
-          if (areKeysNotValid(req.body, this.validKeys)) {
-               res.status(403).send(
-                    errorMessage(
-                         403,
-                         TopicErrorMessages.INVALID_FIELD + `${this.validKeys}`
-                    )
-               );
-               return;
-          }
           const topic_id = await this.service.createTopic(topic);
           if (!topic_id) {
                res.status(400).send(
@@ -86,25 +63,6 @@ export class TopicsController {
           // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
           const newTopic = req.body;
-          if (
-               req.body.constructor === Object &&
-               Object.keys(req.body).length === 0
-          ) {
-               res.status(400).send(
-                    errorMessage(400, TopicErrorMessages.EMPTY_REQUEST_BODY)
-               );
-               return;
-          }
-
-          if (areKeysNotValid(newTopic, this.validKeys)) {
-               res.status(403).send(
-                    errorMessage(
-                         403,
-                         TopicErrorMessages.INVALID_FIELD + `${this.validKeys}`
-                    )
-               );
-               return;
-          }
           const returnedTopic = await this.service.updateTopic(id, newTopic);
           if (!returnedTopic) {
                res.status(404).send(
