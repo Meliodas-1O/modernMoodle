@@ -1,7 +1,8 @@
-import { IExercise } from "../models/exercise";
+import {IExercise} from "../models/exercise";
 
 export interface IExerciseDAO {
      getAll(): Promise<IExercise[]>;
+     getAllFilterChapterId(chapterId: number): Promise<IExercise[]>;
      getById(id: number): Promise<IExercise | undefined>;
      delete(id: number): Promise<number | undefined>;
      create(topic: IExercise): Promise<number | undefined>;

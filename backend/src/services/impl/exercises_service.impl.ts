@@ -9,7 +9,10 @@ export class ExercisesService implements IExercisesService {
           this.dao = dao;
      }
 
-     async getAll(): Promise<IExercise[]> {
+     async getAll(chapterId?: number): Promise<IExercise[]> {
+          if (chapterId) {
+               return await this.dao.getAllFilterChapterId(chapterId!);
+          }
           return await this.dao.getAll();
      }
 
