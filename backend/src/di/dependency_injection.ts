@@ -38,14 +38,19 @@ export function createChaptersController(): ChaptersController {
           return chapters_controller;
      }
 
-     // First, create a PostgresDAO
+     // First, create a PostgresDAO for chapters and topics
      const postgres_chapters_dao = new PostgresChapterDAO();
+     const postgres_topics_dao = new PostgresTopicsDAO();
 
-     // Then, create a ChaptersService
+     // Then, create a ChaptersService and a TopicsService
      const chapters_service = new ChaptersService(postgres_chapters_dao);
+     const topics_service = new TopicsService(postgres_topics_dao);
 
      // Finally, create the ChaptersController
-     chapters_controller = new ChaptersController(chapters_service);
+     chapters_controller = new ChaptersController(
+          chapters_service,
+          topics_service
+     );
      return chapters_controller;
 }
 
@@ -54,14 +59,19 @@ export function createExercisesController(): ExercisesController {
           return exercises_controller;
      }
 
-     // First, create a PostgresDAO
+     // First, create a PostgresDAO for exercises and chapters
      const postgres_exercises_dao = new PostgresExerciseDAO();
+     const postgres_chapters_dao = new PostgresChapterDAO();
 
-     // Then, create an ExercisesService
+     // Then, create an ExercisesService and a ChaptersService
      const exercises_service = new ExercisesService(postgres_exercises_dao);
+     const chapters_service = new ChaptersService(postgres_chapters_dao);
 
      // Finally, create the ExercisesController
-     exercises_controller = new ExercisesController(exercises_service);
+     exercises_controller = new ExercisesController(
+          exercises_service,
+          chapters_service
+     );
      return exercises_controller;
 }
 

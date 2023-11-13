@@ -14,6 +14,12 @@ export class PostgresExerciseDAO implements IExerciseDAO {
           return (await this.db("exercises").select("*")) as IExercise[];
      }
 
+     async getAllFilterChapterId(chapterId: number): Promise<IExercise[]> {
+          return (await this.db("exercises")
+               .select("*")
+               .where("chapter_id", chapterId)) as IExercise[];
+     }
+
      async getById(id: number): Promise<IExercise | undefined> {
           const exercise = (await this.db("exercises")
                .select("*")

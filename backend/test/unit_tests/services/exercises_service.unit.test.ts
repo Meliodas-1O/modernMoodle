@@ -11,6 +11,7 @@ describe("Exercises service", () => {
           // Create a mock for the DAO
           dao = {
                getAll: jest.fn(),
+               getAllFilterChapterId: jest.fn(),
                getById: jest.fn(),
                create: jest.fn(),
                delete: jest.fn(),
@@ -135,4 +136,34 @@ describe("Exercises service", () => {
           expect(dao.update).toBeCalledTimes(1);
           expect(dao.update).toBeCalledWith(id, newExercise);
      });
+
+     test("Get all exercises filter by chapterId", async () => {
+          // Given
+          const exercises: IExercise[] = [
+               {
+                    id: 1,
+                    chapter_id: 1,      // <--
+                    statement: "1+2=?",
+                    solution: "3",
+                    difficulty_level: 15,
+               },
+               {
+                    id: 2,
+                    chapter_id: 2,      // <--
+                    statement: "2+2=?",
+                    solution: "4",
+                    difficulty_level: 37,
+               }
+          ];
+          dao.getAllFilterChapterId = jest.fn().mockResolvedValue([exercises[0]]);
+          const chapterId = 1;
+
+          // When
+          const actual = await sut.getAll(chapterId);
+
+          // Then
+          expect(actual.length).toBe(1);
+          expect(dao.getAllFilterChapterId).toBeCalledTimes(1);
+          expect(dao.getAllFilterChapterId).toBeCalledWith(chapterId);
+     })
 });

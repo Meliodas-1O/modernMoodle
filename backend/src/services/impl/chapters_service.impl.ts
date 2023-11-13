@@ -9,7 +9,10 @@ export class ChaptersService implements IChaptersService {
           this.dao = dao;
      }
 
-     async getAll(): Promise<IChapter[]> {
+     async getAll(topicId?: number): Promise<IChapter[]> {
+          if (topicId) {
+               return await this.dao.getAllFilterTopicId(topicId!);
+          }
           return await this.dao.getAll();
      }
 

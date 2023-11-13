@@ -107,7 +107,7 @@ describe("Topics integration tests suite", () => {
           // Given
           const topicId = 3;
           const updatedTopic = {
-               title: "this is new title",
+               title: "thisisnewtitle",
                description: "COBOL",
           };
 
@@ -121,7 +121,7 @@ describe("Topics integration tests suite", () => {
           const returnedTopic: ITopic = response.body;
           expect(returnedTopic).toBeDefined();
           expect(returnedTopic.id).toBe(`${topicId}`);
-          expect(returnedTopic.title).toBe("this is new title");
+          expect(returnedTopic.title).toBe("thisisnewtitle");
           expect(returnedTopic.description).toBe("COBOL");
      });
 

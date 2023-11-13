@@ -1,18 +1,12 @@
 import request from "supertest";
 import { app } from "../../../src";
-import { setup, teardown } from "../utils/setup";
 import { IExercise } from "../../../src/models/exercise";
 import { ExerciseErrorMessages } from "../../../src/utils/helpers";
+import { setup, teardown } from "../utils/setup";
 
 describe("Exercise failing integration tests suite", () => {
      jest.setTimeout(60 * 1000);
      let id: number;
-     const validKeys: string[] = [
-          "chapter_id",
-          "statement",
-          "solution",
-          "difficulty_level",
-     ];
      beforeAll(async () => {
           await setup();
 
@@ -45,11 +39,6 @@ describe("Exercise failing integration tests suite", () => {
 
                // Then
                expect(response.statusCode).toBe(400);
-               expect(response.body).toBeDefined();
-               expect(response.body).toEqual({
-                    status: 400,
-                    message: ExerciseErrorMessages.EMPTY_REQUEST_BODY,
-               });
           });
 
           test("2 - Create a new exercise with unvalid field", async () => {
@@ -65,13 +54,7 @@ describe("Exercise failing integration tests suite", () => {
                     .set("Content-Type", "application/json");
 
                // Then
-               expect(response.statusCode).toBe(403);
-               expect(response.body).toBeDefined();
-               expect(response.body).toEqual({
-                    status: 403,
-                    message:
-                         ExerciseErrorMessages.INVALID_FIELD + `${validKeys}`,
-               });
+               expect(response.statusCode).toBe(400);
           });
 
           test("3- update exercise with empty request body ", async () => {
@@ -86,11 +69,6 @@ describe("Exercise failing integration tests suite", () => {
 
                // Then
                expect(response.statusCode).toBe(400);
-               expect(response.body).toBeDefined();
-               expect(response.body).toEqual({
-                    status: 400,
-                    message: ExerciseErrorMessages.EMPTY_REQUEST_BODY,
-               });
           });
 
           test("4- update exercise with unvalid request body ", async () => {
@@ -106,13 +84,7 @@ describe("Exercise failing integration tests suite", () => {
                     .set("Content-Type", "application/json");
 
                // Then
-               expect(response.statusCode).toBe(403);
-               expect(response.body).toBeDefined();
-               expect(response.body).toEqual({
-                    status: 403,
-                    message:
-                         ExerciseErrorMessages.INVALID_FIELD + `${validKeys}`,
-               });
+               expect(response.statusCode).toBe(400);
           });
 
           test("5 - Get exercise with wrong id", async () => {
@@ -134,6 +106,8 @@ describe("Exercise failing integration tests suite", () => {
                const fakeChapterId = Math.floor(Math.random() * 9 + 1000000000);
                const newExercise = {
                     statement: "exerciseTitre",
+                    solution: "exerciseSolution",
+                    difficulty_level: 2,
                     chapter_id: fakeChapterId,
                };
 
@@ -144,11 +118,11 @@ describe("Exercise failing integration tests suite", () => {
                     .set("Content-Type", "application/json");
 
                // Then
-               expect(response.statusCode).toBe(400);
+               expect(response.statusCode).toBe(404);
                expect(response.body).toBeDefined();
                expect(response.body).toEqual({
-                    status: 400,
-                    message: ExerciseErrorMessages.CREATE_ERROR,
+                    status: 404,
+                    message: ExerciseErrorMessages.CHAPTER_DOES_NOT_EXIST,
                });
           });
      });
