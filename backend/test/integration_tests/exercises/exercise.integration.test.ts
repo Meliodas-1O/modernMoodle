@@ -2,7 +2,8 @@ import request from "supertest";
 import { app } from "../../../src";
 import { IExercise } from "../../../src/models/exercise";
 import { setup, teardown } from "../utils/setup";
-import { createChapter, createTopic } from "../utils/utils";
+import { createChapter, createExercise, createTopic } from "../utils/utils";
+import { IChapter } from "../../../src/models/chapter";
 
 describe("Exercice integration tests suite", () => {
      jest.setTimeout(60 * 1000);
@@ -135,6 +136,76 @@ describe("Exercice integration tests suite", () => {
 
                const exercises: IExercise[] = response.body;
                expect(exercises.length).toBe(0);
+          });
+
+          test("8 - Create chapters and exercises and get all exercises filter by chapter id", async () => {
+               // Given
+               const topicId = await createTopic(
+                    "topicTitle",
+                    "topicDescription"
+               );
+               const chaptersId: number[] = [];
+               for (let i = 0; i < 4; i++) {
+                    // Create chapter
+                    const chapter: IChapter = {
+                         description: `chapterDesc${i}`,
+                         title: `chapterTitle${i}`,
+                         topic_id: topicId,
+                    };
+                    const chapterId = await createChapter(
+                         chapter.title,
+                         chapter.description,
+                         chapter.topic_id
+                    );
+                    chaptersId.push(chapterId);
+               }
+               for (let i = 0; i < 8; i++) {
+                    // chapter id is the first one for the first 3 exercises
+                    // for the other, it is anything else except the first one
+                    let chapterId: number;
+                    if (i < 3) chapterId = chaptersId[0];
+                    else
+                         chapterId =
+                              chaptersId[1 + (i % (chaptersId.length - 1))];
+                    const exercise: IExercise = {
+                         chapter_id: chapterId,
+                         difficulty_level: 12,
+                         solution: `solution${i + 1}`,
+                         statement: `statement${i + 1}`,
+                    };
+                    await createExercise(
+                         exercise.statement,
+                         exercise.solution,
+                         exercise.chapter_id,
+                         exercise.difficulty_level
+                    );
+               }
+
+               // When
+               const response = await request(app).get(
+                    `/exercises?chapterId=${chaptersId[0]}`
+               );
+
+               // Then
+               expect(response.statusCode).toBe(200);
+               const exercises: IExercise[] = response.body;
+               expect(exercises.length).toBe(3);
+               for (let i = 0; i < 3; i++) {
+                    expect(exercises[i].chapter_id).toBe(chaptersId[0]);
+               }
+
+               const containsStatement1 = exercises.some(
+                    (exercise) => exercise.statement === "statement1"
+               );
+               const containsStatement3 = exercises.some(
+                    (exercise) => exercise.statement === "statement2"
+               );
+               const containsStatement2 = exercises.some(
+                    (exercise) => exercise.statement === "statement3"
+               );
+               expect(containsStatement1).toBe(true);
+               expect(containsStatement2).toBe(true);
+               expect(containsStatement3).toBe(true);
           });
      });
 });
