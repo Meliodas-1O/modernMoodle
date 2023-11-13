@@ -1,5 +1,6 @@
 import request from "supertest";
 import { app } from "../../../src";
+import { IExercise } from "../../../src/models/exercise";
 
 // This file contains some functions that might be used multiple times
 // in various places across our integration tests.
@@ -40,5 +41,26 @@ export async function createTopic(
           .send(topic);
      if (!response.status.toString().startsWith("2"))
           throw new Error("Could not create a new topic");
+     return response.body.id as number;
+}
+
+export async function createExercise(
+     statement: string,
+     solution: string,
+     chapter_id: number,
+     difficulty_level: number
+): Promise<number> {
+     const exercise: IExercise = {
+          chapter_id,
+          difficulty_level,
+          solution,
+          statement,
+     };
+     const response = await request(app)
+          .post("/exercises")
+          .set("Content-Type", "application/json")
+          .send(exercise);
+     if (!response.status.toString().startsWith("2"))
+          throw new Error("Could not create a new exercise");
      return response.body.id as number;
 }
