@@ -13,18 +13,6 @@ export function errorMessage(
      };
 }
 
-export function areKeysNotValid(
-     obj: Record<string, string>,
-     validKeys: string[]
-): boolean {
-     for (const key in obj) {
-          if (!validKeys.includes(key)) {
-               return true;
-          }
-     }
-     return false;
-}
-
 export enum ChapterErrorMessages {
      EMPTY_REQUEST_BODY = "The request body is empty. Please put input values.",
      UPDATE_ERROR = "Error while updating the chapter. Please check your input values or try again later.",
