@@ -35,7 +35,6 @@ export class ChaptersController {
 
      // GET /chapters/:id
      getChapterById = async (req: Request, res: Response) => {
-          // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
           const chapter = await this.chaptersService.getById(id);
           if (!chapter) {
@@ -76,7 +75,6 @@ export class ChaptersController {
 
      // DELETE /chapters/:id
      deleteChapter = async (req: Request, res: Response) => {
-          // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
           await this.chaptersService.deleteChapter(id);
           res.status(200).send();
@@ -84,8 +82,6 @@ export class ChaptersController {
 
      // PATCH /chapters/:id, new chapter is in the body
      updateChapter = async (req: Request, res: Response) => {
-          // TODO: check if id is not undefined | null
-
           const id = parseInt(req.params.id);
           const newChapter = req.body;
           const returnedChapter = await this.chaptersService.updateChapter(

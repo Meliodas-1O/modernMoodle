@@ -33,7 +33,6 @@ export class ExercisesController {
 
      // GET /exercises/:id
      getExerciseById = async (req: Request, res: Response) => {
-          // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
           const exercise = await this.exercisesService.getById(id);
           if (!exercise) {
@@ -47,7 +46,6 @@ export class ExercisesController {
 
      // POST /exercises, exercise to create is in the body
      createExercise = async (req: Request, res: Response) => {
-          // TODO: check if exercise is not undefined | null
           // TODO: check exercise + chapter creation in a transaction
           const exercise: IExercise = req.body;
 
@@ -77,7 +75,6 @@ export class ExercisesController {
 
      // DELETE /exercises/:id
      deleteExercise = async (req: Request, res: Response) => {
-          // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
           await this.exercisesService.deleteExercise(id);
           res.status(200).send();
@@ -85,7 +82,6 @@ export class ExercisesController {
 
      // PATH /exercises/:id, new exercise is in the body
      updateExercise = async (req: Request, res: Response) => {
-          // TODO: check if id is not undefined | null
           // TODO: check if the new `chapter_id` exists (if updated)
           const id = parseInt(req.params.id);
           const newExercise = req.body;

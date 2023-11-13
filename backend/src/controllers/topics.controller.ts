@@ -24,7 +24,6 @@ export class TopicsController {
 
      // GET /topics/:id
      getTopicById = async (req: Request, res: Response) => {
-          // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
           const topic = await this.service.getById(id);
           if (!topic) {
@@ -38,7 +37,6 @@ export class TopicsController {
 
      // POST /topics, topic to create is in the body
      createTopic = async (req: Request, res: Response) => {
-          // TODO: check if topic is not undefined | null
           const topic: ITopic = req.body;
           const topic_id = await this.service.createTopic(topic);
           if (!topic_id) {
@@ -52,7 +50,6 @@ export class TopicsController {
 
      // DELETE /topics/:id
      deleteTopic = async (req: Request, res: Response) => {
-          // TODO: check if id is not undefined | null
           const id = parseInt(req.params.id);
           await this.service.deleteTopic(id);
           res.status(200).send();
@@ -60,7 +57,6 @@ export class TopicsController {
 
      // PATH /topics/:id, new topic is in the body
      updateTopic = async (req: Request, res: Response) => {
-          // TODO: check if id is not undefined | null
           // TODO: check if the new `topic_id` exists (if updated)
           const id = parseInt(req.params.id);
           const newTopic = req.body;
