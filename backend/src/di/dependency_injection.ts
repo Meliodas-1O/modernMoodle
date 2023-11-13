@@ -47,7 +47,10 @@ export function createChaptersController(): ChaptersController {
      const topics_service = new TopicsService(postgres_topics_dao);
 
      // Finally, create the ChaptersController
-     chapters_controller = new ChaptersController(chapters_service, topics_service);
+     chapters_controller = new ChaptersController(
+          chapters_service,
+          topics_service
+     );
      return chapters_controller;
 }
 
@@ -65,7 +68,10 @@ export function createExercisesController(): ExercisesController {
      const chapters_service = new ChaptersService(postgres_chapters_dao);
 
      // Finally, create the ExercisesController
-     exercises_controller = new ExercisesController(exercises_service, chapters_service);
+     exercises_controller = new ExercisesController(
+          exercises_service,
+          chapters_service
+     );
      return exercises_controller;
 }
 
