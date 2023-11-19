@@ -11,6 +11,7 @@ describe("Chapters service", () => {
           // Create a mock for the DAO
           dao = {
                getAll: jest.fn(),
+               getAllFilterTopicId: jest.fn(),
                getById: jest.fn(),
                create: jest.fn(),
                delete: jest.fn(),
@@ -131,5 +132,39 @@ describe("Chapters service", () => {
           // Then
           expect(dao.update).toBeCalledTimes(1);
           expect(dao.update).toBeCalledWith(id, newChapter);
+     });
+
+     test("Get all chapters filter by topicId", async () => {
+          // Given
+          const chapters: IChapter[] = [
+               {
+                    topic_id: 1, // <--
+                    id: 1,
+                    title: "chapter 1",
+                    description: "description 1",
+               },
+               {
+                    topic_id: 1, // <--
+                    id: 2,
+                    title: "chapter 2",
+                    description: "description 2",
+               },
+               {
+                    topic_id: 2, // <--
+                    id: 3,
+                    title: "chapter 3",
+                    description: "description 3",
+               },
+          ];
+          dao.getAllFilterTopicId = jest.fn().mockResolvedValue([chapters[2]]);
+          const topicId = 2;
+
+          // When
+          const actual = await sut.getAll(topicId);
+
+          // Then
+          expect(actual.length).toBe(1);
+          expect(dao.getAllFilterTopicId).toBeCalledTimes(1);
+          expect(dao.getAllFilterTopicId).toBeCalledWith(topicId);
      });
 });
