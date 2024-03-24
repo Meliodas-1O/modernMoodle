@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { backendAPI } from "../api/api";
-import { IChapter } from "../models/ITopic";
 import { Center, Grid, GridItem, Heading, Text } from "@chakra-ui/react";
+import { IChapter } from "../models/ITopic.interface";
 
 type ChapterParams = {
      id: string;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ITopic } from "../models/ITopic";
+import { ITopic } from "../models/ITopic.interface";
 import { backendAPI } from "../api/api";
 import TopicCard from "./TopicCard";
 import { Grid } from "@chakra-ui/react";

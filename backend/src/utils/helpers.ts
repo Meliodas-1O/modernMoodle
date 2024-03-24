@@ -13,18 +13,6 @@ export function errorMessage(
      };
 }
 
-export function areKeysNotValid(
-     obj: Record<string, string>,
-     validKeys: string[]
-): boolean {
-     for (const key in obj) {
-          if (!validKeys.includes(key)) {
-               return true;
-          }
-     }
-     return false;
-}
-
 export enum ChapterErrorMessages {
      EMPTY_REQUEST_BODY = "The request body is empty. Please put input values.",
      UPDATE_ERROR = "Error while updating the chapter. Please check your input values or try again later.",
@@ -32,7 +20,8 @@ export enum ChapterErrorMessages {
      CREATE_ERROR = "Error while creating the chapter. Please check your input values or try again later.",
      NO_CHAPTER_BY_ID = "There is no chapter with the given id. Please check your input values or try again later.",
      NO_CHAPTERS = "There is no chapter yet !",
-     RETRIEVAL_ERROR = "Error while retrieving chapters. Please try again",
+     RETRIEVAL_ERROR = "Error while retrieving chapters. Please try again.",
+     TOPIC_DOES_NOT_EXIST = "The topic associated with this chapter does not exist. Please try again.",
 }
 
 export enum ExerciseErrorMessages {
@@ -42,6 +31,7 @@ export enum ExerciseErrorMessages {
      RETRIEVAL_ERROR = "Error while retrieving exercises. Please try again.",
      NO_EXERCISE_BY_ID = "There is no exercise with the given id. Please check your input values or try again later.",
      UPDATE_ERROR = "Error while updating the exercise. Please check your input values or try again later.",
+     CHAPTER_DOES_NOT_EXIST = "The chapter associated with this exercise does not exist. Please try again.",
 }
 
 export enum TopicErrorMessages {

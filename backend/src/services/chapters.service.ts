@@ -1,7 +1,7 @@
 import { IChapter } from "../models/chapter";
 
 export interface IChaptersService {
-     getAll(): Promise<IChapter[]>;
+     getAll(topicId?: number): Promise<IChapter[]>;
      getById(id: number): Promise<IChapter | undefined>;
      createChapter(chapter: IChapter): Promise<number | undefined>;
      deleteChapter(id: number): Promise<number | undefined>;

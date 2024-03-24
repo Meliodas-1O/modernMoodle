@@ -2,6 +2,7 @@ import { IChapter } from "../models/chapter";
 
 export interface IChapterDAO {
      getAll(): Promise<IChapter[]>;
+     getAllFilterTopicId(topicId: number): Promise<IChapter[]>;
      getById(id: number): Promise<IChapter | undefined>;
      delete(id: number): Promise<number | undefined>;
      create(topic: IChapter): Promise<number | undefined>;
